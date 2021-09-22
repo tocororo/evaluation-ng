@@ -7,6 +7,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { EnvironmentImpl, environment } from 'src/environments/environment';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -33,7 +35,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		ReactiveFormsModule,
 		AppRoutingModule
 	],
-	providers: [],
+	providers: [
+		{ provide: EnvironmentImpl, useValue: environment }
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule

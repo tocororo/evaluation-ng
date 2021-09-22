@@ -2,10 +2,6 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false
-};
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
@@ -14,3 +10,34 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
+import { Environment } from 'toco-lib';
+
+export class EnvironmentImpl implements Environment {
+  production = false;
+  evaluationHost = 'http://localhost:4200/';
+  sceibaHost = 'https://sceiba.cu/';
+  cuorHost = 'https://organizaciones.sceiba.cu/';
+  evaluationApi = 'https://evaluation.sceiba.cu/api/';
+  sceibaApi = 'https://sceiba.cu/api/';
+  cuorApi = 'https://organizaciones.sceiba.cu:5000/api/';
+
+  appHost = 'https://localhost:4200';
+  appName = 'Sceiba';
+
+  websiteUsername_Twitter = '@SceibaCuba';
+  websiteUsername_Facebook = '@sceiba';
+
+  oauthRedirectUri = 'https://localhost:4200/';
+  oauthClientId = 'uLYRoa4mN5870eBby4bElHkrzpDUPFlWTios9njy';
+  oauthScope = 'user:email';
+  topOrganizationPID = '';
+  cachableUrls = [];
+
+  matomoUrl = 'https://crai-stats.upr.edu.cu/';
+  matomoSiteId = 7;
+}
+
+export const environment = new EnvironmentImpl();
+
+export const allowedURLS = [environment.sceibaApi];
