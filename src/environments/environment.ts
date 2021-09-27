@@ -11,7 +11,7 @@
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 
-import { Environment } from 'toco-lib';
+import { Environment } from "toco-lib";
 
 export class EnvironmentImpl implements Environment {
   production = false;

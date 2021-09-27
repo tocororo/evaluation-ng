@@ -1,0 +1,147 @@
+
+<img src="assets/icons/sceiba.footer.top.2.svg" alt="" style="margin-bottom: -8px; width: 100%;">
+<div class="w-100 bg-primary-color" fxLayout="row wrap" fxLayout.mx="column" fxLayoutAlign="center center">
+
+    <div
+        fxLayout="row wrap"
+        fxLayout.mx="column"
+        fxLayoutAlign="space-between center"
+        fxLayoutGap="20px"
+        style="width:100%"
+    >
+        <div class="footer-logo"
+            fxFlex=40%
+            fxFlex.xs=100%
+            fxLayoutAlign="right center"
+            fxLayout="row"
+            [ngStyle.xs]="{'padding-top': '40px', 'padding-bottom': '20px'}"
+        >
+        <a href="https://tocororo.upr.edu.cu" target="_blank" style="color: rgb(0, 0, 0, 0.87); text-decoration: none;">
+          <img src="/assets/images/tocororo.png" alt="Tocororo" width="50" height="50" [alt]="'PROYECTO_TOCORORO' | translate" >
+
+        </a>
+
+        <!-- <img src="/assets/images/tocororo.png" alt="Tocororo" width="50" height="50">
+            <span class="text-initial" style="max-width: 30em; padding-left: 10px; color: white;">
+                {{ 'PROYECTO_TOCORORO' | translate }}
+            </span> -->
+        </div>
+        <div class="footer-rigtside"
+            fxLayout="row wrap"
+            fxLayoutAlign="center center"
+            fxLayoutGap="1em"
+            [ngStyle.xs]="{'place-content': 'flex-end'}"
+        >
+            <a href="https://www.vliruos.be/en/projects/project/22?pid=4202" target="_blank" style="color: rgb(0, 0, 0, 0.87); text-decoration: none;">
+                <img src="/assets/images/vliruos_white.svg" [alt]="'PROYECTO_VLIR' | translate" width="240">
+            </a>
+        </div>
+    </div>
+
+    <mat-toolbar-row
+        fxLayout="row wrap"
+        fxLayoutAlign="center center"
+        fxLayoutGap="1em"
+        style="padding-top: 40px;"
+    >
+        <a mat-mini-fab href="https://www.facebook.com/sceiba/" target="_blank" color="accent" matTooltip="Facebook">
+            <mat-icon svgIcon="facebook" class="mat-18"></mat-icon>
+        </a>
+        <a mat-mini-fab href="https://twitter.com/SceibaCu" target="_blank" color="accent" matTooltip="Twitter">
+            <mat-icon svgIcon="twitter" class="mat-18"></mat-icon>
+        </a>
+        <a mat-mini-fab href="https://github.com/tocororo" target="_blank" color="accent" matTooltip="GitHub">
+            <mat-icon svgIcon="github" class="mat-18">home</mat-icon>
+        </a>
+    </mat-toolbar-row>
+
+    <mat-toolbar class="footer-height" fxLayout="row wrap" fxLayout.mx="column" fxLayoutAlign="center center" color="primary">
+        <mat-toolbar-row
+            fxLayout="row wrap"
+            fxLayout.xs="column"
+            fxLayoutAlign="center center"
+            fxLayoutGap="16px"
+            [ngStyle.xs]="{'place-content': 'flex-end'}"
+        >
+            <!-- <span class="text-large">Sitios de Interés</span> -->
+            <ng-container *ngFor="let item of sites">
+                <a mat-button
+                    class="aling-left"
+                    *ngIf="item.useRouterLink"
+                    [routerLink]="[item.url]"
+                    [ngStyle]="{'line-height': 'initial', 'padding': '10px 16px'}"
+                    [ngStyle.xs]="{width: 'inherit'}"
+                >
+                    <!-- It is not necessary to translate. -->
+                    {{ item.name }}
+                </a>
+                <a mat-button
+                    class="aling-left"
+                    *ngIf=" ! item.useRouterLink"
+                    href="{{ item.url }}"
+                    target="_blank"
+                    [ngStyle]="{'line-height': 'initial', 'padding': '10px 16px'}"
+                    [ngStyle.xs]="{width: 'inherit'}"
+                >
+                    <!-- It is not necessary to translate. -->
+                    {{ item.name }}
+                </a>
+            </ng-container>
+        </mat-toolbar-row>
+
+        <mat-toolbar-row
+            fxLayout="row wrap"
+            fxLayoutAlign="center center"
+        >
+            <div class="pt-30 w-80" ngClass.xs="pt-20 w-100" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center;">
+                <ng-container *ngFor="let item of information">
+                    <a mat-button
+                        class="aling-left"
+                        [routerLink]="[item.url]"
+                        *ngIf="item.useRouterLink"
+                        [ngStyle]="{'line-height': 'initial', 'padding': '10px 16px'}"
+                        [ngStyle.xs]="{width: 'inherit'}"
+                    >
+                        {{ item.name | translate }}
+                    </a>
+                    <a mat-button
+                        class="aling-left"
+                        *ngIf=" ! item.useRouterLink"
+                        href="{{ item.url }}"
+                        target="_blank"
+                        [ngStyle]="{'line-height': 'initial', 'padding': '10px 16px'}"
+                        [ngStyle.xs]="{width: 'inherit'}"
+                    >
+                        {{ item.name | translate }}
+                    </a>
+                </ng-container>
+            </div>
+        </mat-toolbar-row>
+
+        <mat-toolbar-row fxLayout="row wrap" fxFlex="100%" fxLayoutAlign="center center">
+            <p class="mat-h5" style="width: 80%; text-align: center; color:white; margin: 0; padding-top: 40px;">
+                {{ 'SCEIBA_PRIVACIDAD_1' | translate }}
+                <br>
+                {{ 'SCEIBA_PRIVACIDAD_2' | translate }} <a class="a-grey" href="http://creativecommons.org/licenses/by/4.0/" target="_blank"> Creative Commons CC by 4.0 License</a>
+            </p>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div fxLayout="column wrap" fxLayoutAlign="center center" style="padding: 1em;">
+        <a href="https://sceiba.cu" style="color: rgb(0, 0, 0, 0.87); text-decoration: none;">
+            <img src="/assets/icons/sceiba_white.svg" alt="Sceiba" width="120" height="50">
+        </a>
+        <p class="mat-h5" style="width: 80%; text-align: center; color:white; margin: 0;">
+            {{ 'PORTAL_PUB' | translate }}
+            <br>
+            <small>
+                {{ 'DESARROLLADO_CON' | translate }}
+                <a class="a-grey" href="https://invenio-app-readthedocs.io/" target="_blank">Invenio</a>
+                {{ 'CONJUNCION_Y' | translate }} <a class="a-grey" href="https://angular.io/" target="_blank">Angular</a>
+            </small>
+        </p>
+    </div>
+
+</div>
+
+<!-- <span class="text-initial" style="max-width: 30em; text-align: center;">{{ 'PROYECTO_TOCORORO' | translate }}</span> -->

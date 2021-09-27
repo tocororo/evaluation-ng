@@ -1,5 +1,5 @@
 
-import { Environment } from 'toco-lib';
+import { Environment } from "toco-lib";
 
 export class EnvironmentImpl implements Environment {
   production = true;

@@ -1,0 +1,46 @@
+
+mat-toolbar.footer-height{
+    height: auto !important;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+    white-space: normal !important;
+    height: auto !important;
+}
+.text-small{
+    font-size: small;
+}
+.text-initial{
+    font-size: initial;
+    line-height: initial;
+}
+.text-large{
+    font-size: x-large;
+}
+.aling-left{
+    text-align: left;
+    white-space: normal !important;
+}
+
+.a-grey{
+    color: rgb(230, 228, 228);
+    text-decoration: none;
+}
+.a-grey:hover{
+    text-decoration: underline;
+}
+
+.footer-logo {
+    padding-left: 40px;
+}
+
+.footer-social {
+    padding-right: 120px;
+    margin-left: auto;
+}
+
+.footer-rigtside{
+    padding-right: 40px;
+    margin-left: auto;
+}
