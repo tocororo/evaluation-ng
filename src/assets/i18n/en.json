@@ -65,5 +65,8 @@
         "BUTTON_SEARCH": "Search"
     },
     "PAGINA_NO_ENCONTRADA_DISCULPA": "Sorry, the page you requested could not be found!",
-    "PAGINA_NO_ENCONTRADA_REDIRECCION": "Let us take you Home"
+    "PAGINA_NO_ENCONTRADA_REDIRECCION": "Let us take you Home",
+    "ENCUESTA": "Survey",
+    "RESULTADO": "Result",
+    "RECOMENDACION": "Recommendation"
 }

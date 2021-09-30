@@ -7,6 +7,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 const routes: Routes = [
 	{
+		path: 'survey',
+		loadChildren: () => import('./survey/survey.module').then(mod => mod.SurveyModule)
+	},
+	{
 		path: '',
 		component: HomeComponent,
 	},

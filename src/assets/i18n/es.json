@@ -65,5 +65,8 @@
         "BUTTON_SEARCH": "Buscar"
     },
     "PAGINA_NO_ENCONTRADA_DISCULPA": "Lo sentimos, la página que usted solicitó no pudo ser encontrada!",
-    "PAGINA_NO_ENCONTRADA_REDIRECCION": "Vamos a llevarlo a la página Principal"
+    "PAGINA_NO_ENCONTRADA_REDIRECCION": "Vamos a llevarlo a la página Principal",
+    "ENCUESTA": "Encuesta",
+    "RESULTADO": "Resultado",
+    "RECOMENDACION": "Recomendación"
 }
