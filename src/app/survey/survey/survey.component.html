@@ -1,14 +1,33 @@
 
+<mat-toolbar color="accent"
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="center center"
+    style="height: 80px;"
+>
+    <span>{{ title | translate }}</span>
+    <button mat-mini-fab *ngIf="hasPermission" class="mat-18 ml-05" color="primary" (click)="edit()"
+        [matTooltip]="'Muestra la vista de editar el Repositorio Institucional'"
+        [matTooltipClass]="'tooltip-red'"
+    >
+        <mat-icon>mode_edit</mat-icon>
+    </button>
+</mat-toolbar>
+
+<toco-progress [loading]="hasTaskInProgress"></toco-progress>
+
 <mat-tab-group mat-align-tabs="center" [animationDuration]="'1500ms'" (selectedIndexChange)="onSelectTab($event)">
     <mat-tab [label]="'ENCUESTA' | translate"> 
-        Content 1
+        <router-outlet></router-outlet>
     </mat-tab>
 
     <mat-tab [label]="'RESULTADO' | translate">
         Content 2
+        <!-- TODO: Create the `ResultComponent`. -->
     </mat-tab>
 
     <mat-tab [label]="'RECOMENDACION' | translate">
         Content 3
+        <!-- TODO: Create the `RecommendationComponent`. -->
     </mat-tab>
 </mat-tab-group>

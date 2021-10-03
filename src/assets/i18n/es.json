@@ -68,5 +68,8 @@
     "PAGINA_NO_ENCONTRADA_REDIRECCION": "Vamos a llevarlo a la página Principal",
     "ENCUESTA": "Encuesta",
     "RESULTADO": "Resultado",
-    "RECOMENDACION": "Recomendación"
+    "RECOMENDACION": "Recomendación",
+    "TITULO_VISTA_DETALLES": "Detalles de la Evaluación",
+    "TITULO_VISTA_ADICIONAR": "Adiciona una nueva Evaluación",
+    "TITULO_VISTA_EDITAR": "Edita la Evaluación"
 }

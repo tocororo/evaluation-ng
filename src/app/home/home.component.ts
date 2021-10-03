@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 
-import { MetadataService } from "toco-lib";
+import { ActionText, MetadataService } from "toco-lib";
 
 @Component({
 	selector: "app-home",
@@ -12,10 +12,17 @@ import { MetadataService } from "toco-lib";
 })
 export class HomeComponent implements OnInit
 {
+    /**
+     * Represents the `ActionText` enum for internal use. 
+     */
+	public readonly actionText: typeof ActionText;
+
 	public constructor(private _activatedRoute: ActivatedRoute,
 		public transServ: TranslateService,
 		private _metadata: MetadataService)
-	{ }
+	{
+		this.actionText = ActionText;
+	}
 
 	public ngOnInit(): void
 	{

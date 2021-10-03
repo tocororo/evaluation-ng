@@ -68,5 +68,8 @@
     "PAGINA_NO_ENCONTRADA_REDIRECCION": "Let us take you Home",
     "ENCUESTA": "Survey",
     "RESULTADO": "Result",
-    "RECOMENDACION": "Recommendation"
+    "RECOMENDACION": "Recommendation",
+    "TITULO_VISTA_DETALLES": "Details of the Evaluation",
+    "TITULO_VISTA_ADICIONAR": "Add a new Evaluation",
+    "TITULO_VISTA_EDITAR": "Edit the Evaluation"
 }

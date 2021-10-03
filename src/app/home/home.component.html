@@ -10,7 +10,7 @@
 
     <div class="w-100" fxLayout="row" fxLayoutAlign="center center">
         <div class="w-50 text-get-started" markdown [src]="'/assets/markdown/text.get-started.' + ((transServ.currentLang == 'es') ? 'es.md' : 'en.md')"></div>
-        <a mat-raised-button class="button-get-started" color="primary" [routerLink]="['/survey']">
+        <a mat-raised-button class="button-get-started" color="primary" [routerLink]="['/survey/', actionText.add]">
             {{ 'EMPEZAR' | translate }}
         </a>
     </div>
