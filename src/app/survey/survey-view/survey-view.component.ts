@@ -11,7 +11,7 @@ import { Evaluation } from '../evaluation.entity';
  * Represents a control that allows to see the details of a Survey. 
  */
 @Component({
-	selector: 'survey-view',
+	selector: 'app-survey-view',
 	templateUrl: './survey-view.component.html',
 	styleUrls: ['./survey-view.component.scss']
 })

@@ -22,12 +22,16 @@ import { SurveyRoutingModule } from './survey-routing.module';
 import { SurveyComponent } from './survey/survey.component';
 import { SurveyViewComponent } from './survey-view/survey-view.component';
 import { SurveyEditComponent } from './survey-edit/survey-edit.component';
+import { SurveyResultComponent } from './survey-result/survey-result.component';
+import { SurveyRecommendationComponent } from './survey-recommendation/survey-recommendation.component';
 
 @NgModule({
 	declarations: [
 		SurveyComponent,
 		SurveyViewComponent,
-        SurveyEditComponent
+        SurveyEditComponent,
+		SurveyResultComponent,
+		SurveyRecommendationComponent
 	],
 	imports: [
 		CommonModule,

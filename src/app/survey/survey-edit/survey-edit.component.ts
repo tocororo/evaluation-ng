@@ -15,7 +15,7 @@ import { SurveyService } from '../survey.service';
  * Represents a control that allows to add or edit a Survey. 
  */
 @Component({
-	selector: 'survey-edit',
+	selector: 'app-survey-edit',
 	templateUrl: './survey-edit.component.html',
 	styleUrls: ['./survey-edit.component.scss']
 })
