@@ -71,5 +71,10 @@
     "RECOMENDACION": "Recommendation",
     "TITULO_VISTA_DETALLES": "Details of the Evaluation",
     "TITULO_VISTA_ADICIONAR": "Add a new Evaluation",
-    "TITULO_VISTA_EDITAR": "Edit the Evaluation"
+    "TITULO_VISTA_EDITAR": "Edit the Evaluation",
+    "NOMBRE": "Name",
+    "ESCR_NOMBRE_REVISTA": "Write the journal name",
+    "URL_GENERICA": "www.journal.com",
+    "VAL_ERROR_REQUERIDO": "Write a valid value.",
+    "VAL_ERROR_CARACTER_INVAL": "Change or delete invalid characters."
 }

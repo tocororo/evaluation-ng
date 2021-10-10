@@ -16,6 +16,36 @@
 
 <toco-progress [loading]="hasTaskInProgress"></toco-progress>
 
+<form [formGroup]="evaluationFormGroup">
+
+<mat-card>
+    <mat-card-content
+        fxLayout="row wrap"
+        fxLayout.xs="column"
+        fxLayoutAlign="space-between center"
+    >
+        <!-- Start Name -->
+        <mat-form-field class="w-100" [appearance]="'outline'">
+            <mat-label>{{ 'NOMBRE' | translate }}</mat-label>
+            <input matInput [formControlName]="evaluation_ChildControlsPath.name" [required]="'true'" [placeholder]="'ESCR_NOMBRE_REVISTA' | translate" />
+            <mat-error *ngIf="getErrorState(evaluation_ChildControlsPath.name)">{{ getErrorMessage(evaluation_ChildControlsPath.name) | translate }}</mat-error>
+        </mat-form-field>
+        <!-- End Name -->
+
+        <!-- Start URL -->
+        <mat-form-field class="w-45" [appearance]="'outline'">
+            <mat-label>Url</mat-label>
+            <input matInput [formControlName]="evaluation_ChildControlsPath.url" [required]="'true'" [placeholder]="'URL_GENERICA' | translate" />
+            <mat-error *ngIf="getErrorState(evaluation_ChildControlsPath.url)">{{ getErrorMessage(evaluation_ChildControlsPath.url) | translate }}</mat-error>
+        </mat-form-field>
+        <!-- End Name -->
+
+        <!-- Start ISSN -->
+        <input-issn [content]="issnContent"></input-issn>
+        <!-- End ISSN -->
+    </mat-card-content>
+</mat-card>
+
 <mat-tab-group mat-align-tabs="center" [animationDuration]="'1500ms'" (selectedIndexChange)="onSelectTab($event)">
     <mat-tab [label]="'ENCUESTA' | translate"> 
         <router-outlet></router-outlet>
@@ -29,3 +59,5 @@
         <app-survey-recommendation></app-survey-recommendation>
     </mat-tab>
 </mat-tab-group>
+
+</form>

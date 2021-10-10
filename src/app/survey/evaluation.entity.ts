@@ -2,18 +2,18 @@
 import { EntityBase, Entity, Identifier } from 'toco-lib';
 
 /**
- * Entity for main Institution based on schema `...-v1.0.0.json`. 
+ * Entity for Survey based on schema `...-v1.0.0.json`. 
  */
-export class MainInstitution extends EntityBase
+export class Survey extends EntityBase
 {
     /**
-     * The name typically used to refer to the institute. 
+     * Survey name. 
      */
-    name: string;
-    /**
-     * Organization Identifiers, different from GRID mapping. 
-     */
-    identifiers: Array<Identifier>;
+     name: string;
+     /**
+      * Survey URL page. 
+      */
+     url: string;
 }
 
 /**
@@ -22,33 +22,29 @@ export class MainInstitution extends EntityBase
 export class Evaluation extends Entity
 {
     /**
-     * Name of the region. 
+     * Journal name. 
      */
     name: string;
     /**
-     * Main Institution. 
-     */
-    mainInst: MainInstitution;
-    /**
-     * URL page for the institute. 
+     * Journal URL page. 
      */
     url: string;
     /**
-     * URL-OAI page for the institute. 
+     * Journal ISSN. 
      */
-    url_oai: string;
+    issn: string;
+    /**
+     * Journal survey. 
+     */
+    survey: Survey;
 }
 
 /**
- * Represents an object of `MainInstitution` type with all its values set to empty. 
- * The `identifiers` array field must have one empty value at least. 
+ * Represents an object of `Survey` type with all its values set to empty. 
  */
-export const mainInstEmpty: any = {
+export const surveyEmpty: any = {
     'name': '',
-    'identifiers': [{
-        'idtype': '',
-        'value': ''
-    }]
+    'url': ''
 };
 
 /**
@@ -57,7 +53,7 @@ export const mainInstEmpty: any = {
 export const evaluationEmpty: any = {
     'id': '',
     'name': '',
-    'mainInst': mainInstEmpty,
     'url': '',
-    'url_oai': ''
+    'issn': '',
+    'survey': surveyEmpty
 };

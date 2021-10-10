@@ -71,5 +71,10 @@
     "RECOMENDACION": "Recomendación",
     "TITULO_VISTA_DETALLES": "Detalles de la Evaluación",
     "TITULO_VISTA_ADICIONAR": "Adiciona una nueva Evaluación",
-    "TITULO_VISTA_EDITAR": "Edita la Evaluación"
+    "TITULO_VISTA_EDITAR": "Edita la Evaluación",
+    "NOMBRE": "Nombre",
+    "ESCR_NOMBRE_REVISTA": "Escriba el nombre de la revista",
+    "URL_GENERICA": "www.revista.com",
+    "VAL_ERROR_REQUERIDO": "Escriba un valor válido.",
+    "VAL_ERROR_CARACTER_INVAL": "Cambie o borre los caracteres inválidos."
 }

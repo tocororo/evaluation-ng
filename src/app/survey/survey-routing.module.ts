@@ -13,39 +13,27 @@ const surveyRoutes: Routes = [
 	{
 		path: '',
 		component: SurveyComponent,
+        resolve: {
+            /**
+             * This resolver is used on all views. 
+             * In the case of viewing view, it needs to resolve an object from the backend. 
+             * In the case of adding view, it needs to resolve an object with all its values set to empty. 
+             * In the case of editing view, it needs to resolve an object from the backend. 
+             */
+            'evaluation': SurveyResolverService
+        },
 		children: [
             {
                 path: ':uuid/' + ActionText.view,
-                component: SurveyViewComponent,
-                resolve: {
-                    /**
-                     * This resolver is used on all views. In the case of viewing view, 
-                     * it needs to resolve an object from the backend. 
-                     */
-                    'evaluation': SurveyResolverService
-                }
+                component: SurveyViewComponent
             },
             {
                 path: ActionText.add,
-                component: SurveyEditComponent,
-                resolve: {
-                    /**
-                     * This resolver is used on all views. In the case of adding view, 
-                     * it needs to resolve an object with all its values set to empty. 
-                     */
-                    'evaluation': SurveyResolverService
-                }
+                component: SurveyEditComponent
             },
             {
                 path: ':uuid/' + ActionText.edit,
-                component: SurveyEditComponent,
-                resolve: {
-                    /**
-                     * This resolver is used on all views. In the case of editing view, 
-                     * it needs to resolve an object from the backend. 
-                     */
-                    'evaluation': SurveyResolverService
-                }
+                component: SurveyEditComponent
             },
             {
                 path: '',

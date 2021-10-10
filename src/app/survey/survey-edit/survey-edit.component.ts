@@ -1,15 +1,16 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AbstractControl, FormControl, FormGroup, FormArray, Validators, ValidationErrors, FormBuilder } from '@angular/forms';
+import { AbstractControl, FormGroup, Validators, ValidationErrors } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
 
-import { ActionText, Hit, MessageHandler, DialogDeleteConfirmComponent, StatusCode, 
+import { ActionText, Hit, MessageHandler, StatusCode, 
 	HandlerComponent, IdentifierSchemas, ChildControlsPath } from 'toco-lib';
 
 import { Evaluation } from '../evaluation.entity';
 
 import { SurveyService } from '../survey.service';
+import { SurveyValueService } from '../survey-resolver.service';
 
 /**
  * Represents a control that allows to add or edit a Survey. 
@@ -27,15 +28,9 @@ export class SurveyEditComponent implements OnInit
 	 * that define the path to a child control. 
 	 */
 	public readonly survey_ChildControlsPath: ChildControlsPath = {
+		'survey': 'survey',
 		'name': 'name',
-		'mainInst': 'mainInst',
-		'mainInst_o_name': 'name',  /* _o = only */
-		'mainInst_o_ids': 'identifiers',  /* _o = only */
-		'mainInst_name': 'mainInst.name',
-		'mainInst_ids_o_idtype': 'idtype',  /* _o = only */
-		'mainInst_ids_o_value': 'value',  /* _o = only */
-		'url': 'url',
-		'url_oai': 'url_oai'
+		'url': 'url'
 	};
 
 	/**
@@ -54,8 +49,6 @@ export class SurveyEditComponent implements OnInit
 	public selectOptionsIdType: { idtype: string, value: string }[ ];
 
 	public surveyFormGroup: FormGroup;
-	public identifiersMainInstitution_FA: FormArray;
-	private _evaluation: Evaluation;  /* It is like a readonly field, and it is only used to initialize the form. */
 
 	/**
 	 * Represents the current control that is analyzed for displaying an error. 
@@ -77,8 +70,8 @@ export class SurveyEditComponent implements OnInit
 	private _validationError_invalidCharacter: string;
 
 	public constructor(private _activatedRoute: ActivatedRoute,
-		private _formBuilder: FormBuilder,
 		private _surveyService: SurveyService,
+		private _surveyValueService: SurveyValueService,
 		private _dialog: MatDialog,
 		private _snackBar: MatSnackBar)
 	{
@@ -90,13 +83,11 @@ export class SurveyEditComponent implements OnInit
 		this.selectOptionsIdType = [ ];
 
 		this.surveyFormGroup = undefined;
-		this.identifiersMainInstitution_FA = undefined;
-		this._evaluation = undefined;
 
 		this._controlToDisplayError = undefined;
 		this._validationErrors = undefined;
-		this._validationError_required = `Escriba un valor válido.`;
-		this._validationError_invalidCharacter = `Cambie o borre los caracteres inválidos.`;
+		this._validationError_required = 'VAL_ERROR_REQUERIDO';
+		this._validationError_invalidCharacter = 'VAL_ERROR_CARACTER_INVAL';
 	}
 
 	public ngOnInit(): void
@@ -104,115 +95,15 @@ export class SurveyEditComponent implements OnInit
 		/* True if the component is used as an adding view; otherwise, false. */
         this.isAddingView = (this._activatedRoute.snapshot.url[(this._activatedRoute.snapshot.url.length - 1)].path == ActionText.add)  /* The string ActionText.add is the value of the last route sub-path that is specified in the `*-routing.module.ts` file. */
 
+		// TODO: Adaptar a los valores de los controles select. 
 		for (const key in IdentifierSchemas)
 		{
 			this.selectOptionsIdType.push({ 'idtype': IdentifierSchemas[key], 'value': IdentifierSchemas[key] });
 		}
 
-		this._activatedRoute.data.subscribe({
-			next: (data: { 'evaluation': Hit<Evaluation> }) => {
-				/* It is not necessary to realize deep copy because the `_evaluation` field 
-				 * is like a readonly field, and it is only used to initialize the form. */
-				this._evaluation = data.evaluation.metadata;
+		this.surveyFormGroup = (this._surveyValueService.evaluationFormGroup.get(this.survey_ChildControlsPath.survey)) as FormGroup;
 
-				this._initFormData();
-
-				/* The component ends its loading task. It is set here and not in the `complete` property because the `complete` notification is not sent. */
-				this.hasTaskInProgress = false;
-			},
-			error: (err: any) => {
-				/* The component ends its loading task. */
-				this.hasTaskInProgress = false;
-
-				const m = new MessageHandler(this._snackBar);
-				m.showMessage(StatusCode.OK, err.message)
-			}
-		});
-
-		console.log('Data got for editing: ', this._evaluation, this.surveyFormGroup);
-	}
-
-	/**
-	 * Initializes the form data. 
-	 */
-	private _initFormData(): void
-	{
-		this.surveyFormGroup = this._formBuilder.group({
-			'name': new FormControl(this._evaluation.name, 
-				Validators.pattern('^[a-zA-Z\_][a-zA-Z\-\_\ \0-9]*$')
-			),
-
-			'mainInst': this._formBuilder.group({
-				'name': new FormControl(this._evaluation.mainInst.name, [
-					Validators.pattern('^[a-zA-Z\_][a-zA-Z\-\_\0-9]*$')
-					//Validators.pattern(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/i)
-				]),
-
-				'identifiers': (this.identifiersMainInstitution_FA = this._addItemsFormArrayIdentifiers(this._evaluation.mainInst.identifiers))
-			}),
-
-			'url': new FormControl(this._evaluation.url, [
-				Validators.pattern(/(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/i)
-				//Validators.pattern(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/i)
-			]),
-
-			'url_oai': new FormControl(this._evaluation.url_oai, [
-				Validators.pattern(/(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/i)
-				//Validators.pattern(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/i)
-			])
-		});
-	}
-
-	private _addItemsFormArrayIdentifiers(items: any[]): FormArray
-	{
-		let resFormArray: FormArray = this._formBuilder.array([]);
-
-		for (const item of items)
-		{
-			resFormArray.push(this._formBuilder.group(
-				{
-					'idtype': new FormControl(item.idtype),
-					'value': new FormControl(item.value, [
-						Validators.pattern('^[a-zA-Z\_][a-zA-Z\-\_\0-9]*$')
-					])
-				})
-			);
-		}
-
-		return resFormArray
-	}
-
-	public addIdentifier(): void
-	{
-		this.identifiersMainInstitution_FA.push(this._formBuilder.group(
-			{
-				'idtype': new FormControl(''),
-				'value': new FormControl('', [
-					Validators.pattern('^[a-zA-Z\_][a-zA-Z\-\_\0-9]*$')
-				])
-			})
-		);
-	}
-
-	public deleteIdentifier(pos: number): void
-	{
-		const dialogRef = this._dialog.open(DialogDeleteConfirmComponent, {
-			width: '40%',
-			data: { 
-				'delTypeArt': 'el',
-				'delType': 'identificador',
-				'delValue':  ((this.identifiersMainInstitution_FA.value[pos].idtype) ? this.identifiersMainInstitution_FA.value[pos].idtype : 'vacio') 
-					+ ': ' 
-					+ ((this.identifiersMainInstitution_FA.value[pos].value) ? this.identifiersMainInstitution_FA.value[pos].value : 'vacio')
-			}
-		});
-
-		dialogRef.afterClosed().subscribe((isDeleted: boolean) => {
-			if (isDeleted)
-			{
-				this.identifiersMainInstitution_FA.removeAt(pos);
-			}
-		});
+		console.log('Data got for editing: ', this.surveyFormGroup);
 	}
 
 	public update(): void

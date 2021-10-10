@@ -15,8 +15,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 
-import { CoreModule, /*TocoFormsModule,*/ StaticsModule } from 'toco-lib';
+import { CoreModule, TocoFormsModule, StaticsModule } from 'toco-lib';
 
 import { SurveyRoutingModule } from './survey-routing.module';
 import { SurveyComponent } from './survey/survey.component';
@@ -24,6 +25,7 @@ import { SurveyViewComponent } from './survey-view/survey-view.component';
 import { SurveyEditComponent } from './survey-edit/survey-edit.component';
 import { SurveyResultComponent } from './survey-result/survey-result.component';
 import { SurveyRecommendationComponent } from './survey-recommendation/survey-recommendation.component';
+
 
 @NgModule({
 	declarations: [
@@ -49,9 +51,10 @@ import { SurveyRecommendationComponent } from './survey-recommendation/survey-re
         MatCardModule,
         MatSelectModule,
         MatButtonModule,
+		MatDividerModule,
 
 		CoreModule,
-		// TocoFormsModule,
+		TocoFormsModule,
 		StaticsModule,
 		SurveyRoutingModule
 	]

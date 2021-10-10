@@ -1,9 +1,9 @@
 
 <mat-card>
 
-    <mat-card-content>
+    <mat-card-content [formGroup]="surveyFormGroup">
 
-        <form [formGroup]="surveyFormGroup">
+        <!-- <div [formGroup]="surveyFormGroup"> -->
 
             <!-- Start Name -->
             <mat-form-field class="w-100" [appearance]="'outline'">
@@ -13,71 +13,6 @@
             </mat-form-field>
             <!-- End Name -->
 
-            <!-- Start MainInstitution -->
-            <mat-card class="mb-2">
-                <mat-card-content [formGroupName]="survey_ChildControlsPath.mainInst">
-                    <p>
-                        <mat-label>Institución Principal</mat-label>
-                    </p>
-
-                    <!-- Start Name -->
-                    <mat-form-field class="w-100" [appearance]="'outline'">
-                        <mat-label>Nombre</mat-label>
-                        <input matInput [formControlName]="survey_ChildControlsPath.mainInst_o_name" [required]="'true'" [placeholder]="'Escriba el nombre de la Institución Principal'" />
-                        <mat-error *ngIf="getErrorState(survey_ChildControlsPath.mainInst_name)">{{ getErrorMessage(survey_ChildControlsPath.mainInst_name) }}</mat-error>
-                    </mat-form-field>
-                    <!-- End Name -->
-
-                    <!-- Start Identifiers -->
-                    <mat-card class="mb-2">
-                        <mat-card-content [formArrayName]="survey_ChildControlsPath.mainInst_o_ids">
-                            <p>
-                                <mat-label>Identidicadores</mat-label>
-                            </p>
-
-                            <div *ngFor="let identifier of identifiersMainInstitution_FA.controls; let pos=index"
-                                class="w-100 my-outline" [formGroup]="identifiersMainInstitution_FA.controls[pos]"
-                                fxLayout="row wrap" fxLayoutAlign="space-between center"
-                            >
-                                <mat-form-field class="w-45" [appearance]="'legacy'">
-                                    <mat-label>Id</mat-label>
-                                    <mat-select class="w-100" [formControlName]="survey_ChildControlsPath.mainInst_ids_o_idtype" [required]="'true'" [placeholder]="'Seleccione el tipo de id'">
-                                        <mat-option *ngFor="let item of selectOptionsIdType" [value]="item.idtype">
-                                            {{ item.value }}
-                                        </mat-option>
-                                    </mat-select>
-                                    <mat-error *ngIf="getErrorState([ survey_ChildControlsPath.mainInst, survey_ChildControlsPath.mainInst_o_ids, pos, survey_ChildControlsPath.mainInst_ids_o_idtype ])">{{ getErrorMessage([ survey_ChildControlsPath.mainInst, survey_ChildControlsPath.mainInst_o_ids, pos, survey_ChildControlsPath.mainInst_ids_o_idtype ]) }}</mat-error>
-                                </mat-form-field>
-
-                                <mat-form-field class="w-45" [appearance]="'legacy'">
-                                    <mat-label>Valor</mat-label>
-                                    <input matInput [formControlName]="survey_ChildControlsPath.mainInst_ids_o_value" [required]="'true'" [placeholder]="'Escriba un valor para el id'" />
-                                    <mat-error *ngIf="getErrorState([ survey_ChildControlsPath.mainInst, survey_ChildControlsPath.mainInst_o_ids, pos, survey_ChildControlsPath.mainInst_ids_o_value ])">{{ getErrorMessage([ survey_ChildControlsPath.mainInst, survey_ChildControlsPath.mainInst_o_ids, pos, survey_ChildControlsPath.mainInst_ids_o_value ]) }}</mat-error>
-                                </mat-form-field>
-
-                                <button mat-mini-fab class="mat-18" color="primary" [disabled]="identifiersMainInstitution_FA.controls.length == 1"
-                                    (click)="deleteIdentifier(pos)" [matTooltip]="'Elimina el id'" [matTooltipClass]="'tooltip-red'"
-                                >
-                                    <mat-icon>delete</mat-icon>
-                                </button>
-                            </div>
-                        </mat-card-content>
-
-                        <mat-card-actions align="end" class="mrb-0">
-                            <button mat-stroked-button color="primary" (click)="addIdentifier()"
-                                [matTooltip]="'Adiciona un nuevo id'"
-                                [matTooltipClass]="'tooltip-red'"
-                            >
-                                Adicionar
-                            </button>
-                        </mat-card-actions>
-                    </mat-card>
-                    <!-- End Identifiers -->
-
-                </mat-card-content>
-            </mat-card>
-            <!-- End MainInstitution -->
-
             <!-- Start URL -->
             <mat-form-field class="w-100" [appearance]="'outline'">
                 <mat-label>Url</mat-label>
@@ -86,15 +21,7 @@
             </mat-form-field>
             <!-- End Name -->
 
-            <!-- Start URL-OAI -->
-            <mat-form-field class="w-100" [appearance]="'outline'">
-                <mat-label>Url-OAI</mat-label>
-                <input matInput [formControlName]="survey_ChildControlsPath.url_oai" [required]="'true'" [placeholder]="'Escriba el Url-OAI del Repositorio Institucional'" />
-                <mat-error *ngIf="getErrorState(survey_ChildControlsPath.url_oai)">{{ getErrorMessage(survey_ChildControlsPath.url_oai) }}</mat-error>
-            </mat-form-field>
-            <!-- End Name -->
-
-        </form>
+        <!-- </div> -->
 
     </mat-card-content>
 
