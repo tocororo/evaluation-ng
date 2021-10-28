@@ -1,8 +1,8 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatHorizontalStepper, MatSnackBar } from '@angular/material';
 
 import { ActionText, ChildControlsPath, Hit, InputContent, InputIssnComponent, 
 	MessageHandler, StatusCode, TextInputAppearance } from 'toco-lib';
@@ -25,6 +25,7 @@ export class SurveyComponent implements OnInit
 	 * that define the path to a child control. 
 	 */
 	 public readonly evaluation_ChildControlsPath: ChildControlsPath = {
+		'journalData': 'journalData',
 		'name': 'name',
 		'url': 'url',
 		'issn': 'issn'
@@ -48,7 +49,11 @@ export class SurveyComponent implements OnInit
 	public hasTaskInProgress: boolean;
  
 	public evaluationFormGroup: FormGroup;
+	public evalJournalDataFormGroup: FormGroup;
 	public issnContent: InputContent;
+
+	@ViewChild('stepper', { static: true })
+	private _matHorizontalStepper: MatHorizontalStepper;
 
 	/**
 	 * It is like a readonly field, and it is only used to initialize the form; for that reason, 
@@ -80,6 +85,9 @@ export class SurveyComponent implements OnInit
 	  */
 	private _validationError_invalidCharacter: string;
 
+	firstFormGroup: FormGroup;
+	secondFormGroup: FormGroup;
+
 	public constructor(private _activatedRoute: ActivatedRoute,
 		private _formBuilder: FormBuilder,
 		private _surveyService: SurveyService,
@@ -94,6 +102,7 @@ export class SurveyComponent implements OnInit
 		this.hasTaskInProgress = true;
 
 		this.evaluationFormGroup = undefined;
+		this.evalJournalDataFormGroup = undefined;
 		this.issnContent = undefined;
 		this._evaluation = undefined;
 
@@ -158,6 +167,13 @@ export class SurveyComponent implements OnInit
 			}
 		});
 
+		this.firstFormGroup = this._formBuilder.group({
+			firstCtrl: ['', Validators.required]
+			});
+		this.secondFormGroup = this._formBuilder.group({
+			secondCtrl: ['', Validators.required]
+			});
+
 		console.log('Data got by survey component: ', this._evaluation, this.evaluationFormGroup);
 	}
 
@@ -194,7 +210,7 @@ export class SurveyComponent implements OnInit
 			'name': 'issn',
 			'label': 'ISSN',
 			'controlType': InputIssnComponent,
-			'value': this._evaluation.issn,
+			'value': this._evaluation.journalData.issn,
 			'required': true,
 			'width': '45%',
 			'appearance': TextInputAppearance.outline,
@@ -202,16 +218,18 @@ export class SurveyComponent implements OnInit
 		};
 
 		this.evaluationFormGroup = this._formBuilder.group({
-			'name': new FormControl(this._evaluation.name, 
-				Validators.pattern('^[a-zA-Z\_áéíóúÁÉÍÓÚ][a-zA-Z\-\_áéíóúÁÉÍÓÚ\ \0-9]*$')
-			),
- 
-			'url': new FormControl(this._evaluation.url, [
-				Validators.pattern(/(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/i)
-				//Validators.pattern(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/i)
-			]),
+			'journalData': this.evalJournalDataFormGroup = this._formBuilder.group({
+				'name': new FormControl(this._evaluation.journalData.name, 
+					Validators.pattern('^[a-zA-Z\_áéíóúÁÉÍÓÚ][a-zA-Z\-\_áéíóúÁÉÍÓÚ\ \0-9]*$')
+				),
+	
+				'url': new FormControl(this._evaluation.journalData.url, [
+					Validators.pattern(/(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/i)
+					//Validators.pattern(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/i)
+				]),
 
-			'issn': this.issnContent.formControl
+				'issn': this.issnContent.formControl
+			})
 		});
 	}
 
@@ -220,7 +238,7 @@ export class SurveyComponent implements OnInit
 	 */
 	public getErrorState(controlName: Array<string | number> | string): boolean
 	{
-		this._controlToDisplayError = this.evaluationFormGroup.get(controlName);
+		this._controlToDisplayError = this.evalJournalDataFormGroup.get(controlName);
 
 		/* The control does not display errors before the user has a 
 		 * chance to edit the form. The checks for dirty and touched prevent errors 
@@ -237,7 +255,7 @@ export class SurveyComponent implements OnInit
 	 */
 	public getErrorMessage(controlName: Array<string | number> | string): string
 	{
-		this._validationErrors = (this._controlToDisplayError = this.evaluationFormGroup.get(controlName)).errors;
+		this._validationErrors = (this._controlToDisplayError = this.evalJournalDataFormGroup.get(controlName)).errors;
 
 		/* Shows the text errors. They have a descendant order of importance. */
 		if (this._validationErrors)
@@ -254,5 +272,11 @@ export class SurveyComponent implements OnInit
 		}
 
 		return '';
+	}
+
+	public goToSurvey(): void
+	{
+		/* Selects and focuses the next step in list. */
+		this._matHorizontalStepper.next();
 	}
 }

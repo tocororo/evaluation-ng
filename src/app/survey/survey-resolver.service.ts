@@ -17,9 +17,11 @@ const evaluationEmpty_Resolved: any = {
         'id': '876acbf2-5a67-4b5c-92ca-040761d54595',
         'user': 'nick_1',
         'date': new Date(),
-        'name': undefined,
-        'url': undefined,
-        'issn': undefined,
+        'journalData': {
+            'name': undefined,
+            'url': undefined,
+            'issn': undefined
+        },
         'sections': [
             {  /* Visibility Section */
                 'title': 'VISIBILIDAD',
@@ -536,9 +538,11 @@ const evaluationExample: any = {
         'id': '876acbf2-5a67-4b5c-92ca-040761d54595',
         'user': 'nick_1',
         'date': new Date(),
-        'name': 'Ecología aplicada',
-        'url': 'http://www.lamolina.edu.pe/ecolapl/',
-        'issn': '1726-2216',
+        'journalData': {
+            'name': 'Ecología aplicada',
+            'url': 'http://www.lamolina.edu.pe/ecolapl/',
+            'issn': '1726-2216'
+        },
         'sections': [
             {  /* Visibility Section */
                 'title': 'VISIBILIDAD',

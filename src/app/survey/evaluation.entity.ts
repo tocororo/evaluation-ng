@@ -104,6 +104,26 @@ export class SurveySection extends EntityBase
 }
 
 /**
+ * Entity for JournalData based on schema `...-v1.0.0.json`. 
+ * Represents the journal general data that a user fills in the first step. 
+ */
+ export class JournalData extends EntityBase
+ {
+    /**
+     * Journal name. 
+     */
+     name: string;
+     /**
+      * Journal URL page. 
+      */
+     url: string;
+     /**
+      * Journal ISSN. 
+      */
+     issn: string;
+ }
+
+/**
  * Entity for Evaluation based on schema `...-v1.0.0.json`. 
  */
  export class Evaluation extends Entity
@@ -120,17 +140,9 @@ export class SurveySection extends EntityBase
     /************************************* Journal Data ***************************/
 
     /**
-     * Journal name. 
+     * Journal Data. 
      */
-    name: string;
-    /**
-     * Journal URL page. 
-     */
-    url: string;
-    /**
-     * Journal ISSN. 
-     */
-    issn: string;
+    journalData: JournalData;
 
     /**************************************** Survey ******************************/
 
@@ -142,7 +154,6 @@ export class SurveySection extends EntityBase
     /****************************** Result and Recommendations ********************/
     // TODO: ... 
  }
-
 
 /**
  * Entity for EvaluationOnlyAnswer based on schema `...-v1.0.0.json`. 
@@ -161,17 +172,9 @@ export class EvaluationOnlyAnswer extends Entity
     /************************************* Journal Data ***************************/
 
     /**
-     * Journal name. 
+     * Journal Data. 
      */
-    name: string;
-    /**
-     * Journal URL page. 
-     */
-    url: string;
-    /**
-     * Journal ISSN. 
-     */
-    issn: string;
+     journalData: JournalData;
 
     /**************************************** Survey ******************************/
 

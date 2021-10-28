@@ -12,45 +12,74 @@
 
 <form [formGroup]="evaluationFormGroup">
 
-    <br />
-    <mat-card>
-        <mat-card-header
-            fxLayout="row wrap"
-            fxLayout.xs="column"
-            fxLayoutAlign="center center"
+    <mat-horizontal-stepper [linear]="'true'" #stepper>
+        <mat-step [stepControl]="evalJournalDataFormGroup">
+            <div
+                fxLayout="row wrap"
+                fxLayout.xs="column"
+                fxLayoutAlign="space-between center"
+                [formGroupName]="evaluation_ChildControlsPath.journalData"
+            >
+                <ng-template matStepLabel>{{ 'DATOS_REVISTA' | translate }}</ng-template>
 
-            mat-card-image style="background-color: aqua;"
-            color="accent"
-        >
-            <mat-card-title style="margin: 6px auto;">{{ 'DATOS_REVISTA' | translate }}</mat-card-title>
-        </mat-card-header>
+                <!-- Start Name -->
+                <mat-form-field class="w-100" [appearance]="'outline'">
+                    <mat-label>{{ 'NOMBRE' | translate }}</mat-label>
+                    <input matInput [formControlName]="evaluation_ChildControlsPath.name" [required]="'true'" [placeholder]="'ESCR_NOMBRE_REVISTA' | translate" />
+                    <mat-error *ngIf="getErrorState(evaluation_ChildControlsPath.name)">{{ getErrorMessage(evaluation_ChildControlsPath.name) | translate }}</mat-error>
+                </mat-form-field>
+                <!-- End Name -->
 
-        <mat-card-content
-            fxLayout="row wrap"
-            fxLayout.xs="column"
-            fxLayoutAlign="space-between center"
-        >
-            <!-- Start Name -->
-            <mat-form-field class="w-100" [appearance]="'outline'">
-                <mat-label>{{ 'NOMBRE' | translate }}</mat-label>
-                <input matInput [formControlName]="evaluation_ChildControlsPath.name" [required]="'true'" [placeholder]="'ESCR_NOMBRE_REVISTA' | translate" />
-                <mat-error *ngIf="getErrorState(evaluation_ChildControlsPath.name)">{{ getErrorMessage(evaluation_ChildControlsPath.name) | translate }}</mat-error>
+                <!-- Start URL -->
+                <mat-form-field class="w-45" [appearance]="'outline'">
+                    <mat-label>Url</mat-label>
+                    <input matInput [formControlName]="evaluation_ChildControlsPath.url" [required]="'true'" [placeholder]="'URL_GENERICA' | translate" />
+                    <mat-error *ngIf="getErrorState(evaluation_ChildControlsPath.url)">{{ getErrorMessage(evaluation_ChildControlsPath.url) | translate }}</mat-error>
+                </mat-form-field>
+                <!-- End Name -->
+
+                <!-- Start ISSN -->
+                <input-issn [content]="issnContent"></input-issn>
+                <!-- End ISSN -->
+            </div>
+            <div
+                fxLayout="row wrap"
+                fxLayout.xs="column"
+                fxLayoutAlign="end center"
+            >
+                <!-- <button mat-stroked-button color="primary" [disabled]="evalJournalDataFormGroup.invalid" (click)="goToSurvey()" -->
+                <button mat-raised-button style="color: white;" color="primary"
+                    [matTooltip]="'IR_A_ENCUESTA' | translate"
+                    [disabled]="evalJournalDataFormGroup.invalid" (click)="goToSurvey()"
+                >
+                    {{ 'SIGUIENTE' | translate }}
+                    <mat-icon>navigate_next</mat-icon>
+                </button>
+            </div>
+        </mat-step>
+
+        <!-- <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Fill out your address</ng-template>
+            <mat-form-field>
+                <input matInput placeholder="Address" formControlName="secondCtrl" required>
             </mat-form-field>
-            <!-- End Name -->
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+            </form>
+        </mat-step> -->
 
-            <!-- Start URL -->
-            <mat-form-field class="w-45" [appearance]="'outline'">
-                <mat-label>Url</mat-label>
-                <input matInput [formControlName]="evaluation_ChildControlsPath.url" [required]="'true'" [placeholder]="'URL_GENERICA' | translate" />
-                <mat-error *ngIf="getErrorState(evaluation_ChildControlsPath.url)">{{ getErrorMessage(evaluation_ChildControlsPath.url) | translate }}</mat-error>
-            </mat-form-field>
-            <!-- End Name -->
-
-            <!-- Start ISSN -->
-            <input-issn [content]="issnContent"></input-issn>
-            <!-- End ISSN -->
-        </mat-card-content>
-    </mat-card>
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            You are now done.
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
 
     <br />
     <mat-tab-group mat-align-tabs="center" [animationDuration]="'1500ms'" (selectedIndexChange)="onSelectTab($event)">
