@@ -5,11 +5,11 @@ import { Observable, of } from 'rxjs';
 
 import { Environment } from 'toco-lib';
 
-import { Evaluation } from './evaluation.entity';
+import { EvaluationOnlyAnswer } from './evaluation.entity';
 
 /**
  * Represents the service that communicates with the backend for all issues 
- * that refer to change an Evaluation. 
+ * that refer to change an `Evaluation` and/or `EvaluationOnlyAnswer`. 
  */
 @Injectable({
 	providedIn: 'root'
@@ -28,7 +28,7 @@ export class SurveyService {
 	public constructor(private _env: Environment, private _http: HttpClient)
 	{ }
 
-	public editEvaluation(evaluation: Evaluation): Observable<any>
+	public editEvaluation(evaluation: EvaluationOnlyAnswer): Observable<any>
 	{
 //// Backend data ////
 		// TODO: Poner correctamente el campo `this._env.sceibaApi` o crear un `this._env.evaluationApi`. 
@@ -38,7 +38,7 @@ export class SurveyService {
 //////////////////////
 
 //// Mock data ////
-		console.log('editEvaluation: There is not backend yet!', evaluation);
+		console.error('editEvaluation: There is not backend yet!', evaluation);
 		return of(evaluation);
 ///////////////////
 	}

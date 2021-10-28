@@ -2,28 +2,28 @@
 <div fxLayout="column" fxLayoutAlign="center center">
 
     <div class="w-100 bg-primary-color" fxLayoutAlign="center center">
-        <div class="pt-50 ph-10">
+        <div class="pt-2em pb-2em ph-10">
             <h3 class="mat-display-2 main-title" style="text-align: center; color: white;">{{ 'AUT_REV_CIENT_CUBANAS' | translate }}</h3>
         </div>
     </div>
-    <img src="assets/icons/sceiba.top.bottom.2.svg" alt="" style="margin-top: -4px; width: 100%;">
+    <!-- <img src="assets/icons/sceiba.top.bottom.2.svg" alt="" style="margin-top: -4px; width: 100%;"> -->
 
     <div class="w-100" fxLayout="row" fxLayoutAlign="center center">
         <div class="w-50 text-get-started" markdown [src]="'/assets/markdown/text.get-started.' + ((transServ.currentLang == 'es') ? 'es.md' : 'en.md')"></div>
-        <a mat-raised-button class="button-get-started" color="primary" [routerLink]="['/survey/', actionText.add]">
+        <a mat-raised-button class="button-get-started" style="color: white;" color="primary" [routerLink]="['survey', actionText.add]">
             {{ 'EMPEZAR' | translate }}
         </a>
     </div>
 
-    <img src="assets/icons/sceiba.middle.top.svg" alt="" style="margin-bottom: -4px; width: 100%;">
+    <!-- <img src="assets/icons/sceiba.middle.top.svg" alt="" style="margin-bottom: -4px; width: 100%;"> -->
     <div class="w-100 bg-primary-color" fxLayout="column" fxLayoutAlign="center center">
         <div class="w-70 white-title" fxLayout="center">
             <div class="p" markdown [src]="'/assets/markdown/home.evaluation.' + ((transServ.currentLang == 'es') ? 'es.md' : 'en.md')"></div>
         </div>
     </div>
-    <img src="assets/icons/sceiba.top.bottom.2.svg" alt="" style="margin-top: -4px; width: 100%;">
+    <!-- <img src="assets/icons/sceiba.top.bottom.2.svg" alt="" style="margin-top: -4px; width: 100%;"> -->
 
-    <div class="pt-50" ngClass.xs="pt-20 pb-20" fxLayout="column" fxLayoutAlign="center center">
+    <div class="pt-2em pb-1em" ngClass.xs="pt-20 pb-20" fxLayout="column" fxLayoutAlign="center center">
         <h1 class="mat-display-1 text-center" style="margin: 0;">{{ 'PARTICIPANTES' | translate }}</h1>
         <!-- <mat-divider [ngStyle.xs]="{ width: '100%'}" [ngStyle]="{ width: '90%'}"></mat-divider> -->
       <div class="pt-30 w-80" ngClass.xs="pt-20 w-100" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center;">

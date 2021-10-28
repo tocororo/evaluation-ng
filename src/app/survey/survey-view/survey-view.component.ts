@@ -70,12 +70,12 @@ export class SurveyViewComponent implements OnInit
 	 }
 
 	/**
-	 * Does the tasks to go to the editing view. 
+	 * Does the tasks to go to the adding view. 
 	 */
 	public edit(): void
 	{
-		/* Navigates to the editing view. */
-		this._router.navigate(['survey', this.evaluation.id, ActionText.edit]);
+		/* Navigates to the adding view. */
+		this._router.navigate(['survey', ActionText.add]);
 	}
 
 	/**

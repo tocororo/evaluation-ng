@@ -1,10 +1,11 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
 
-import { ActionText, ChildControlsPath, Hit, InputContent, InputIssnComponent, MessageHandler, StatusCode, TextInputAppearance } from 'toco-lib';
+import { ActionText, ChildControlsPath, Hit, InputContent, InputIssnComponent, 
+	MessageHandler, StatusCode, TextInputAppearance } from 'toco-lib';
 
 import { Evaluation } from '../evaluation.entity';
 
@@ -48,11 +49,12 @@ export class SurveyComponent implements OnInit
  
 	public evaluationFormGroup: FormGroup;
 	public issnContent: InputContent;
+
 	/**
 	 * It is like a readonly field, and it is only used to initialize the form; for that reason, 
 	 * its name begins with an underscore to remember you that you can NOT change its value. 
 	 */
-	public _evaluation: Evaluation;
+	private _evaluation: Evaluation;
 
 	/**
 	 * Returns the selected tab position. Its value is set internally. 
@@ -122,12 +124,6 @@ export class SurveyComponent implements OnInit
 					break;
 				}
 
-			case ActionText.edit:
-				{
-					this.title = 'TITULO_VISTA_EDITAR';
-					break;
-				}
-
 			default:
 				{
 					console.error('There is a configuration error with the URL because the programme does not know what to do with it!');
@@ -141,8 +137,13 @@ export class SurveyComponent implements OnInit
 				 * is like a readonly field, and it is only used to initialize the form; for that reason, 
 				 * its name begins with an underscore to remember you that you can NOT change its value. */
 				this._evaluation = data.evaluation.metadata;
+				/* Saves the value to be used by descendant components (`SurveyViewComponent`, `SurveyEditComponent`, 
+				* `SurveyResultComponent`, and `SurveyRecommendationComponent`). */
+				this._surveyValueService._evaluation = this._evaluation;
 
 				this._initFormData();
+				/* Saves the value to be used by descendant components (`SurveyViewComponent`, `SurveyEditComponent`, 
+				* `SurveyResultComponent`, and `SurveyRecommendationComponent`). */
 				this._surveyValueService.evaluationFormGroup = this.evaluationFormGroup;
 
 				/* The component ends its loading task. It is set here and not in the `complete` property because the `complete` notification is not sent. */
@@ -202,7 +203,7 @@ export class SurveyComponent implements OnInit
 
 		this.evaluationFormGroup = this._formBuilder.group({
 			'name': new FormControl(this._evaluation.name, 
-				Validators.pattern('^[a-zA-Z\_][a-zA-Z\-\_\ \0-9]*$')
+				Validators.pattern('^[a-zA-Z\_áéíóúÁÉÍÓÚ][a-zA-Z\-\_áéíóúÁÉÍÓÚ\ \0-9]*$')
 			),
  
 			'url': new FormControl(this._evaluation.url, [
@@ -210,18 +211,7 @@ export class SurveyComponent implements OnInit
 				//Validators.pattern(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/i)
 			]),
 
-			'issn': this.issnContent.formControl,
-
-			'survey': this._formBuilder.group({
-				'name': new FormControl(this._evaluation.survey.name, 
-					Validators.pattern('^[a-zA-Z\_][a-zA-Z\-\_\ \0-9]*$')
-				),
-	 
-				'url': new FormControl(this._evaluation.survey.url, [
-					Validators.pattern(/(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/i)
-					//Validators.pattern(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/i)
-				])
-			})
+			'issn': this.issnContent.formControl
 		});
 	}
 

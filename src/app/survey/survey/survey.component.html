@@ -1,63 +1,70 @@
 
-<mat-toolbar color="accent"
+<mat-toolbar color="primary"
     fxLayout="row wrap"
     fxLayout.xs="column"
     fxLayoutAlign="center center"
-    style="height: 80px;"
+    style="height: 100px; color: white; font-size: 2em;"
 >
     <span>{{ title | translate }}</span>
-    <button mat-mini-fab *ngIf="hasPermission" class="mat-18 ml-05" color="primary" (click)="edit()"
-        [matTooltip]="'Muestra la vista de editar el Repositorio Institucional'"
-        [matTooltipClass]="'tooltip-red'"
-    >
-        <mat-icon>mode_edit</mat-icon>
-    </button>
 </mat-toolbar>
 
 <toco-progress [loading]="hasTaskInProgress"></toco-progress>
 
 <form [formGroup]="evaluationFormGroup">
 
-<mat-card>
-    <mat-card-content
-        fxLayout="row wrap"
-        fxLayout.xs="column"
-        fxLayoutAlign="space-between center"
-    >
-        <!-- Start Name -->
-        <mat-form-field class="w-100" [appearance]="'outline'">
-            <mat-label>{{ 'NOMBRE' | translate }}</mat-label>
-            <input matInput [formControlName]="evaluation_ChildControlsPath.name" [required]="'true'" [placeholder]="'ESCR_NOMBRE_REVISTA' | translate" />
-            <mat-error *ngIf="getErrorState(evaluation_ChildControlsPath.name)">{{ getErrorMessage(evaluation_ChildControlsPath.name) | translate }}</mat-error>
-        </mat-form-field>
-        <!-- End Name -->
+    <br />
+    <mat-card>
+        <mat-card-header
+            fxLayout="row wrap"
+            fxLayout.xs="column"
+            fxLayoutAlign="center center"
 
-        <!-- Start URL -->
-        <mat-form-field class="w-45" [appearance]="'outline'">
-            <mat-label>Url</mat-label>
-            <input matInput [formControlName]="evaluation_ChildControlsPath.url" [required]="'true'" [placeholder]="'URL_GENERICA' | translate" />
-            <mat-error *ngIf="getErrorState(evaluation_ChildControlsPath.url)">{{ getErrorMessage(evaluation_ChildControlsPath.url) | translate }}</mat-error>
-        </mat-form-field>
-        <!-- End Name -->
+            mat-card-image style="background-color: aqua;"
+            color="accent"
+        >
+            <mat-card-title style="margin: 6px auto;">{{ 'DATOS_REVISTA' | translate }}</mat-card-title>
+        </mat-card-header>
 
-        <!-- Start ISSN -->
-        <input-issn [content]="issnContent"></input-issn>
-        <!-- End ISSN -->
-    </mat-card-content>
-</mat-card>
+        <mat-card-content
+            fxLayout="row wrap"
+            fxLayout.xs="column"
+            fxLayoutAlign="space-between center"
+        >
+            <!-- Start Name -->
+            <mat-form-field class="w-100" [appearance]="'outline'">
+                <mat-label>{{ 'NOMBRE' | translate }}</mat-label>
+                <input matInput [formControlName]="evaluation_ChildControlsPath.name" [required]="'true'" [placeholder]="'ESCR_NOMBRE_REVISTA' | translate" />
+                <mat-error *ngIf="getErrorState(evaluation_ChildControlsPath.name)">{{ getErrorMessage(evaluation_ChildControlsPath.name) | translate }}</mat-error>
+            </mat-form-field>
+            <!-- End Name -->
 
-<mat-tab-group mat-align-tabs="center" [animationDuration]="'1500ms'" (selectedIndexChange)="onSelectTab($event)">
-    <mat-tab [label]="'ENCUESTA' | translate"> 
-        <router-outlet></router-outlet>
-    </mat-tab>
+            <!-- Start URL -->
+            <mat-form-field class="w-45" [appearance]="'outline'">
+                <mat-label>Url</mat-label>
+                <input matInput [formControlName]="evaluation_ChildControlsPath.url" [required]="'true'" [placeholder]="'URL_GENERICA' | translate" />
+                <mat-error *ngIf="getErrorState(evaluation_ChildControlsPath.url)">{{ getErrorMessage(evaluation_ChildControlsPath.url) | translate }}</mat-error>
+            </mat-form-field>
+            <!-- End Name -->
 
-    <mat-tab [label]="'RESULTADO' | translate">
-        <app-survey-result></app-survey-result>
-    </mat-tab>
+            <!-- Start ISSN -->
+            <input-issn [content]="issnContent"></input-issn>
+            <!-- End ISSN -->
+        </mat-card-content>
+    </mat-card>
 
-    <mat-tab [label]="'RECOMENDACION' | translate">
-        <app-survey-recommendation></app-survey-recommendation>
-    </mat-tab>
-</mat-tab-group>
+    <br />
+    <mat-tab-group mat-align-tabs="center" [animationDuration]="'1500ms'" (selectedIndexChange)="onSelectTab($event)">
+        <mat-tab [label]="'ENCUESTA' | translate"> 
+            <router-outlet></router-outlet>
+        </mat-tab>
+
+        <mat-tab [label]="'RESULTADO' | translate">
+            <app-survey-result></app-survey-result>
+        </mat-tab>
+
+        <mat-tab [label]="'RECOMENDACION' | translate">
+            <app-survey-recommendation></app-survey-recommendation>
+        </mat-tab>
+    </mat-tab-group>
 
 </form>

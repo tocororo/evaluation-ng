@@ -209,7 +209,7 @@ $md-greylight: (
 
 
 /* - colors - */
-$toco-primary: mat-palette($md-green);
+$toco-primary: mat-palette($md-azullight/*md-green*/);
 $toco-accent: mat-palette($md-grey);
 //$toco-warn: mat-palette($mat-grey, 200, 100, 900);
 $toco-warn: mat-palette($mat-deep-orange);
@@ -242,7 +242,7 @@ $toco-theme: mat-light-theme($toco-primary, $toco-accent, $toco-warn);
 }
 
 .alternate-theme-userProfile {
-    $alternate-primary: mat-palette($md-green);
+    $alternate-primary: mat-palette($md-azullight/*md-green*/);
     $alternate-accent:  mat-palette($md-grey);
     $toco-warn: mat-palette($mat-deep-orange);
 

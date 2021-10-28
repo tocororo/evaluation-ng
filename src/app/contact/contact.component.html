@@ -18,7 +18,7 @@
 
     <re-captcha (resolved)="resolved($event)" siteKey="{{ siteKey }}"></re-captcha>
 
-    <button mat-raised-button (click)="send()" color="primary" class="mt-1">
+    <button mat-raised-button class="mt-1" style="color: white;" color="primary" (click)="send()">
         <mat-icon matPrefix>send</mat-icon>
         {{ 'ENVIAR' | translate }}
     </button>

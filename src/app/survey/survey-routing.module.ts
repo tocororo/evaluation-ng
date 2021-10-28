@@ -32,10 +32,6 @@ const surveyRoutes: Routes = [
                 component: SurveyEditComponent
             },
             {
-                path: ':uuid/' + ActionText.edit,
-                component: SurveyEditComponent
-            },
-            {
                 path: '',
                 redirectTo: '/survey/' + ActionText.add,
                 pathMatch: 'full'

@@ -1,0 +1,34 @@
+
+<mat-card>
+    <mat-card-header
+        fxLayout="row wrap"
+        fxLayout.xs="column"
+        fxLayoutAlign="center center"
+
+        mat-card-image style="background-color: aqua;"
+        color="accent"
+    >
+        <mat-card-title style="margin: 6px auto;">{{ surveySection.title | translate }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <mat-accordion [formGroup]="parentFormGroup" [multi]="'true'">
+
+            <mat-expansion-panel *ngFor="let category of surveySection.categories">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>{{ category.title | translate }}</mat-panel-title>
+                    <mat-panel-description>{{ category.desc | translate }}</mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <ng-container *ngFor="let question of category.questions" [ngSwitch]="question.type">
+                    <input-bool *ngSwitchCase="categoryQuestionType.bool" [content]="question._inputContent"></input-bool>
+
+                    <input-number *ngSwitchCase="categoryQuestionType.integer" [content]="question._inputContent"></input-number>
+
+                    <input-select *ngSwitchCase="categoryQuestionType.select" [content]="question._inputContent"></input-select>
+                </ng-container>
+            </mat-expansion-panel>
+
+        </mat-accordion>
+    </mat-card-content>
+</mat-card>
