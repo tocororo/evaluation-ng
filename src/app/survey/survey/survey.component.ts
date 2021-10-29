@@ -79,7 +79,7 @@ export class SurveyComponent implements OnInit
 		/* The string ActionText.add is the value of the last route sub-path that is specified in the `*-routing.module.ts` file. */
 		this._actionText = this._activatedRoute.snapshot.children[0].url[(this._activatedRoute.snapshot.children[0].url.length - 1)].path as ActionText;
 		/* Saves the value to be used by descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
-		* and `SurveyResultComponent`). */
+		* and `SurveyResultAndRecommendationsComponent`). */
 		this._surveyValueService._actionText = this._actionText;
 
 		switch (this._actionText)
@@ -111,12 +111,12 @@ export class SurveyComponent implements OnInit
      			 * it is initialized. */
 				this._evaluation = data.evaluation.metadata;
 				/* Saves the value to be used by descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
-				* and `SurveyResultComponent`). */
+				* and `SurveyResultAndRecommendationsComponent`). */
 				this._surveyValueService._evaluation = this._evaluation;
 
 				this._initFormData();
 				/* Saves the value to be used by descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
-				* and `SurveyResultComponent`). */
+				* and `SurveyResultAndRecommendationsComponent`). */
 				this._surveyValueService.evaluationFormGroup = this.evaluationFormGroup;
 
 				/* The component ends its loading task. It is set here and not in the `complete` property because the `complete` notification is not sent. */

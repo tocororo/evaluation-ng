@@ -1104,7 +1104,7 @@ export class SurveyResolverService implements Resolve<SearchResponse<Evaluation>
 /**
  * A service that behaves as the bridge between the `SurveyComponent` 
  * and the descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
- * and `SurveyResultComponent`). 
+ * and `SurveyResultAndRecommendationsComponent`). 
  */
 @Injectable({
     providedIn: 'root'
@@ -1117,7 +1117,7 @@ export class SurveyValueService
      * it is initialized. 
      * It is initialized in the `SurveyComponent`, and it is 
      * used by descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
-     * and `SurveyResultComponent`). 
+     * and `SurveyResultAndRecommendationsComponent`). 
      * Returns the action through a text. 
      */
     public _actionText: ActionText;
@@ -1128,14 +1128,14 @@ export class SurveyValueService
      * it is initialized. 
      * It is initialized in the `SurveyComponent`, and it is 
      * used by descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
-     * and `SurveyResultComponent`). 
+     * and `SurveyResultAndRecommendationsComponent`). 
      */
     public _evaluation: Evaluation;
 
     /**
      * A value that is initialized in the `SurveyComponent`, and it is 
      * used by descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
-     * and `SurveyResultComponent`). 
+     * and `SurveyResultAndRecommendationsComponent`). 
      */
     public evaluationFormGroup: FormGroup;
 

@@ -25,7 +25,7 @@ import { SurveyRoutingModule } from './survey-routing.module';
 import { SurveyComponent } from './survey/survey.component';
 import { SurveyViewComponent } from './survey-view/survey-view.component';
 import { SurveyQuestionsComponent } from './survey-questions/survey-questions.component';
-import { SurveyResultComponent } from './survey-result/survey-result.component';
+import { SurveyResultAndRecommendationsComponent } from './survey-result-and-recommendations/survey-result-and-recommendations.component';
 import { SurveyJournalDataComponent } from './survey-journal-data/survey-journal-data.component';
 import { ViewerCardComponent } from './viewer-card/viewer-card.component';
 
@@ -34,7 +34,7 @@ import { ViewerCardComponent } from './viewer-card/viewer-card.component';
 		SurveyComponent,
 		SurveyViewComponent,
         SurveyQuestionsComponent,
-		SurveyResultComponent,
+		SurveyResultAndRecommendationsComponent,
 		SurveyJournalDataComponent,
 		ViewerCardComponent
 	],
