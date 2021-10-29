@@ -14,14 +14,13 @@
 
     <mat-horizontal-stepper [linear]="'true'" #stepper>
         <mat-step [stepControl]="evalJournalDataFormGroup">
+            <ng-template matStepLabel>{{ 'DATOS_REVISTA' | translate }}</ng-template>
             <div
                 fxLayout="row wrap"
                 fxLayout.xs="column"
                 fxLayoutAlign="space-between center"
                 [formGroupName]="evaluation_ChildControlsPath.journalData"
             >
-                <ng-template matStepLabel>{{ 'DATOS_REVISTA' | translate }}</ng-template>
-
                 <!-- Start Name -->
                 <mat-form-field class="w-100" [appearance]="'outline'">
                     <mat-label>{{ 'NOMBRE' | translate }}</mat-label>
@@ -44,11 +43,10 @@
             </div>
             <div
                 fxLayout="row wrap"
-                fxLayout.xs="column"
+                fxLayout.xs="row"
                 fxLayoutAlign="end center"
             >
-                <!-- <button mat-stroked-button color="primary" [disabled]="evalJournalDataFormGroup.invalid" (click)="goToSurvey()" -->
-                <button mat-raised-button style="color: white;" color="primary"
+                <button mat-raised-button style="color: white;" color="primary" type="button"
                     [matTooltip]="'IR_A_ENCUESTA' | translate"
                     [disabled]="evalJournalDataFormGroup.invalid" (click)="goToSurvey()"
                 >
@@ -58,30 +56,78 @@
             </div>
         </mat-step>
 
-        <!-- <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>Fill out your address</ng-template>
-            <mat-form-field>
-                <input matInput placeholder="Address" formControlName="secondCtrl" required>
-            </mat-form-field>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+        <mat-step [stepControl]="evalSurveyFormGroup">
+            <ng-template matStepLabel>{{ 'ENCUESTA' | translate }}</ng-template>
+            <router-outlet></router-outlet>
+            <div
+                fxLayout="row wrap"
+                fxLayout.xs="row"
+                fxLayoutAlign="end center"
+                style="margin-top: 1.5em;"
+            >
+                <button mat-raised-button style="color: white;" color="primary" type="button"
+                    [matTooltip]="'IR_A_DATOS_REVISTA' | translate"
+                    [disabled]="evalSurveyFormGroup.invalid" (click)="goToJournalData()"
+                >
+                    {{ 'ANTERIOR' | translate }}
+                    <mat-icon>navigate_before</mat-icon>
+                </button>
+                <button mat-raised-button style="color: white; margin-left: 1.5em;" color="primary" type="button"
+                    [matTooltip]="'IR_A_RESULTADO_Y_RECOMENDACIONES' | translate"
+                    [disabled]="evalSurveyFormGroup.invalid" (click)="goToResultAndRecommendations()"
+                >
+                    {{ 'SIGUIENTE' | translate }}
+                    <mat-icon>navigate_next</mat-icon>
+                </button>
             </div>
-            </form>
-        </mat-step> -->
+        </mat-step>
 
         <mat-step>
-            <ng-template matStepLabel>Done</ng-template>
+            <ng-template matStepLabel>{{ 'RESULTADO_Y_RECOMENDACIONES' | translate }}</ng-template>
+            <app-survey-result></app-survey-result>
             You are now done.
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button (click)="stepper.reset()">Reset</button>
+
+            <div
+                fxLayout="row wrap"
+                fxLayout.xs="row"
+                fxLayoutAlign="end center"
+            >
+                <button mat-raised-button style="color: white;" color="primary" type="button"
+                    [matTooltip]="'IR_A_ENCUESTA' | translate"
+                    (click)="goToSurveyBack()"
+                >
+                    {{ 'ANTERIOR' | translate }}
+                    <mat-icon>navigate_before</mat-icon>
+                </button>
+                <button mat-raised-button [matMenuTriggerFor]="menuSave" style="color: white; margin-left: 1.5em;" color="primary" type="button"
+                    [matTooltip]="'GUARDAR_TOOLTIP' | translate"
+                >
+                    {{ 'GUARDAR' | translate }}
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menuSave="matMenu">
+                    <button mat-menu-item (click)="save()">
+                        <mat-icon>create</mat-icon>
+                        <span>{{ 'GUARDAR_Y_HACER_UNA_NUEVA' | translate }}</span>
+                    </button>
+                    <button mat-menu-item (click)="save()">
+                        <mat-icon>compare</mat-icon>
+                        <span>{{ 'GUARDAR_Y_COMPARAR' | translate }}</span>
+                    </button>
+                    <button mat-menu-item (click)="save()">
+                        <mat-icon>share</mat-icon>
+                        <span>{{ 'GUARDAR_Y_COMPARTIR' | translate }}</span>
+                    </button>
+                    <button mat-menu-item (click)="save()">
+                        <mat-icon>exit_to_app</mat-icon>
+                        <span>{{ 'GUARDAR_Y_SALIR' | translate }}</span>
+                    </button>
+                </mat-menu>
             </div>
         </mat-step>
     </mat-horizontal-stepper>
 
-    <br />
+    <!-- <br />
     <mat-tab-group mat-align-tabs="center" [animationDuration]="'1500ms'" (selectedIndexChange)="onSelectTab($event)">
         <mat-tab [label]="'ENCUESTA' | translate"> 
             <router-outlet></router-outlet>
@@ -94,6 +140,6 @@
         <mat-tab [label]="'RECOMENDACION' | translate">
             <app-survey-recommendation></app-survey-recommendation>
         </mat-tab>
-    </mat-tab-group>
+    </mat-tab-group> -->
 
 </form>

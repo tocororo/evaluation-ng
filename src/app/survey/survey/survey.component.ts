@@ -3,11 +3,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MatDialog, MatHorizontalStepper, MatSnackBar } from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
 
-import { ActionText, ChildControlsPath, Hit, InputContent, InputIssnComponent, 
-	MessageHandler, StatusCode, TextInputAppearance } from 'toco-lib';
+import { ActionText, ChildControlsPath, Hit, InputContent, InputIssnComponent, TextInputAppearance,
+	MessageHandler, StatusCode, HandlerComponent } from 'toco-lib';
 
-import { Evaluation } from '../evaluation.entity';
+import { Evaluation, EvaluationOnlyAnswer } from '../evaluation.entity';
 
 import { SurveyService } from '../survey.service';
 import { SurveyValueService } from '../survey-resolver.service';
@@ -51,6 +52,7 @@ export class SurveyComponent implements OnInit
 	public evaluationFormGroup: FormGroup;
 	public evalJournalDataFormGroup: FormGroup;
 	public issnContent: InputContent;
+	public evalSurveyFormGroup: FormGroup;
 
 	@ViewChild('stepper', { static: true })
 	private _matHorizontalStepper: MatHorizontalStepper;
@@ -60,11 +62,6 @@ export class SurveyComponent implements OnInit
 	 * its name begins with an underscore to remember you that you can NOT change its value. 
 	 */
 	private _evaluation: Evaluation;
-
-	/**
-	 * Returns the selected tab position. Its value is set internally. 
-	 */
-	private _selectedTabPos: number;
 
 	/**
 	 * Represents the current control that is analyzed for displaying an error. 
@@ -90,6 +87,7 @@ export class SurveyComponent implements OnInit
 
 	public constructor(private _activatedRoute: ActivatedRoute,
 		private _formBuilder: FormBuilder,
+		private _transServ: TranslateService,
 		private _surveyService: SurveyService,
 		private _surveyValueService: SurveyValueService,
 		private _dialog: MatDialog,
@@ -104,9 +102,8 @@ export class SurveyComponent implements OnInit
 		this.evaluationFormGroup = undefined;
 		this.evalJournalDataFormGroup = undefined;
 		this.issnContent = undefined;
+		this.evalSurveyFormGroup = undefined;
 		this._evaluation = undefined;
-
-		this._selectedTabPos = 0;
 
 		this._controlToDisplayError = undefined;
 		this._validationErrors = undefined;
@@ -177,29 +174,6 @@ export class SurveyComponent implements OnInit
 		console.log('Data got by survey component: ', this._evaluation, this.evaluationFormGroup);
 	}
 
-	public onSelectTab(newPos: number): void
-	{
-		// console.log('onSelectTab pos: ', newPos);
-
-		switch ((this._selectedTabPos = newPos))
-		{
-			case 0:  /* Survey */
-				{
-					break;
-				}
-
-			case 1:  /* Result */
-				{
-					break;
-				}
-
-			default:  /* Recommendation */
-				{
-					break;
-				}
-		}
-	}
-
 	/**
 	 * Initializes the form data. 
 	 */
@@ -229,7 +203,9 @@ export class SurveyComponent implements OnInit
 				]),
 
 				'issn': this.issnContent.formControl
-			})
+			}),
+
+			'survey': this.evalSurveyFormGroup = this._formBuilder.group({ })
 		});
 	}
 
@@ -278,5 +254,60 @@ export class SurveyComponent implements OnInit
 	{
 		/* Selects and focuses the next step in list. */
 		this._matHorizontalStepper.next();
+	}
+
+	public goToSurveyBack(): void
+	{
+		/* Selects and focuses the previous step in list. */
+		this._matHorizontalStepper.previous();
+	}
+
+	public goToJournalData(): void
+	{
+		/* Selects and focuses the previous step in list. */
+		this._matHorizontalStepper.previous();
+	}
+
+	public goToResultAndRecommendations(): void
+	{
+		/* Selects and focuses the next step in list. */
+		this._matHorizontalStepper.next();
+	}
+
+	public save(): void
+	{
+		/* The component begins its updating task. */
+		this.hasTaskInProgress = true;
+
+		console.log('save: ', this.evaluationFormGroup.valid, this.evaluationFormGroup);
+
+		this._surveyService.editEvaluation(this.evaluationFormGroup.value).subscribe({
+			next: (result: Hit<EvaluationOnlyAnswer>) => {
+				console.log('save result: ', result);
+			},
+			error: (err: any) => {
+				/* The component ends its updating task. */
+				this.hasTaskInProgress = false;
+
+				const m = new MessageHandler(this._snackBar);
+				m.showMessage(StatusCode.OK, err.message)
+			},
+			complete: () => {
+				/* The component ends its updating task. */
+				this.hasTaskInProgress = false;
+
+				let message: string = '';
+				this._transServ.get('EVAL_REV_GUARDADA').subscribe((res: string) => {
+					message = res;
+				});
+				let title: string = '';
+				this._transServ.get('OPERACION_EXITOSA').subscribe((res: string) => {
+					title = res;
+				});
+
+				const m = new MessageHandler(null, this._dialog);
+				m.showMessage(StatusCode.OK, message, HandlerComponent.dialog, title, '50%');
+			}
+		});
 	}
 }
