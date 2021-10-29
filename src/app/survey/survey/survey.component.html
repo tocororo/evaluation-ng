@@ -15,32 +15,7 @@
     <mat-horizontal-stepper [linear]="'true'" #stepper>
         <mat-step [stepControl]="evalJournalDataFormGroup">
             <ng-template matStepLabel>{{ 'DATOS_REVISTA' | translate }}</ng-template>
-            <div
-                fxLayout="row wrap"
-                fxLayout.xs="column"
-                fxLayoutAlign="space-between center"
-                [formGroupName]="evaluation_ChildControlsPath.journalData"
-            >
-                <!-- Start Name -->
-                <mat-form-field class="w-100" [appearance]="'outline'">
-                    <mat-label>{{ 'NOMBRE' | translate }}</mat-label>
-                    <input matInput [formControlName]="evaluation_ChildControlsPath.name" [required]="'true'" [placeholder]="'ESCR_NOMBRE_REVISTA' | translate" />
-                    <mat-error *ngIf="getErrorState(evaluation_ChildControlsPath.name)">{{ getErrorMessage(evaluation_ChildControlsPath.name) | translate }}</mat-error>
-                </mat-form-field>
-                <!-- End Name -->
-
-                <!-- Start URL -->
-                <mat-form-field class="w-45" [appearance]="'outline'">
-                    <mat-label>Url</mat-label>
-                    <input matInput [formControlName]="evaluation_ChildControlsPath.url" [required]="'true'" [placeholder]="'URL_GENERICA' | translate" />
-                    <mat-error *ngIf="getErrorState(evaluation_ChildControlsPath.url)">{{ getErrorMessage(evaluation_ChildControlsPath.url) | translate }}</mat-error>
-                </mat-form-field>
-                <!-- End Name -->
-
-                <!-- Start ISSN -->
-                <input-issn [content]="issnContent"></input-issn>
-                <!-- End ISSN -->
-            </div>
+            <app-survey-journal-data></app-survey-journal-data>
             <div
                 fxLayout="row wrap"
                 fxLayout.xs="row"
@@ -56,7 +31,8 @@
             </div>
         </mat-step>
 
-        <mat-step [stepControl]="evalSurveyFormGroup">
+        <!-- [stepControl]="evalSurveyFormGroup" -->
+        <mat-step>
             <ng-template matStepLabel>{{ 'ENCUESTA' | translate }}</ng-template>
             <router-outlet></router-outlet>
             <div
@@ -67,15 +43,15 @@
             >
                 <button mat-raised-button style="color: white;" color="primary" type="button"
                     [matTooltip]="'IR_A_DATOS_REVISTA' | translate"
-                    [disabled]="evalSurveyFormGroup.invalid" (click)="goToJournalData()"
-                >
+                    (click)="goToJournalData()"
+                >   <!-- [disabled]="evalSurveyFormGroup.invalid" -->
                     {{ 'ANTERIOR' | translate }}
                     <mat-icon>navigate_before</mat-icon>
                 </button>
                 <button mat-raised-button style="color: white; margin-left: 1.5em;" color="primary" type="button"
                     [matTooltip]="'IR_A_RESULTADO_Y_RECOMENDACIONES' | translate"
-                    [disabled]="evalSurveyFormGroup.invalid" (click)="goToResultAndRecommendations()"
-                >
+                    (click)="goToResultAndRecommendations()"
+                >   <!-- [disabled]="evalSurveyFormGroup.invalid" -->
                     {{ 'SIGUIENTE' | translate }}
                     <mat-icon>navigate_next</mat-icon>
                 </button>
@@ -91,6 +67,7 @@
                 fxLayout="row wrap"
                 fxLayout.xs="row"
                 fxLayoutAlign="end center"
+                style="margin-top: 1.5em;"
             >
                 <button mat-raised-button style="color: white;" color="primary" type="button"
                     [matTooltip]="'IR_A_ENCUESTA' | translate"
@@ -126,20 +103,5 @@
             </div>
         </mat-step>
     </mat-horizontal-stepper>
-
-    <!-- <br />
-    <mat-tab-group mat-align-tabs="center" [animationDuration]="'1500ms'" (selectedIndexChange)="onSelectTab($event)">
-        <mat-tab [label]="'ENCUESTA' | translate"> 
-            <router-outlet></router-outlet>
-        </mat-tab>
-
-        <mat-tab [label]="'RESULTADO' | translate">
-            <app-survey-result></app-survey-result>
-        </mat-tab>
-
-        <mat-tab [label]="'RECOMENDACION' | translate">
-            <app-survey-recommendation></app-survey-recommendation>
-        </mat-tab>
-    </mat-tab-group> -->
 
 </form>

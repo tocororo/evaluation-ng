@@ -6,7 +6,7 @@ import { ActionText } from 'toco-lib';
 
 import { SurveyComponent } from './survey/survey.component';
 import { SurveyViewComponent } from './survey-view/survey-view.component';
-import { SurveyEditComponent } from './survey-edit/survey-edit.component';
+import { SurveyQuestionsComponent } from './survey-questions/survey-questions.component';
 import { SurveyResolverService } from './survey-resolver.service';
 
 const surveyRoutes: Routes = [
@@ -29,7 +29,7 @@ const surveyRoutes: Routes = [
             },
             {
                 path: ActionText.add,
-                component: SurveyEditComponent
+                component: SurveyQuestionsComponent
             },
             {
                 path: '',

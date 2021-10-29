@@ -1,0 +1,29 @@
+
+<div
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-between center"
+    [formGroup]="journalDataFormGroup"
+>
+
+    <!-- Start Name -->
+    <mat-form-field class="w-100" [appearance]="'outline'">
+        <mat-label>{{ 'NOMBRE' | translate }}</mat-label>
+        <input matInput [formControlName]="journalData_ChildControlsPath.name" [required]="'true'" [placeholder]="'ESCR_NOMBRE_REVISTA' | translate" />
+        <mat-error *ngIf="getErrorState(journalData_ChildControlsPath.name)">{{ getErrorMessage(journalData_ChildControlsPath.name) | translate }}</mat-error>
+    </mat-form-field>
+    <!-- End Name -->
+
+    <!-- Start URL -->
+    <mat-form-field class="w-45" [appearance]="'outline'">
+        <mat-label>Url</mat-label>
+        <input matInput [formControlName]="journalData_ChildControlsPath.url" [required]="'true'" [placeholder]="'URL_GENERICA' | translate" />
+        <mat-error *ngIf="getErrorState(journalData_ChildControlsPath.url)">{{ getErrorMessage(journalData_ChildControlsPath.url) | translate }}</mat-error>
+    </mat-form-field>
+    <!-- End Name -->
+
+    <!-- Start ISSN -->
+    <input-issn [content]="issnContent"></input-issn>
+    <!-- End ISSN -->
+
+</div>

@@ -24,18 +24,18 @@ import { CoreModule, TocoFormsModule, StaticsModule } from 'toco-lib';
 import { SurveyRoutingModule } from './survey-routing.module';
 import { SurveyComponent } from './survey/survey.component';
 import { SurveyViewComponent } from './survey-view/survey-view.component';
-import { SurveyEditComponent } from './survey-edit/survey-edit.component';
+import { SurveyQuestionsComponent } from './survey-questions/survey-questions.component';
 import { SurveyResultComponent } from './survey-result/survey-result.component';
-import { SurveyRecommendationComponent } from './survey-recommendation/survey-recommendation.component';
+import { SurveyJournalDataComponent } from './survey-journal-data/survey-journal-data.component';
 import { ViewerCardComponent } from './viewer-card/viewer-card.component';
 
 @NgModule({
 	declarations: [
 		SurveyComponent,
 		SurveyViewComponent,
-        SurveyEditComponent,
+        SurveyQuestionsComponent,
 		SurveyResultComponent,
-		SurveyRecommendationComponent,
+		SurveyJournalDataComponent,
 		ViewerCardComponent
 	],
 	imports: [

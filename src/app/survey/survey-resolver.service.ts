@@ -1103,8 +1103,8 @@ export class SurveyResolverService implements Resolve<SearchResponse<Evaluation>
 
 /**
  * A service that behaves as the bridge between the `SurveyComponent` 
- * and the descendant components (`SurveyViewComponent`, `SurveyEditComponent`, 
- * `SurveyResultComponent`, and `SurveyRecommendationComponent`). 
+ * and the descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
+ * and `SurveyResultComponent`). 
  */
 @Injectable({
     providedIn: 'root'
@@ -1113,22 +1113,35 @@ export class SurveyValueService
 {
     /**
      * It is like a readonly field, and it is only used to initialize the form; for that reason, 
-     * its name begins with an underscore to remember you that you can NOT change its value. 
+     * its name begins with an underscore to remember you that you can NOT change its value after 
+     * it is initialized. 
      * It is initialized in the `SurveyComponent`, and it is 
-     * used by descendant components (`SurveyViewComponent`, `SurveyEditComponent`, 
-     * `SurveyResultComponent`, and `SurveyRecommendationComponent`). 
+     * used by descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
+     * and `SurveyResultComponent`). 
+     * Returns the action through a text. 
+     */
+    public _actionText: ActionText;
+
+    /**
+     * It is like a readonly field, and it is only used to initialize the form; for that reason, 
+     * its name begins with an underscore to remember you that you can NOT change its value after 
+     * it is initialized. 
+     * It is initialized in the `SurveyComponent`, and it is 
+     * used by descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
+     * and `SurveyResultComponent`). 
      */
     public _evaluation: Evaluation;
 
     /**
      * A value that is initialized in the `SurveyComponent`, and it is 
-     * used by descendant components (`SurveyViewComponent`, `SurveyEditComponent`, 
-     * `SurveyResultComponent`, and `SurveyRecommendationComponent`). 
+     * used by descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
+     * and `SurveyResultComponent`). 
      */
     public evaluationFormGroup: FormGroup;
 
     public constructor()
     {
+        this._actionText = undefined;
         this._evaluation = undefined;
         this.evaluationFormGroup = undefined;
     }
