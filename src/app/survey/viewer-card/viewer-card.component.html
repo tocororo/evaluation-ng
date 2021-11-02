@@ -5,8 +5,8 @@
         fxLayout.xs="column"
         fxLayoutAlign="center center"
 
-        mat-card-image style="background-color: aqua;"
-        color="accent"
+        mat-card-image
+        class="mch-bg-primary-color"
     >
         <mat-card-title style="margin: 6px auto;">{{ surveySection.title | translate }}</mat-card-title>
     </mat-card-header>
@@ -20,13 +20,29 @@
                     <mat-panel-description>{{ category.desc | translate }}</mat-panel-description>
                 </mat-expansion-panel-header>
 
-                <ng-container *ngFor="let question of category.questions" [ngSwitch]="question.type">
-                    <input-bool *ngSwitchCase="categoryQuestionType.bool" [content]="question._inputContent"></input-bool>
+                <table mat-table [dataSource]="category.questions" class="mat-elevation-z8">
 
-                    <input-number *ngSwitchCase="categoryQuestionType.integer" [content]="question._inputContent"></input-number>
-
-                    <input-select *ngSwitchCase="categoryQuestionType.select" [content]="question._inputContent"></input-select>
-                </ng-container>
+                    <!-- Question Column -->
+                    <ng-container [matColumnDef]="displayedColumns[0]">
+                        <td mat-cell *matCellDef="let element"> {{ element.desc | translate }} </td>
+                    </ng-container>
+                
+                    <!-- Answer Column -->
+                    <ng-container [matColumnDef]="displayedColumns[1]">
+                        <td mat-cell *matCellDef="let element">
+                            <ng-container [ngSwitch]="element.type">
+                                <input-bool *ngSwitchCase="categoryQuestionType.bool" [content]="element._inputContent"></input-bool>
+            
+                                <input-number *ngSwitchCase="categoryQuestionType.integer" [content]="element._inputContent"></input-number>
+            
+                                <input-select *ngSwitchCase="categoryQuestionType.select" [content]="element._inputContent"></input-select>
+                            </ng-container>
+                        </td>
+                    </ng-container>
+                
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                
+                </table>
             </mat-expansion-panel>
 
         </mat-accordion>

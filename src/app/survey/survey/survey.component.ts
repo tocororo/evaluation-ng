@@ -1,12 +1,11 @@
 
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatHorizontalStepper, MatSnackBar } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 
-import { ActionText, Hit, InputContent, InputIssnComponent, TextInputAppearance,
-	MessageHandler, StatusCode, HandlerComponent } from 'toco-lib';
+import { ActionText, Hit, MessageHandler, StatusCode, HandlerComponent } from 'toco-lib';
 
 import { Evaluation, EvaluationOnlyAnswer } from '../evaluation.entity';
 

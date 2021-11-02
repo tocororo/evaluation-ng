@@ -1,5 +1,6 @@
 
-<ng-container *ngFor="let section of surveyValueService._evaluation.sections">
-    <br />
+<ng-container *ngFor="let section of surveyValueService._evaluation.sections; let pos=index">
+    <div *ngIf="pos == 0" style="margin-top: 0.6em;"></div>
+    <br *ngIf="pos != 0" />
     <app-viewer-card [parentFormGroup]="surveyFormGroup" [surveySection]="section"></app-viewer-card>
 </ng-container>

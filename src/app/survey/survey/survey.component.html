@@ -12,8 +12,9 @@
 
 <form [formGroup]="evaluationFormGroup">
 
-    <mat-horizontal-stepper [linear]="'true'" #stepper>
-        <mat-step [stepControl]="evalJournalDataFormGroup">
+    <mat-horizontal-stepper [linear]="'true'" #stepper style="margin-top: 0.6em;">
+        <!-- [stepControl]="evalJournalDataFormGroup" -->
+        <mat-step>
             <ng-template matStepLabel>{{ 'DATOS_REVISTA' | translate }}</ng-template>
             <app-survey-journal-data></app-survey-journal-data>
             <div
@@ -43,15 +44,15 @@
             >
                 <button mat-raised-button style="color: white;" color="primary" type="button"
                     [matTooltip]="'IR_A_DATOS_REVISTA' | translate"
-                    (click)="goToJournalData()"
-                >   <!-- [disabled]="evalSurveyFormGroup.invalid" -->
+                    [disabled]="evalSurveyFormGroup.invalid" (click)="goToJournalData()"
+                >
                     {{ 'ANTERIOR' | translate }}
                     <mat-icon>navigate_before</mat-icon>
                 </button>
                 <button mat-raised-button style="color: white; margin-left: 1.5em;" color="primary" type="button"
                     [matTooltip]="'IR_A_RESULTADO_Y_RECOMENDACIONES' | translate"
-                    (click)="goToResultAndRecommendations()"
-                >   <!-- [disabled]="evalSurveyFormGroup.invalid" -->
+                    [disabled]="evalSurveyFormGroup.invalid" (click)="goToResultAndRecommendations()"
+                >
                     {{ 'SIGUIENTE' | translate }}
                     <mat-icon>navigate_next</mat-icon>
                 </button>

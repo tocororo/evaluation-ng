@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -18,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTableModule } from '@angular/material/table';
 
 import { CoreModule, TocoFormsModule, StaticsModule } from 'toco-lib';
 
@@ -45,7 +45,6 @@ import { ViewerCardComponent } from './viewer-card/viewer-card.component';
 		FlexLayoutModule,
 		TranslateModule,
 
-		MatTabsModule,
         MatTooltipModule,
         MatIconModule,
         MatToolbarModule,
@@ -57,6 +56,7 @@ import { ViewerCardComponent } from './viewer-card/viewer-card.component';
 		MatExpansionModule,
 		MatMenuModule,
 		MatStepperModule,
+		MatTableModule,
 
 		CoreModule,
 		TocoFormsModule,

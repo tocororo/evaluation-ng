@@ -31,6 +31,8 @@ export class ViewerCardComponent implements OnInit
 	@Input()
 	public surveySection: SurveySection;
 
+	public readonly displayedColumns: string[] = [ 'question', 'answer' ];
+
 	public constructor()
 	{
 		this.categoryQuestionType = CategoryQuestionType;
@@ -67,12 +69,12 @@ export class ViewerCardComponent implements OnInit
 							question._inputContent = {
 								'formControl': InputBoolComponent.getFormControlByDefault(),
 								'name': question.id,
-								'label': question.desc,
+								'label': undefined,
 								'controlType': InputBoolComponent,
 								'value': question.answer,
 								'required': true,
 								'width': '100%',
-								'appearance': TextInputAppearance.outline,
+								'appearance': TextInputAppearance.standard,
 								'ariaLabel': question.desc,
 							};
 							break;
@@ -87,12 +89,12 @@ export class ViewerCardComponent implements OnInit
 							question._inputContent = {
 								'formControl': InputNumberComponent.getFormControlByDefault(validatorArguments),
 								'name': question.id,
-								'label': question.desc,
+								'label': undefined,
 								'controlType': InputNumberComponent,
 								'value': question.answer,
 								'required': true,
 								'width': '100%',
-								'appearance': TextInputAppearance.outline,
+								'appearance': TextInputAppearance.standard,
 								'ariaLabel': question.desc,
 							};
 							break;
@@ -103,12 +105,12 @@ export class ViewerCardComponent implements OnInit
 							question._inputContent = {
 								'formControl': InputSelectComponent.getFormControlByDefault(),
 								'name': question.id,
-								'label': question.desc,
+								'label': undefined,
 								'controlType': InputSelectComponent,
 								'value': question.answer,
 								'required': true,
 								'width': '100%',
-								'appearance': TextInputAppearance.outline,
+								'appearance': TextInputAppearance.standard,
 								'ariaLabel': question.desc,
 								'selectOptions': question.selectOptions,
 								'multiple': false

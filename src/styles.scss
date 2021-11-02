@@ -313,6 +313,14 @@ body { margin: 0; }
      margin: 16px;
      border-radius: 4px;
  }
+ .mch-bg-primary-color
+ {
+    background-color: mat-color($toco-primary);
+    color: #fff;
+    padding: 0.5em;
+    margin: 0.5em;
+    border-radius: 4px;
+}
  .bg-primary-color {
     background-color: mat-color($toco-primary);
 }
