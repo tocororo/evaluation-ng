@@ -91,6 +91,7 @@
     "VAL_ERROR_CARACTER_INVAL": "Cambie o borre los caracteres inválidos.",
     "VISIBILIDAD": "Visibilidad",
     "IMPACTO": "Impacto",
+    "DONDE_BUSCARLA": "Dónde buscarla: ",
 
     "INDIZACION": "Indización",
     "C_001_Q_001": "Está incluida en DOAJ",
@@ -102,14 +103,18 @@
 
     "ACCESO": "Acceso",
     "C_002_Q_001": "Existe un sitio web propio de la revista",
-    "C_002_Q_002": "Disponibilidad de los últimos números publicados",
-    "C_002_Q_003": "Disponibilidad de los artículos publicados por la revista en su sitio web",
+    "C_002_Q_002": "Están disponibles los últimos números en el sitio web de la revista",
+    "C_002_Q_003": "Están disponibles los artículos de manera individual en el sitio web de la revista",
     "C_002_Q_004": "Existen artículos de la revista en repositorios nacional y/o institucional de acceso abierto",
     "C_002_Q_005": "Existen artículos de la revista en repositorios de acceso abierto internacionales generales y/o temáticos (ej.: Zenodo, La Referencia, OceanDocs, Arxich, entre otros)",
     "NO_APLICA": "N/A (no aplica)",
     "NO_DISPONIBLE_ULTIMO_NUM": "No se encuentra disponible el último número de la revista",
     "SOLAMENTE_DISPONIBLE_ULTIMO_NUM": "Solamente se encuentra el último número de la revista",
     "TODOS_NUM_PUBLICADOS_ULTIMOS_DOS_AÑOS": "Se encuentran todos los números publicados por la revista en los últimos dos años",
+    "NO_DISPONIBLE_IND_NO_DESC_NUM": "No están disponibles de manera individual ni puede descargarse el número completo",
+    "NO_DISPONIBLE_IND_SI_DESC_NUM": "No están disponibles de manera individual pero puede descargarse el número completo sin restricciones",
+    "SI_DISPONIBLE_IND_NO_DESC_NUM": "Están disponibles de manera individual con restricciones de acceso y/o descarga",
+    "SI_DISPONIBLE_IND_SI_DESC_NUM": "Se acceden y descargan libremente de manera individual",
     "SITIO_OFICIAL_REV": "Sitio oficial de la revista",
     "GOOGLE_ACADEMICO": "Google académico",
 
@@ -176,9 +181,12 @@
 
     "IMPACTO_ACADEMICO": "Impacto académico",
     "C_007_Q_001": "Tiene citas registradas en Scimago/Scopus o Scielo Analytics o Google Académico",
-    "C_007_Q_002": "Citas recibidas en Google Académico",
+    "C_007_Q_002": "Citas recibidas en Scopus/Scimago o Web de la Ciencia/JCR o Google Académico/Scielo Analytics",
     "C_007_Q_003": "Según Google Académico el índice H5 de la revista",
-    "C_007_Q_002_HINT": "Este elemento se considerará para una de las siguientes opciones: Scimago/Scopus, JCR, Scielo Analytics o Google Académico. Si se desea estimar en más de una opción, hay que hacerlo de manera diferenciada. Nunca deben sumarse los totales de citación provenientes de diferentes fuentes",
+    "C_007_Q_002_HINT": "Este elemento se considerará para una de las siguientes opciones: Scopus/Scimago o Web de la Ciencia/JCR o Google Académico/Scielo Analytics. Si se desea estimar en más de una opción, hay que hacerlo de manera diferenciada. Nunca deben sumarse los totales de citación provenientes de diferentes fuentes",
+    "MENOS_DEL_20_ART_ULT_3_AÑOS_REC_ALGUNA_CITA": "Menos del 20% de los artículos publicados en los últimos tres años han recibido al menos una cita",
+    "ENTRE_EL_20_Y_50_ART_ULT_3_AÑOS_REC_ALGUNA_CITA": "Entre el 20% y el 50% de los artículos publicados en los últimos tres años han recibido al menos una cita",
+    "MAS_DEL_50_ART_ULT_3_AÑOS_REC_ALGUNA_CITA": "Más del 50% de los artículos publicados en los últimos tres años han recibido al menos una cita",
     "MENOR_IGUAL_IND_H5_REV_PER_ANT": "Es menor o igual al índice H5 de la revista en el período anterior",
     "MAYOR_IND_H5_REV_PER_ANT": "Es mayor al índice H5 de la revista en el período anterior",
 

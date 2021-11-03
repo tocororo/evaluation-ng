@@ -24,19 +24,28 @@
 
                     <!-- Question Column -->
                     <ng-container [matColumnDef]="displayedColumns[0]">
-                        <td mat-cell *matCellDef="let element"> {{ element.desc | translate }} </td>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.desc | translate }}
+                        </td>
                     </ng-container>
-                
+
                     <!-- Answer Column -->
                     <ng-container [matColumnDef]="displayedColumns[1]">
                         <td mat-cell *matCellDef="let element">
-                            <ng-container [ngSwitch]="element.type">
-                                <input-bool *ngSwitchCase="categoryQuestionType.bool" [content]="element._inputContent"></input-bool>
-            
-                                <input-number *ngSwitchCase="categoryQuestionType.integer" [content]="element._inputContent"></input-number>
-            
-                                <input-select *ngSwitchCase="categoryQuestionType.select" [content]="element._inputContent"></input-select>
-                            </ng-container>
+                            <div
+                                fxLayout="row"
+                                fxLayout.xs="row"
+                                fxLayoutAlign="center center"
+                            >
+                                <mat-icon [matTooltip]="getTooltipHint(element)" [matTooltipPosition]="'right'" color="primary">find_in_page</mat-icon>
+                                <ng-container [ngSwitch]="element.type">
+                                    <input-bool *ngSwitchCase="categoryQuestionType.bool" [content]="element._inputContent"></input-bool>
+                
+                                    <input-number *ngSwitchCase="categoryQuestionType.integer" [content]="element._inputContent"></input-number>
+                
+                                    <input-select *ngSwitchCase="categoryQuestionType.select" [content]="element._inputContent"></input-select>
+                                </ng-container>
+                            </div>
                         </td>
                     </ng-container>
                 

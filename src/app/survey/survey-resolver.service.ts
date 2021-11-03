@@ -106,16 +106,20 @@ const evaluationEmpty_Resolved: any = {
                                 'answer': undefined,
                                 'selectOptions': [
                                     {
-                                        'label': 'PONER-OPCION-CORRECTAMENTE-1',
-                                        'value': 'PONER-OPCION-CORRECTAMENTE-1'
+                                        'label': 'NO_DISPONIBLE_IND_NO_DESC_NUM',
+                                        'value': 'NO_DISPONIBLE_IND_NO_DESC_NUM'
                                     },
                                     {
-                                        'label': 'PONER-OPCION-CORRECTAMENTE-2',
-                                        'value': 'PONER-OPCION-CORRECTAMENTE-2'
+                                        'label': 'NO_DISPONIBLE_IND_SI_DESC_NUM',
+                                        'value': 'NO_DISPONIBLE_IND_SI_DESC_NUM'
                                     },
                                     {
-                                        'label': 'PONER-OPCION-CORRECTAMENTE-3',
-                                        'value': 'PONER-OPCION-CORRECTAMENTE-3'
+                                        'label': 'SI_DISPONIBLE_IND_NO_DESC_NUM',
+                                        'value': 'SI_DISPONIBLE_IND_NO_DESC_NUM'
+                                    },
+                                    {
+                                        'label': 'SI_DISPONIBLE_IND_SI_DESC_NUM',
+                                        'value': 'SI_DISPONIBLE_IND_SI_DESC_NUM'
                                     }
                                 ]
                             },
@@ -457,16 +461,16 @@ const evaluationEmpty_Resolved: any = {
                                 'answer': undefined,
                                 'selectOptions': [
                                     {
-                                        'label': 'PONER-OPCION-CORRECTAMENTE-1',
-                                        'value': 'PONER-OPCION-CORRECTAMENTE-1'
+                                        'label': 'MENOS_DEL_20_ART_ULT_3_AÑOS_REC_ALGUNA_CITA',
+                                        'value': 'MENOS_DEL_20_ART_ULT_3_AÑOS_REC_ALGUNA_CITA'
                                     },
                                     {
-                                        'label': 'PONER-OPCION-CORRECTAMENTE-2',
-                                        'value': 'PONER-OPCION-CORRECTAMENTE-2'
+                                        'label': 'ENTRE_EL_20_Y_50_ART_ULT_3_AÑOS_REC_ALGUNA_CITA',
+                                        'value': 'ENTRE_EL_20_Y_50_ART_ULT_3_AÑOS_REC_ALGUNA_CITA'
                                     },
                                     {
-                                        'label': 'PONER-OPCION-CORRECTAMENTE-3',
-                                        'value': 'PONER-OPCION-CORRECTAMENTE-3'
+                                        'label': 'MAS_DEL_50_ART_ULT_3_AÑOS_REC_ALGUNA_CITA',
+                                        'value': 'MAS_DEL_50_ART_ULT_3_AÑOS_REC_ALGUNA_CITA'
                                     }
                                 ]
                             },
@@ -556,7 +560,7 @@ const evaluationExample: any = {
                                 'id': 'c_001_q_001',
                                 'desc': 'C_001_Q_001',
                                 'hint': 'DATOS_OFICIALES_DOAJ_MIAR',
-                                'answer': true
+                                'answer': false
                             },
                             {
                                 'type': CategoryQuestionType.bool,
@@ -570,16 +574,16 @@ const evaluationExample: any = {
                                 'id': 'c_001_q_003',
                                 'desc': 'C_001_Q_003',
                                 'hint': 'MIAR',
-                                'answer': 12,
-                                'min':  0
+                                'answer': 3,
+                                'min': 0
                             },
                             {
                                 'type': CategoryQuestionType.integer,
                                 'id': 'c_001_q_004',
                                 'desc': 'C_001_Q_004',
                                 'hint': 'MIAR',
-                                'answer': 0,
-                                'min':  0
+                                'answer': 2,
+                                'min': 0
                             }
                         ]
                     },
@@ -599,7 +603,7 @@ const evaluationExample: any = {
                                 'id': 'c_002_q_002',
                                 'desc': 'C_002_Q_002',
                                 'hint': 'SITIO_OFICIAL_REV',
-                                'answer': 'SOLAMENTE_DISPONIBLE_ULTIMO_NUM',
+                                'answer': 'TODOS_NUM_PUBLICADOS_ULTIMOS_DOS_AÑOS',
                                 'selectOptions': [
                                     {
                                         'label': 'NO_APLICA',
@@ -624,19 +628,23 @@ const evaluationExample: any = {
                                 'id': 'c_002_q_003',
                                 'desc': 'C_002_Q_003',
                                 'hint': 'SITIO_OFICIAL_REV',
-                                'answer': 'PONER-OPCION-CORRECTAMENTE-3',
+                                'answer': 'NO_DISPONIBLE_IND_SI_DESC_NUM',
                                 'selectOptions': [
                                     {
-                                        'label': 'PONER-OPCION-CORRECTAMENTE-1',
-                                        'value': 'PONER-OPCION-CORRECTAMENTE-1'
+                                        'label': 'NO_DISPONIBLE_IND_NO_DESC_NUM',
+                                        'value': 'NO_DISPONIBLE_IND_NO_DESC_NUM'
                                     },
                                     {
-                                        'label': 'PONER-OPCION-CORRECTAMENTE-2',
-                                        'value': 'PONER-OPCION-CORRECTAMENTE-2'
+                                        'label': 'NO_DISPONIBLE_IND_SI_DESC_NUM',
+                                        'value': 'NO_DISPONIBLE_IND_SI_DESC_NUM'
                                     },
                                     {
-                                        'label': 'PONER-OPCION-CORRECTAMENTE-3',
-                                        'value': 'PONER-OPCION-CORRECTAMENTE-3'
+                                        'label': 'SI_DISPONIBLE_IND_NO_DESC_NUM',
+                                        'value': 'SI_DISPONIBLE_IND_NO_DESC_NUM'
+                                    },
+                                    {
+                                        'label': 'SI_DISPONIBLE_IND_SI_DESC_NUM',
+                                        'value': 'SI_DISPONIBLE_IND_SI_DESC_NUM'
                                     }
                                 ]
                             },
@@ -672,7 +680,7 @@ const evaluationExample: any = {
                                 'id': 'c_003_q_002',
                                 'desc': 'C_003_Q_002',
                                 'hint': 'VALIDADOR_OPENAIRE_WS',
-                                'answer': true
+                                'answer': false
                             },
                             {
                                 'type': CategoryQuestionType.bool,
@@ -714,7 +722,7 @@ const evaluationExample: any = {
                                 'id': 'c_003_q_008',
                                 'desc': 'C_003_Q_008',
                                 'hint': 'SITIO_OFICIAL_REV_VALIDADOR_OPENAIRE_FIELD',
-                                'answer': true
+                                'answer': false
                             }
                         ]
                     },
@@ -727,7 +735,7 @@ const evaluationExample: any = {
                                 'id': 'c_004_q_001',
                                 'desc': 'C_004_Q_001',
                                 'hint': 'SITIO_OFICIAL_REV_AURA',
-                                'answer': 'SOLAMENTE_VER_POST_PRINT',
+                                'answer': 'NO_PERMITE_AUTOARCHIVADO_VER',
                                 'selectOptions': [
                                     {
                                         'label': 'VARIAS_VERSIONES_ART',
@@ -773,7 +781,7 @@ const evaluationExample: any = {
                                 'id': 'c_004_q_005',
                                 'desc': 'C_004_Q_005',
                                 'hint': 'SITIO_OFICIAL_REV',
-                                'answer': true
+                                'answer': false
                             }
                         ]
                     },
@@ -786,7 +794,7 @@ const evaluationExample: any = {
                                 'id': 'c_005_q_001',
                                 'desc': 'C_005_Q_001',
                                 'hint': 'SITIO_OFICIAL_REV',
-                                'answer': 'EN_MAS_DE_UN_IDIOMA',
+                                'answer': 'SOLAMENTE_ESPAÑOL',
                                 'selectOptions': [
                                     {
                                         'label': 'SOLAMENTE_ESPAÑOL',
@@ -807,7 +815,7 @@ const evaluationExample: any = {
                                 'id': 'c_005_q_002',
                                 'desc': 'C_005_Q_002',
                                 'hint': 'SITIO_OFICIAL_REV',
-                                'answer': true
+                                'answer': false
                             },
                             {
                                 'type': CategoryQuestionType.select,
@@ -856,7 +864,7 @@ const evaluationExample: any = {
                                 'id': 'c_005_q_005',
                                 'desc': 'C_005_Q_005',
                                 'hint': 'SITIO_OFICIAL_REV',
-                                'answer': 'MAS_DEL_50_TOTAL_PUBLICADO_PERIODO',
+                                'answer': 'MENOS_DEL_20_TOTAL_PUBLICADO_PERIODO',
                                 'selectOptions': [
                                     {
                                         'label': 'MAS_DEL_50_TOTAL_PUBLICADO_PERIODO',
@@ -904,14 +912,14 @@ const evaluationExample: any = {
                                 'id': 'c_006_q_001',
                                 'desc': 'C_006_Q_001',
                                 'hint': 'SITIO_OFICIAL_REV_AURA',
-                                'answer': true
+                                'answer': false
                             },
                             {
                                 'type': CategoryQuestionType.select,
                                 'id': 'c_006_q_002',
                                 'desc': 'C_006_Q_002',
                                 'hint': 'REDES_SOCIALES',
-                                'answer': 'PERFIL_RED_SOC_SI_MENDELEY_RESEARCHGATE',
+                                'answer': 'NO',
                                 'selectOptions': [
                                     {
                                         'label': 'NO',
@@ -932,7 +940,7 @@ const evaluationExample: any = {
                                 'id': 'c_006_q_003',
                                 'desc': 'C_006_Q_003',
                                 'hint': 'REDES_SOCIALES',
-                                'answer': 'TWITTER_FACEBOOK_INSTAGRAM_MENDELEY_RESEARCHGATE',
+                                'answer': 'SOLAMENTE_MENDELEY_RESEARCHGATE',
                                 'selectOptions': [
                                     {
                                         'label': 'NO',
@@ -975,19 +983,19 @@ const evaluationExample: any = {
                                 'id': 'c_007_q_002',
                                 'desc': 'C_007_Q_002',
                                 'hint': 'C_007_Q_002_HINT',
-                                'answer': 'PONER-OPCION-CORRECTAMENTE-1',
+                                'answer': 'ENTRE_EL_20_Y_50_ART_ULT_3_AÑOS_REC_ALGUNA_CITA',
                                 'selectOptions': [
                                     {
-                                        'label': 'PONER-OPCION-CORRECTAMENTE-1',
-                                        'value': 'PONER-OPCION-CORRECTAMENTE-1'
+                                        'label': 'MENOS_DEL_20_ART_ULT_3_AÑOS_REC_ALGUNA_CITA',
+                                        'value': 'MENOS_DEL_20_ART_ULT_3_AÑOS_REC_ALGUNA_CITA'
                                     },
                                     {
-                                        'label': 'PONER-OPCION-CORRECTAMENTE-2',
-                                        'value': 'PONER-OPCION-CORRECTAMENTE-2'
+                                        'label': 'ENTRE_EL_20_Y_50_ART_ULT_3_AÑOS_REC_ALGUNA_CITA',
+                                        'value': 'ENTRE_EL_20_Y_50_ART_ULT_3_AÑOS_REC_ALGUNA_CITA'
                                     },
                                     {
-                                        'label': 'PONER-OPCION-CORRECTAMENTE-3',
-                                        'value': 'PONER-OPCION-CORRECTAMENTE-3'
+                                        'label': 'MAS_DEL_50_ART_ULT_3_AÑOS_REC_ALGUNA_CITA',
+                                        'value': 'MAS_DEL_50_ART_ULT_3_AÑOS_REC_ALGUNA_CITA'
                                     }
                                 ]
                             },
@@ -1023,7 +1031,7 @@ const evaluationExample: any = {
                                 'id': 'c_008_q_001',
                                 'desc': 'C_008_Q_001',
                                 'hint': 'RANKINGS_REV',
-                                'answer': 'Q1_Q2_JOURNAL_CITATION',
+                                'answer': 'NO',
                                 'selectOptions': [
                                     {
                                         'label': 'NO',

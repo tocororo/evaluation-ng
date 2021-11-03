@@ -1,6 +1,7 @@
 
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 import { SelectContent, InputBoolComponent, InputNumberComponent, InputSelectComponent, 
 	TextInputAppearance, ValidatorArguments } from 'toco-lib';
@@ -33,7 +34,7 @@ export class ViewerCardComponent implements OnInit
 
 	public readonly displayedColumns: string[] = [ 'question', 'answer' ];
 
-	public constructor()
+	public constructor(private _transServ: TranslateService)
 	{
 		this.categoryQuestionType = CategoryQuestionType;
 
@@ -129,5 +130,18 @@ export class ViewerCardComponent implements OnInit
 				this.parentFormGroup.addControl(question._inputContent.name, question._inputContent.formControl);
 			}
 		}
+	}
+
+	public getTooltipHint(categoryQuestion: CategoryQuestion): string
+	{
+		let tooltipHint: string = '';
+
+		this._transServ.get([ 'DONDE_BUSCARLA', categoryQuestion.hint ]).subscribe((res: any) => {
+			tooltipHint = res;
+
+			console.log(res);
+		});
+
+		return tooltipHint;
 	}
 }
