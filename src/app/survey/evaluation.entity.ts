@@ -4,8 +4,8 @@ import { EntityBase, Entity, SelectOption, InputContent, Params } from 'toco-lib
 /**
  * An enum that represents the type of an `CategoryQuestion`. 
  */
- export enum CategoryQuestionType
- {
+export enum CategoryQuestionType
+{
     /**
      * The `bool` type is the default type. It shows a boolean control. 
      */
@@ -64,7 +64,7 @@ export class CategoryQuestion extends EntityBase
      * This field is filled internally. 
      * For internal use only. 
      */
-    _inputContent?: InputContent = undefined;
+    _inputContent?: InputContent;
 }
 
 /**
@@ -104,10 +104,10 @@ export class SurveySection extends EntityBase
 }
 
 /**
- * Entity for JournalData based on schema `...-v1.0.0.json`. 
+ * Entity for JournalGeneralData based on schema `...-v1.0.0.json`. 
  * Represents the journal general data that a user fills in the first step. 
  */
- export class JournalData extends EntityBase
+ export class JournalGeneralData extends EntityBase
  {
     /**
      * Journal name. 
@@ -142,7 +142,7 @@ export class SurveySection extends EntityBase
     /**
      * Journal Data. 
      */
-    journalData: JournalData;
+    journalData: JournalGeneralData;
 
     /**************************************** Survey ******************************/
 
@@ -174,7 +174,7 @@ export class EvaluationOnlyAnswer extends Entity
     /**
      * Journal Data. 
      */
-     journalData: JournalData;
+     journalData: JournalGeneralData;
 
     /**************************************** Survey ******************************/
 

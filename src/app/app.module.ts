@@ -21,7 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-import { Environment, SearchService } from 'toco-lib';
+import { Environment } from 'toco-lib';
 import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -76,8 +76,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		AppRoutingModule
 	],
 	providers: [
-		{ provide: Environment, useValue: environment },
-		SearchService
+		{ provide: Environment, useValue: environment }
 	],
 	bootstrap: [AppComponent]
 })

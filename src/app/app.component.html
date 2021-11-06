@@ -97,7 +97,7 @@
 
 <mat-menu #menuLanguages="matMenu">
   <a *ngFor="let lang of languageTexts; let i=index" mat-menu-item (click)="setLanguage(i)">
-    <mat-icon *ngIf="i == languageSelected; else elseTemplate_radio_button_unchecked">radio_button_checked</mat-icon>
+    <mat-icon *ngIf="i == currentLang; else elseTemplate_radio_button_unchecked">radio_button_checked</mat-icon>
     {{ lang }}
   </a>
 

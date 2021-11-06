@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatHorizontalStepper, MatSnackBar } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 
-import { ActionText, Hit, MessageHandler, StatusCode, HandlerComponent } from 'toco-lib';
+import { ActionText, cloneValue, Hit, MessageHandler, StatusCode, HandlerComponent } from 'toco-lib';
 
 import { Evaluation, EvaluationOnlyAnswer } from '../evaluation.entity';
 
@@ -75,7 +75,7 @@ export class SurveyComponent implements OnInit
 
 	public ngOnInit(): void
 	{
-		/* The string ActionText.add is the value of the last route sub-path that is specified in the `*-routing.module.ts` file. */
+		/* The string `ActionText.add` is the value of the last route sub-path that is specified in the `*-routing.module.ts` file. */
 		this._actionText = this._activatedRoute.snapshot.children[0].url[(this._activatedRoute.snapshot.children[0].url.length - 1)].path as ActionText;
 		/* Saves the value to be used by descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
 		* and `SurveyResultAndRecommendationsComponent`). */
@@ -104,11 +104,13 @@ export class SurveyComponent implements OnInit
 
 		this._activatedRoute.data.subscribe({
 			next: (data: { 'evaluation': Hit<Evaluation> }) => {
-				/* It is not necessary to realize deep copy because the `_evaluation` field 
-				 * is like a readonly field, and it is only used to initialize the form; for that reason, 
-				 * its name begins with an underscore to remember you that you can NOT change its value after 
-     			 * it is initialized. */
-				this._evaluation = data.evaluation.metadata;
+				/* It is necessary to realize deep copy because the `_evaluation` field has some internal fields 
+				 * that will be changed when the application language will be changed. 
+				 * The previous scene is the only case that will change the `_evaluation` field; so in the rest of the case, 
+				 * it is like a readonly field, and it is only used to initialize the form. For that reason, 
+				 * its name begins with an underscore to remember you that you can change its value ONLY 
+				 * when the application language will be changed. */
+				this._evaluation = cloneValue(data.evaluation.metadata);
 				/* Saves the value to be used by descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
 				* and `SurveyResultAndRecommendationsComponent`). */
 				this._surveyValueService._evaluation = this._evaluation;
@@ -130,7 +132,7 @@ export class SurveyComponent implements OnInit
 			}
 		});
 
-		console.log('Data got by survey component: ', this._evaluation, this.evaluationFormGroup);
+		console.log('Data got for SurveyComponent: ', this._evaluation, this.evaluationFormGroup);
 	}
 
 	/**

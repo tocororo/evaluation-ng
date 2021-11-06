@@ -8,7 +8,7 @@
         mat-card-image
         class="mch-bg-primary-color"
     >
-        <mat-card-title style="margin: 6px auto;">{{ surveySection.title | translate }}</mat-card-title>
+        <mat-card-title style="margin: 6px auto;">{{ surveySection.title }}</mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
@@ -16,8 +16,8 @@
 
             <mat-expansion-panel *ngFor="let category of surveySection.categories">
                 <mat-expansion-panel-header>
-                    <mat-panel-title>{{ category.title | translate }}</mat-panel-title>
-                    <mat-panel-description>{{ category.desc | translate }}</mat-panel-description>
+                    <mat-panel-title>{{ category.title }}</mat-panel-title>
+                    <mat-panel-description>{{ category.desc }}</mat-panel-description>
                 </mat-expansion-panel-header>
 
                 <table mat-table [dataSource]="category.questions" class="mat-elevation-z8">
@@ -25,7 +25,7 @@
                     <!-- Question Column -->
                     <ng-container [matColumnDef]="displayedColumns[0]">
                         <td mat-cell *matCellDef="let element">
-                            {{ element.desc | translate }}
+                            {{ element.desc }}
                         </td>
                     </ng-container>
 

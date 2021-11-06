@@ -139,7 +139,7 @@ export class ViewerCardComponent implements OnInit
 		this._transServ.get([ 'DONDE_BUSCARLA', categoryQuestion.hint ]).subscribe((res: any) => {
 			tooltipHint = res;
 
-			console.log(res);
+			// console.log(res);
 		});
 
 		return tooltipHint;
