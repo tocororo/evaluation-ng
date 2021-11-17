@@ -20,6 +20,8 @@ export class ViewerCardComponent implements OnInit
      */
 	public readonly categoryQuestionType: typeof CategoryQuestionType;
 
+	public readonly displayedColumns: string[] = [ 'question', 'answer' ];
+
 	/**
 	 * Returns the `FormGroup` parent. 
 	 */
@@ -31,8 +33,6 @@ export class ViewerCardComponent implements OnInit
 	 */
 	@Input()
 	public surveySection: SurveySection;
-
-	public readonly displayedColumns: string[] = [ 'question', 'answer' ];
 
 	public constructor(private _transServ: TranslateService)
 	{

@@ -2,12 +2,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { ChildControlsPath } from 'toco-lib';
+import { ActionText } from 'toco-lib';
 
-import { SurveyValueService } from '../survey-resolver.service';
+import { SurveySection } from '../evaluation.entity';
 
 /**
- * Represents a control that contains the survey questions. 
+ * Represents a control that contains the questions associated with the survey. 
+ * The questions are group in categories. 
+ * The categories are group in sections. 
  */
 @Component({
 	selector: 'app-survey-questions',
@@ -17,28 +19,35 @@ import { SurveyValueService } from '../survey-resolver.service';
 export class SurveyQuestionsComponent implements OnInit
 {
 	/**
-	 * An object of paths that is used to get the child controls in the `surveyFormGroup` control. 
-	 * The value of its properties is a dot-delimited string value or an array of string/number values 
-	 * that define the path to a child control. 
+	 * Returns the action through a text. 
+	 * It is like a readonly field, and it is only used to initialize the form; for that reason, 
+	 * its name begins with an underscore to remember you that you can NOT change its value after 
+     * it is initialized. 
 	 */
-	public readonly survey_ChildControlsPath: ChildControlsPath = {
-		'survey': 'survey'
-	};
+	public _actionText: ActionText;
 
 	/**
-	 * Returns the survey `FormGroup`. 
+	 * Returns the array of sections associated with the survey. 
+	 * It is like a readonly field, and it is only used to initialize the form; for that reason, 
+	 * its name begins with an underscore to remember you that you can NOT change its value after 
+	 * it is initialized. 
+	 */
+	public _survey: Array<SurveySection>;
+
+	/**
+	 * Returns the `FormGroup` for the array of sections associated with the survey. 
 	 */
 	public surveyFormGroup: FormGroup;
 
-	public constructor(public surveyValueService: SurveyValueService)
+	public constructor()
 	{
+		this._actionText = undefined;
+		this._survey = undefined;
 		this.surveyFormGroup = undefined;
 	}
 
 	public ngOnInit(): void
 	{
-		this.surveyFormGroup = this.surveyValueService.evaluationFormGroup.get(this.survey_ChildControlsPath.survey) as FormGroup;
-
 		console.log('Data got for SurveyQuestionsComponent: ', this.surveyFormGroup);
 	}
 }

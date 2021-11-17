@@ -3,14 +3,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatHorizontalStepper, MatSnackBar } from '@angular/material';
-import { TranslateService } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 import { ActionText, cloneValue, Hit, MessageHandler, StatusCode, HandlerComponent } from 'toco-lib';
 
-import { Evaluation, EvaluationOnlyAnswer } from '../evaluation.entity';
+import { CategoryQuestion, CategoryQuestionType, Evaluation, EvaluationOnlyAnswer, SectionCategory, SurveySection } from '../evaluation.entity';
 
 import { SurveyService } from '../survey.service';
-import { SurveyValueService } from '../survey-resolver.service';
+import { SurveyQuestionsComponent } from '../survey-questions/survey-questions.component';
 
 @Component({
 	selector: 'app-survey',
@@ -42,6 +42,7 @@ export class SurveyComponent implements OnInit
 	public evaluationFormGroup: FormGroup;
 	public evalJournalDataFormGroup: FormGroup;
 	public evalSurveyFormGroup: FormGroup;
+	public evalResultAndRecomsFormGroup: FormGroup;
 
 	@ViewChild('stepper', { static: true })
 	private _matHorizontalStepper: MatHorizontalStepper;
@@ -51,13 +52,12 @@ export class SurveyComponent implements OnInit
 	 * its name begins with an underscore to remember you that you can NOT change its value after 
      * it is initialized. 
 	 */
-	private _evaluation: Evaluation;
+	public _evaluation: Evaluation;
 
 	public constructor(private _activatedRoute: ActivatedRoute,
 		private _formBuilder: FormBuilder,
 		private _transServ: TranslateService,
 		private _surveyService: SurveyService,
-		private _surveyValueService: SurveyValueService,
 		private _dialog: MatDialog,
 		private _snackBar: MatSnackBar)
 	{
@@ -70,6 +70,7 @@ export class SurveyComponent implements OnInit
 		this.evaluationFormGroup = undefined;
 		this.evalJournalDataFormGroup = undefined;
 		this.evalSurveyFormGroup = undefined;
+		this.evalResultAndRecomsFormGroup = undefined;
 		this._evaluation = undefined;
 	}
 
@@ -77,9 +78,6 @@ export class SurveyComponent implements OnInit
 	{
 		/* The string `ActionText.add` is the value of the last route sub-path that is specified in the `*-routing.module.ts` file. */
 		this._actionText = this._activatedRoute.snapshot.children[0].url[(this._activatedRoute.snapshot.children[0].url.length - 1)].path as ActionText;
-		/* Saves the value to be used by descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
-		* and `SurveyResultAndRecommendationsComponent`). */
-		this._surveyValueService._actionText = this._actionText;
 
 		switch (this._actionText)
 		{
@@ -111,14 +109,8 @@ export class SurveyComponent implements OnInit
 				 * its name begins with an underscore to remember you that you can change its value ONLY 
 				 * when the application language will be changed. */
 				this._evaluation = cloneValue(data.evaluation.metadata);
-				/* Saves the value to be used by descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
-				* and `SurveyResultAndRecommendationsComponent`). */
-				this._surveyValueService._evaluation = this._evaluation;
 
 				this._initFormData();
-				/* Saves the value to be used by descendant components (`SurveyJournalDataComponent`, `SurveyQuestionsComponent`, 
-				* and `SurveyResultAndRecommendationsComponent`). */
-				this._surveyValueService.evaluationFormGroup = this.evaluationFormGroup;
 
 				/* The component ends its loading task. It is set here and not in the `complete` property because the `complete` notification is not sent. */
 				this.hasTaskInProgress = false;
@@ -132,6 +124,11 @@ export class SurveyComponent implements OnInit
 			}
 		});
 
+		/* Changes the translation when the language changes. */
+		this._transServ.onLangChange.subscribe((params: LangChangeEvent) => {
+			this._setNewLanguage();
+		});
+
 		console.log('Data got for SurveyComponent: ', this._evaluation, this.evaluationFormGroup);
 	}
 
@@ -143,8 +140,78 @@ export class SurveyComponent implements OnInit
 		this.evaluationFormGroup = this._formBuilder.group({
 			'journalData': this.evalJournalDataFormGroup = this._formBuilder.group({ }),
 
-			'survey': this.evalSurveyFormGroup = this._formBuilder.group({ })
+			'survey': this.evalSurveyFormGroup = this._formBuilder.group({ }),
+
+			'resultAndRecoms': this.evalResultAndRecomsFormGroup = this._formBuilder.group({ })
 		});
+	}
+
+	/**
+	 * Sets the new language. 
+	 */
+	private _setNewLanguage(): void
+	{
+		this._surveyService.getEvaluationById(((this._evaluation) ? (this._evaluation.id) : undefined), this._transServ.currentLang).subscribe({
+			next: (data: Hit<Evaluation>) => {
+
+				let i: number, j: number, k: number, l: number;
+
+				let old_sections: Array<SurveySection> = this._evaluation.sections;
+				let new_sections: Array<SurveySection> = data.metadata.sections;
+
+				let old_categories: Array<SectionCategory>;
+				let new_categories: Array<SectionCategory>;
+
+				let old_questions: Array<CategoryQuestion>;
+				let new_questions: Array<CategoryQuestion>;
+
+				for (i = 0; i < old_sections.length; ++i)
+				{
+					old_sections[i].title = new_sections[i].title;
+
+					old_categories = old_sections[i].categories;
+					new_categories = new_sections[i].categories;
+
+					for (j = 0; j < old_categories.length; ++j)
+					{
+						old_categories[j].title = new_categories[j].title;
+						old_categories[j].desc = new_categories[j].desc;
+
+						old_questions = old_categories[j].questions;
+						new_questions = new_categories[j].questions;
+
+						for (k = 0; k < old_questions.length; ++k)
+						{
+							old_questions[k].desc = new_questions[k].desc;
+							old_questions[k].hint = new_questions[k].hint;
+
+							if (old_questions[k].type == CategoryQuestionType.select)
+							{
+								for (l = 0; l < old_questions[k].selectOptions.length; ++l)
+								{
+									old_questions[k].selectOptions[l].label = new_questions[k].selectOptions[l].label;
+								}
+							}
+						}
+					}
+				}
+			},
+			error: (err: any) => {
+				const m = new MessageHandler(this._snackBar);
+				m.showMessage(StatusCode.OK, err.message)
+			}
+		});
+		console.log('New data got by SurveyComponent because the language changed: ', this._evaluation);
+	}
+
+	public onChildLoaded(component: SurveyQuestionsComponent): void
+	{
+		if (this._actionText != undefined)
+		{
+			component._actionText = this._actionText;
+			component._survey = this._evaluation.sections;
+			component.surveyFormGroup = this.evalSurveyFormGroup;
+		}
 	}
 
 	public goToSurvey(): void
@@ -165,7 +232,7 @@ export class SurveyComponent implements OnInit
 		this._matHorizontalStepper.previous();
 	}
 
-	public goToResultAndRecommendations(): void
+	public goToResultAndRecoms(): void
 	{
 		/* Selects and focuses the next step in list. */
 		this._matHorizontalStepper.next();

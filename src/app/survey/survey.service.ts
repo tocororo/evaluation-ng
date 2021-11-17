@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Environment, Hit } from 'toco-lib';

@@ -16,7 +16,12 @@
         <!-- [stepControl]="evalJournalDataFormGroup" -->
         <mat-step>
             <ng-template matStepLabel>{{ 'DATOS_REVISTA' | translate }}</ng-template>
-            <app-survey-journal-data></app-survey-journal-data>
+            <app-survey-journal-data
+                [_actionText]="_actionText"
+                [_journalData]="_evaluation.journalData"
+                [journalDataFormGroup]="evalJournalDataFormGroup"
+            >
+            </app-survey-journal-data>
             <div
                 fxLayout="row wrap"
                 fxLayout.xs="row"
@@ -35,7 +40,7 @@
         <!-- [stepControl]="evalSurveyFormGroup" -->
         <mat-step>
             <ng-template matStepLabel>{{ 'ENCUESTA' | translate }}</ng-template>
-            <router-outlet></router-outlet>
+            <router-outlet (activate)="onChildLoaded($event)"></router-outlet>
             <div
                 fxLayout="row wrap"
                 fxLayout.xs="row"
@@ -51,7 +56,7 @@
                 </button>
                 <button mat-raised-button style="color: white; margin-left: 1.5em;" color="primary" type="button"
                     [matTooltip]="'IR_A_RESULTADO_Y_RECOMENDACIONES' | translate"
-                    [disabled]="evalSurveyFormGroup.invalid" (click)="goToResultAndRecommendations()"
+                    [disabled]="evalSurveyFormGroup.invalid" (click)="goToResultAndRecoms()"
                 >
                     {{ 'SIGUIENTE' | translate }}
                     <mat-icon>navigate_next</mat-icon>
@@ -61,7 +66,11 @@
 
         <mat-step>
             <ng-template matStepLabel>{{ 'RESULTADO_Y_RECOMENDACIONES' | translate }}</ng-template>
-            <app-survey-result-and-recommendations></app-survey-result-and-recommendations>
+            <app-survey-result-and-recoms
+                [_resultAndRecoms]="_evaluation.resultAndRecoms"
+                [resultAndRecomsFormGroup]="evalResultAndRecomsFormGroup"
+            >
+            </app-survey-result-and-recoms>
             <div
                 fxLayout="row wrap"
                 fxLayout.xs="row"

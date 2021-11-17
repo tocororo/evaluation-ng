@@ -2,6 +2,20 @@
 import { EntityBase, Entity, SelectOption, InputContent, Params } from 'toco-lib';
 
 /**
+ * The evaluation data that is stored in the frontend and backend are divided into two parts: schema and answer. 
+ *  * Schema: (EvaluationSchema) A class that contains all the information to create the survey form dynamically. 
+ *  * Answer: (EvaluationAnswer) A class that contains all the information entered by the user in the survey form. 
+ *     * In addition, this class contains a `resultAndRecoms` field (for the result and recommendations), whose value is equal to or different from `undefined`. 
+ *        * The `resultAndRecoms` field equal to `undefined` means that the evaluation has not been processed by the backend (because the backend is the one who produces this value). 
+ *           * Examples of use of this case: 
+ *              * When using the `SurveyComponent` component to add an evaluation in the first and second part. 
+ *              * When using the `SurveyComponent` component to add an evaluation in the third part. 
+ *        * The `resultAndRecoms` field different from `undefined` means that the evaluation was processed by the backend. 
+ *           * Examples of use of this case: 
+ *              * When using the `SurveyComponent` component to view an evaluation. 
+ */
+
+/**
  * An enum that represents the type of an `CategoryQuestion`. 
  */
 export enum CategoryQuestionType
@@ -140,7 +154,7 @@ export class SurveySection extends EntityBase
     /************************************* Journal Data ***************************/
 
     /**
-     * Journal Data. 
+     * Journal general data. 
      */
     journalData: JournalGeneralData;
 
@@ -152,11 +166,16 @@ export class SurveySection extends EntityBase
     sections: Array<SurveySection>;
 
     /****************************** Result and Recommendations ********************/
-    // TODO: ... 
+
+    /**
+     * Result and recommendations. 
+     */
+     resultAndRecoms: Params<any>;
  }
 
 /**
  * Entity for EvaluationOnlyAnswer based on schema `...-v1.0.0.json`. 
+ * This class only contains the values that the user can add or modify. 
  */
 export class EvaluationOnlyAnswer extends Entity
 {
@@ -172,7 +191,7 @@ export class EvaluationOnlyAnswer extends Entity
     /************************************* Journal Data ***************************/
 
     /**
-     * Journal Data. 
+     * Journal general data. 
      */
      journalData: JournalGeneralData;
 
@@ -184,5 +203,9 @@ export class EvaluationOnlyAnswer extends Entity
     survey: Params<any>;
 
     /****************************** Result and Recommendations ********************/
-    // TODO: ... 
+
+    /**
+     * Result and recommendations. 
+     */
+    resultAndRecoms: Params<any>;
 }

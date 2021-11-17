@@ -1,13 +1,13 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
-import { ChildControlsPath, InputContent, InputIssnComponent, TextInputAppearance } from 'toco-lib';
+import { ActionText, ChildControlsPath, InputContent, InputIssnComponent, TextInputAppearance } from 'toco-lib';
 
-import { SurveyValueService } from '../survey-resolver.service';
+import { JournalGeneralData } from '../evaluation.entity';
 
 /**
- * Represents a control that contains the survey journal data. 
+ * Represents a control that contains the journal general data associated with the survey. 
  */
 @Component({
 	selector: 'app-survey-journal-data',
@@ -22,15 +22,33 @@ export class SurveyJournalDataComponent implements OnInit
 	 * that define the path to a child control. 
 	 */
 	public readonly journalData_ChildControlsPath: ChildControlsPath = {
-		'journalData': 'journalData',
 		'name': 'name',
 		'url': 'url',
 		'issn': 'issn'
 	};
 
 	/**
-	 * Returns the survey journal data `FormGroup`. 
+	 * Returns the action through a text. 
+	 * It is like a readonly field, and it is only used to initialize the form; for that reason, 
+	 * its name begins with an underscore to remember you that you can NOT change its value after 
+	 * it is initialized. 
 	 */
+	@Input()
+	public _actionText: ActionText;
+
+	/**
+	 * Returns the journal general data. 
+	 * It is like a readonly field, and it is only used to initialize the form; for that reason, 
+	 * its name begins with an underscore to remember you that you can NOT change its value after 
+	 * it is initialized. 
+	 */
+	@Input()
+	public _journalData: JournalGeneralData;
+
+	/**
+	 * Returns the journal general data `FormGroup`. 
+	 */
+	@Input()
 	public journalDataFormGroup: FormGroup;
 	public issnContent: InputContent;
 
@@ -53,8 +71,10 @@ export class SurveyJournalDataComponent implements OnInit
 	 */
 	private _validationError_invalidCharacter: string;
 
-	public constructor(public surveyValueService: SurveyValueService)
+	public constructor()
 	{
+		this._actionText = undefined;
+		this._journalData = undefined;
 		this.journalDataFormGroup = undefined;
 		this.issnContent = undefined;
 
@@ -66,8 +86,6 @@ export class SurveyJournalDataComponent implements OnInit
 
 	public ngOnInit(): void
 	{
-		this.journalDataFormGroup = this.surveyValueService.evaluationFormGroup.get(this.journalData_ChildControlsPath.journalData) as FormGroup;
-
 		this._initFormData();
 
 		console.log('Data got for SurveyJournalDataComponent: ', this.journalDataFormGroup);
@@ -83,7 +101,7 @@ export class SurveyJournalDataComponent implements OnInit
 			'name': 'issn',
 			'label': 'ISSN',
 			'controlType': InputIssnComponent,
-			'value': this.surveyValueService._evaluation.journalData.issn,
+			'value': this._journalData.issn,
 			'required': true,
 			'width': '45%',
 			'appearance': TextInputAppearance.outline,
@@ -93,12 +111,12 @@ export class SurveyJournalDataComponent implements OnInit
 		/* Adds control to `journalDataFormGroup`. */
 
 		this.journalDataFormGroup.addControl(this.journalData_ChildControlsPath.name as string,
-			new FormControl(this.surveyValueService._evaluation.journalData.name,
+			new FormControl(this._journalData.name,
 				Validators.pattern('^[a-zA-Z\_áéíóúÁÉÍÓÚ][a-zA-Z\-\_áéíóúÁÉÍÓÚ\ \0-9]*$')
 		));
 
 		this.journalDataFormGroup.addControl(this.journalData_ChildControlsPath.url as string,
-			new FormControl(this.surveyValueService._evaluation.journalData.url,
+			new FormControl(this._journalData.url,
 				Validators.pattern(/(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/i)
 				// Validators.pattern(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/i)
 		));
