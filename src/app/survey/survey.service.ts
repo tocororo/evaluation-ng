@@ -2,12 +2,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Environment, Hit } from 'toco-lib';
+import { cloneValue, Environment, Hit } from 'toco-lib';
 
-import { CategoryQuestionType, Evaluation, EvaluationOnlyAnswer } from './evaluation.entity';
+import { CategoryQuestionType, Evaluation, EvaluationAnswer } from './evaluation.entity';
 
 /**
  * Represents an object with all its values set to empty in Spanish language. 
@@ -2113,7 +2113,7 @@ const evaluationExample_English: any = {
 
 /**
  * Represents the service that communicates with the backend for all issues 
- * that refer to work with an `Evaluation` and/or `EvaluationOnlyAnswer`. 
+ * that refer to work with an `Evaluation` and/or `EvaluationAnswer`. 
  */
 @Injectable({
 	providedIn: 'root'
@@ -2125,7 +2125,7 @@ export class SurveyService
 	private _httpOptions = {
 		headers: new HttpHeaders({
 			'Content-Type': 'application/json',
-			Authorization: 'Bearer ',
+			'Authorization': 'Bearer ',
 		}),
 	};
 
@@ -2184,7 +2184,7 @@ export class SurveyService
 			/* In the case of remaining views (viewing and editing views), this occurs when the `id` argument is NOT `undefined`, 
 			it needs to get an object equal to the store object. */
 
-			return ((currentLang == 'es') ? of(evaluationExample_Spanish) : of(evaluationExample_English));
+			return ((currentLang == 'es') ? of(cloneValue(evaluationExample_Spanish)) : of(cloneValue(evaluationExample_English)));
 		}
 		else
 		{
@@ -2192,18 +2192,68 @@ export class SurveyService
 			it needs to get an object with all its values set to empty. 
 			This is a great optimization that you can implement in the backend. */
 
-			return ((currentLang == 'es') ? of(evaluationEmpty_Spanish) : of(evaluationEmpty_English));
+			return ((currentLang == 'es') ? of(cloneValue(evaluationEmpty_Spanish)) : of(cloneValue(evaluationEmpty_English)));
 		}
 ////////////////////////////////////////////
 	}
 
-	public editEvaluation(evaluation: EvaluationOnlyAnswer): Observable<any>
+	/**
+	 * Constructs a `PUT` request that interprets the body as a JSON object and returns 
+	 * an observable of the response. 
+     * Sends the data that was inserted by the user (an `EvaluationAnswer` object 
+     * with the `resultAndRecoms` field equals `undefined`) to the backend in order to 
+     * realize the processing and gets the result and recommendations. 
+     * Then, the backend returns an object `EvaluationAnswer` with the `resultAndRecoms` 
+     * field different of `undefined`, and this result is showed in the third part "Result and Recommendations". 
+	 * @param evaluation Evaluation answer. 
+	 * @param currentLang Language currently used as string. 
+	 * The Spanish language is: 'es'. 
+	 * The English language is: 'en'. 
+	 * @return An `Observable` of the `HTTPResponse`, with a response body in the `Hit<Evaluation>` type. 
+	 */
+    public doEvaluation(evaluation: EvaluationAnswer, currentLang: string): Observable<any>
+	{
+//// Backend data //////////////////////////
+		// // TODO: Poner correctamente el campo `this._env.sceibaApi` o crear un `this._env.evaluationApi`. 
+		// const url: string = this._env.sceibaApi + this._prefix + '/do';
+
+        // this._httpOptions['params'] = { 'currentLang': currentLang };
+		// return this._http.put<Hit<EvaluationAnswer>>(url, JSON.stringify(evaluation), this._httpOptions);
+////////////////////////////////////////////
+
+
+//// Mock data /////////////////////////////
+		console.error('doEvaluation: There is not backend yet!', evaluation);
+        return ((currentLang == 'es') ? of({
+            'metadata': {
+                'id': '876acbf2-5a67-4b5c-92ca-040761d54595',
+                'user': evaluation.user,
+                'date': evaluation.date,
+                'journalData': evaluation.journalData,
+                'sections': evaluation.survey,
+                'resultAndRecoms': { 'res1': 'resultado 1', 'res2': 'resultado 2', 'res3': 'resultado 3' }
+            }
+        }) : of({
+            'metadata': {
+                'id': '876acbf2-5a67-4b5c-92ca-040761d54595',
+                'user': evaluation.user,
+                'date': evaluation.date,
+                'journalData': evaluation.journalData,
+                'sections': evaluation.survey,
+                'resultAndRecoms': { 'res1': 'result 1', 'res2': 'result 2', 'res3': 'result 3' }
+            }
+        }));
+////////////////////////////////////////////
+	}
+
+	public editEvaluation(evaluation: EvaluationAnswer): Observable<any>
 	{
 //// Backend data //////////////////////////
 		// // TODO: Poner correctamente el campo `this._env.sceibaApi` o crear un `this._env.evaluationApi`. 
 		// const url: string = this._env.sceibaApi + this._prefix + '/' + evaluation.id;
 
-		// return this._http.put<any>(url, JSON.stringify(evaluation), this._httpOptions);
+        // /* It is NOT necessary to indicate the language. */
+		// return this._http.put<Hit<EvaluationAnswer>>(url, JSON.stringify(evaluation), this._httpOptions);
 ////////////////////////////////////////////
 
 

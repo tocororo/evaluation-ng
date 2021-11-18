@@ -3,11 +3,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MatHorizontalStepper, MatSnackBar } from '@angular/material';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
-import { ActionText, cloneValue, Hit, MessageHandler, StatusCode, HandlerComponent } from 'toco-lib';
+import { ActionText, Hit, MessageHandler, StatusCode, HandlerComponent } from 'toco-lib';
 
-import { CategoryQuestion, CategoryQuestionType, Evaluation, EvaluationOnlyAnswer, SectionCategory, SurveySection } from '../evaluation.entity';
+import { CategoryQuestion, CategoryQuestionType, Evaluation, EvaluationAnswer, SectionCategory, SurveySection } from '../evaluation.entity';
 
 import { SurveyService } from '../survey.service';
 import { SurveyQuestionsComponent } from '../survey-questions/survey-questions.component';
@@ -102,13 +103,13 @@ export class SurveyComponent implements OnInit
 
 		this._activatedRoute.data.subscribe({
 			next: (data: { 'evaluation': Hit<Evaluation> }) => {
-				/* It is necessary to realize deep copy because the `_evaluation` field has some internal fields 
+				/* It is necessary to work with a copy because the `_evaluation` field has some internal fields 
 				 * that will be changed when the application language will be changed. 
 				 * The previous scene is the only case that will change the `_evaluation` field; so in the rest of the case, 
 				 * it is like a readonly field, and it is only used to initialize the form. For that reason, 
 				 * its name begins with an underscore to remember you that you can change its value ONLY 
 				 * when the application language will be changed. */
-				this._evaluation = cloneValue(data.evaluation.metadata);
+				this._evaluation = data.evaluation.metadata;
 
 				this._initFormData();
 
@@ -214,6 +215,41 @@ export class SurveyComponent implements OnInit
 		}
 	}
 
+	public onSelectedStepHasChanged(event: StepperSelectionEvent): void
+	{
+		console.log('onSelectedStepHasChanged ', event.selectedIndex);
+
+		if (event.selectedIndex == 2)  /* = 2 means the step of result and recommendations. */
+		{
+			if (this._actionText == ActionText.add)  /* For viewing component, it does NOT need to do this. */
+			{
+				/* The component begins its updating task. */
+				this.hasTaskInProgress = true;
+	
+				console.log('Do Evaluation: ', this.evaluationFormGroup.valid, this.evaluationFormGroup);
+	
+				this._surveyService.doEvaluation(this.evaluationFormGroup.value, this._transServ.currentLang).subscribe({
+					next: (result: Hit<EvaluationAnswer>) => {
+						console.log('Do Evaluation result: ', result);
+	
+						/* Copies the result to show in the third part "Result and Recommendations". */
+						this._evaluation.resultAndRecoms = result.metadata.resultAndRecoms;
+	
+						/* The component ends its loading task. It is set here and not in the `complete` property because the `complete` notification is not sent. */
+						this.hasTaskInProgress = false;
+					},
+					error: (err: any) => {
+						/* The component ends its updating task. */
+						this.hasTaskInProgress = false;
+	
+						const m = new MessageHandler(this._snackBar);
+						m.showMessage(StatusCode.OK, err.message)
+					}
+				});
+			}
+		}
+	}
+
 	public goToSurvey(): void
 	{
 		/* Selects and focuses the next step in list. */
@@ -243,11 +279,11 @@ export class SurveyComponent implements OnInit
 		/* The component begins its updating task. */
 		this.hasTaskInProgress = true;
 
-		console.log('save: ', this.evaluationFormGroup.valid, this.evaluationFormGroup);
+		console.log('Save Evaluation: ', this.evaluationFormGroup.valid, this.evaluationFormGroup);
 
 		this._surveyService.editEvaluation(this.evaluationFormGroup.value).subscribe({
-			next: (result: Hit<EvaluationOnlyAnswer>) => {
-				console.log('save result: ', result);
+			next: (result: Hit<EvaluationAnswer>) => {
+				console.log('Save Evaluation result: ', result);
 			},
 			error: (err: any) => {
 				/* The component ends its updating task. */

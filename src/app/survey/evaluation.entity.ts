@@ -170,14 +170,14 @@ export class SurveySection extends EntityBase
     /**
      * Result and recommendations. 
      */
-     resultAndRecoms: Params<any>;
+    resultAndRecoms: Params<any>;
  }
 
 /**
- * Entity for EvaluationOnlyAnswer based on schema `...-v1.0.0.json`. 
+ * Entity for EvaluationAnswer based on schema `...-v1.0.0.json`. 
  * This class only contains the values that the user can add or modify. 
  */
-export class EvaluationOnlyAnswer extends Entity
+export class EvaluationAnswer extends Entity
 {
     /**
      * User who made the evaluation. 
