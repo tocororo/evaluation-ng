@@ -1,7 +1,7 @@
 
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 import { SelectContent, InputBoolComponent, InputNumberComponent, InputSelectComponent, 
 	TextInputAppearance, ValidatorArguments } from 'toco-lib';
@@ -22,6 +22,8 @@ export class ViewerCardComponent implements OnInit
 
 	public readonly displayedColumns: string[] = [ 'question', 'answer' ];
 
+	public whereToLookForIt: string;
+
 	/**
 	 * Returns the `FormGroup` parent. 
 	 */
@@ -37,6 +39,8 @@ export class ViewerCardComponent implements OnInit
 	public constructor(private _transServ: TranslateService)
 	{
 		this.categoryQuestionType = CategoryQuestionType;
+
+		this._getTranslation();
 
 		this.parentFormGroup = undefined;
 		this.surveySection = undefined;
@@ -54,6 +58,11 @@ export class ViewerCardComponent implements OnInit
 	 */
 	private _initFormData(): void
 	{
+		/* Changes the translation when the language changes. */
+		this._transServ.onLangChange.subscribe((params: LangChangeEvent) => {
+			this._getTranslation();
+		});
+
 		/* Creates controls content. */
 
 		let question: CategoryQuestion;
@@ -132,16 +141,13 @@ export class ViewerCardComponent implements OnInit
 		}
 	}
 
-	public getTooltipHint(categoryQuestion: CategoryQuestion): string
+	/**
+	 * Gets translation. 
+	 */
+	private _getTranslation(): void
 	{
-		let tooltipHint: string = '';
-
-		this._transServ.get([ 'DONDE_BUSCARLA', categoryQuestion.hint ]).subscribe((res: any) => {
-			tooltipHint = res;
-
-			// console.log(res);
+		this._transServ.get('DONDE_BUSCARLA').subscribe((res: any) => {
+			this.whereToLookForIt = res;
 		});
-
-		return tooltipHint;
 	}
 }

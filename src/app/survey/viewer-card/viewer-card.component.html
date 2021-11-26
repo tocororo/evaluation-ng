@@ -37,7 +37,7 @@
                                 fxLayout.xs="row"
                                 fxLayoutAlign="center center"
                             >
-                                <mat-icon [matTooltip]="getTooltipHint(element)" [matTooltipPosition]="'right'" color="primary">find_in_page</mat-icon>
+                                <mat-icon [matTooltip]="whereToLookForIt + element.hint" [matTooltipPosition]="'right'" color="primary">find_in_page</mat-icon>
                                 <ng-container [ngSwitch]="element.type">
                                     <input-bool *ngSwitchCase="categoryQuestionType.bool" [content]="element._inputContent"></input-bool>
                 
