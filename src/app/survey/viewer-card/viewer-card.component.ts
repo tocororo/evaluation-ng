@@ -40,7 +40,7 @@ export class ViewerCardComponent implements OnInit
 	{
 		this.categoryQuestionType = CategoryQuestionType;
 
-		this._getTranslation();
+		this._doTranslation();
 
 		this.parentFormGroup = undefined;
 		this.surveySection = undefined;
@@ -48,6 +48,11 @@ export class ViewerCardComponent implements OnInit
 
 	public ngOnInit(): void
 	{
+		/* Changes the translation when the language changes. */
+		this._transServ.onLangChange.subscribe((params: LangChangeEvent) => {
+			this._doTranslation();
+		});
+
 		this._initFormData();
 
 		console.log('Data got for ViewerCardComponent: ', this.parentFormGroup);
@@ -58,11 +63,6 @@ export class ViewerCardComponent implements OnInit
 	 */
 	private _initFormData(): void
 	{
-		/* Changes the translation when the language changes. */
-		this._transServ.onLangChange.subscribe((params: LangChangeEvent) => {
-			this._getTranslation();
-		});
-
 		/* Creates controls content. */
 
 		let question: CategoryQuestion;
@@ -123,7 +123,10 @@ export class ViewerCardComponent implements OnInit
 								'appearance': TextInputAppearance.standard,
 								'ariaLabel': question.desc,
 								'selectOptions': question.selectOptions,
-								'multiple': false
+								'multiple': false,
+								'showTooltip': true,
+								'selectTooltipPosition': 'below',
+								'optionsTooltipPosition': 'left'
 							} as SelectContent;
 							break;
 						}
@@ -142,9 +145,9 @@ export class ViewerCardComponent implements OnInit
 	}
 
 	/**
-	 * Gets translation. 
+	 * Does the translation. 
 	 */
-	private _getTranslation(): void
+	private _doTranslation(): void
 	{
 		this._transServ.get('DONDE_BUSCARLA').subscribe((res: any) => {
 			this.whereToLookForIt = res;
