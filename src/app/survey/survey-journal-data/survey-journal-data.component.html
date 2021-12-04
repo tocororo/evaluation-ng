@@ -8,11 +8,7 @@
 >
 
     <!-- Start Name -->
-    <mat-form-field class="w-100" [appearance]="'outline'">
-        <mat-label>{{ 'NOMBRE' | translate }}</mat-label>
-        <input matInput [formControlName]="journalData_ChildControlsPath.name" [required]="'true'" [placeholder]="'ESCR_NOMBRE_REVISTA' | translate" />
-        <mat-error *ngIf="getErrorState(journalData_ChildControlsPath.name)">{{ getErrorMessage(journalData_ChildControlsPath.name) | translate }}</mat-error>
-    </mat-form-field>
+    <input-text [content]="nameContent"></input-text>
     <!-- End Name -->
 
     <!-- Start URL -->

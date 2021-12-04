@@ -126,15 +126,15 @@ export class SurveySection extends EntityBase
     /**
      * Journal name. 
      */
-     name: string;
-     /**
-      * Journal URL page. 
-      */
-     url: string;
-     /**
-      * Journal ISSN. 
-      */
-     issn: string;
+    name: string;
+    /**
+     * Journal URL page. 
+     */
+    url: string;
+    /**
+     * Journal ISSN. 
+     */
+    issn: string;
  }
 
 /**
@@ -193,7 +193,7 @@ export class EvaluationAnswer extends Entity
     /**
      * Journal general data. 
      */
-     journalData: JournalGeneralData;
+    journalData: JournalGeneralData;
 
     /**************************************** Survey ******************************/
 

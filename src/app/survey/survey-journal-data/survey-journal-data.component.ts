@@ -2,7 +2,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
-import { ActionText, ChildControlsPath, InputContent, InputIssnComponent, TextInputAppearance } from 'toco-lib';
+import { ActionText, ChildControlsPath, InputContent, InputIssnComponent, InputTextComponent, TextInputAppearance } from 'toco-lib';
 
 import { JournalGeneralData } from '../evaluation.entity';
 
@@ -50,6 +50,7 @@ export class SurveyJournalDataComponent implements OnInit
 	 */
 	@Input()
 	public journalDataFormGroup: FormGroup;
+	public nameContent: InputContent;
 	public issnContent: InputContent;
 
 	/**
@@ -76,6 +77,7 @@ export class SurveyJournalDataComponent implements OnInit
 		this._actionText = undefined;
 		this._journalData = undefined;
 		this.journalDataFormGroup = undefined;
+		this.nameContent = undefined;
 		this.issnContent = undefined;
 
 		this._controlToDisplayError = undefined;
@@ -96,9 +98,21 @@ export class SurveyJournalDataComponent implements OnInit
 	 */
 	private _initFormData(): void
 	{
+		this.nameContent = {
+			'formControl': InputTextComponent.getFormControlByDefault({ 'pattern': '^[a-zA-Z\_áéíóúÁÉÍÓÚ][a-zA-Z\-\_áéíóúÁÉÍÓÚ\ 0-9]*$' }),
+			'name': this.journalData_ChildControlsPath.name as string,
+			'label': 'NOMBRE',
+			'controlType': InputTextComponent,
+			'value': this._journalData.name,
+			'required': true,
+			'width': '100%',
+			'appearance': TextInputAppearance.outline,
+			'ariaLabel': 'NOMBRE'
+		};
+
 		this.issnContent = {
 			'formControl': InputIssnComponent.getFormControlByDefault(),
-			'name': 'issn',
+			'name': this.journalData_ChildControlsPath.issn as string,
 			'label': 'ISSN',
 			'controlType': InputIssnComponent,
 			'value': this._journalData.issn,
@@ -111,9 +125,8 @@ export class SurveyJournalDataComponent implements OnInit
 		/* Adds control to `journalDataFormGroup`. */
 
 		this.journalDataFormGroup.addControl(this.journalData_ChildControlsPath.name as string,
-			new FormControl(this._journalData.name,
-				Validators.pattern('^[a-zA-Z\_áéíóúÁÉÍÓÚ][a-zA-Z\-\_áéíóúÁÉÍÓÚ\ \0-9]*$')
-		));
+			this.nameContent.formControl
+		);
 
 		this.journalDataFormGroup.addControl(this.journalData_ChildControlsPath.url as string,
 			new FormControl(this._journalData.url,
