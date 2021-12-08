@@ -87,8 +87,6 @@
     "NOMBRE": "Name",
     "ESCR_NOMBRE_REVISTA": "Write the journal name",
     "URL_GENERICA": "www.journal.com",
-    "VAL_ERROR_REQUERIDO": "Write a valid value.",
-    "VAL_ERROR_CARACTER_INVAL": "Change or delete invalid characters.",
 
     "DONDE_BUSCARLA": "Where to look for it: ",
 

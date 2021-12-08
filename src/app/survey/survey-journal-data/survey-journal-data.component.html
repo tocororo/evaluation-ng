@@ -11,13 +11,9 @@
     <input-text [content]="nameContent"></input-text>
     <!-- End Name -->
 
-    <!-- Start URL -->
-    <mat-form-field class="w-45" [appearance]="'outline'">
-        <mat-label>Url</mat-label>
-        <input matInput [formControlName]="journalData_ChildControlsPath.url" [required]="'true'" [placeholder]="'URL_GENERICA' | translate" />
-        <mat-error *ngIf="getErrorState(journalData_ChildControlsPath.url)">{{ getErrorMessage(journalData_ChildControlsPath.url) | translate }}</mat-error>
-    </mat-form-field>
-    <!-- End Name -->
+    <!-- Start Url -->
+    <input-url [content]="urlContent"></input-url>
+    <!-- End Url -->
 
     <!-- Start ISSN -->
     <input-issn [content]="issnContent"></input-issn>
