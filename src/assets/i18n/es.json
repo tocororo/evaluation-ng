@@ -86,7 +86,7 @@
     "OPERACION_EXITOSA": "Operación exitosa",
     "NOMBRE": "Nombre",
     "ESCR_NOMBRE_REVISTA": "Escriba el nombre de la revista",
-    "URL_GENERICA": "www.revista.com",
+    "URL_GENERICA": "https://www.revista.com/",
 
     "DONDE_BUSCARLA": "Dónde buscarla: ",
 
@@ -101,8 +101,8 @@
     "TOCO_NG_E_ISSN": "ISSN Electrónico",
     "TOCO_NG_ISSN_L": "ISSN Vinculando",
 
-    "TOCO_NG_ERROR_MSG_ISSN_LONG_INVAL": "Su longitud debe ser 11.",
-    "TOCO_NG_ERROR_MSG_ISSN_LONG_Y_DIG_INVAL": "Su longitud debe ser 11, y todas las posiciones tienen dígitos (la última también puede tener x o X).",
+    "TOCO_NG_ERROR_MSG_ISSN_LONG_INVAL": "La longitud debe ser 11.",
+    "TOCO_NG_ERROR_MSG_ISSN_LONG_Y_DIG_INVAL": "La longitud debe ser 11, y todas las posiciones tienen dígitos (la última también puede tener x o X).",
     "TOCO_NG_ERROR_MSG_ISSN_DIG_INVAL": "Todas las posiciones deben tener dígitos (la última también puede tener x o X).",
     "TOCO_NG_ERROR_MSG_ISSN_DIG_CHEQUEO_INVAL": "Hay algún dígito incorrecto.",
 

@@ -86,7 +86,7 @@
     "OPERACION_EXITOSA": "Successful operation",
     "NOMBRE": "Name",
     "ESCR_NOMBRE_REVISTA": "Write the journal name",
-    "URL_GENERICA": "www.journal.com",
+    "URL_GENERICA": "https://www.journal.com/",
 
     "DONDE_BUSCARLA": "Where to look for it: ",
 
@@ -101,8 +101,8 @@
     "TOCO_NG_E_ISSN": "Electronic ISSN",
     "TOCO_NG_ISSN_L": "Linking ISSN",
 
-    "TOCO_NG_ERROR_MSG_ISSN_LONG_INVAL": "Its length must be 11.",
-    "TOCO_NG_ERROR_MSG_ISSN_LONG_Y_DIG_INVAL": "Its length must be 11, and all positions have digits (the last one can also have x or X).",
+    "TOCO_NG_ERROR_MSG_ISSN_LONG_INVAL": "The length must be 11.",
+    "TOCO_NG_ERROR_MSG_ISSN_LONG_Y_DIG_INVAL": "The length must be 11, and all positions have digits (the last one can also have x or X).",
     "TOCO_NG_ERROR_MSG_ISSN_DIG_INVAL": "All positions must have digits (the last one can also have x or X).",
     "TOCO_NG_ERROR_MSG_ISSN_DIG_CHEQUEO_INVAL": "There is some wrong digit.",
 

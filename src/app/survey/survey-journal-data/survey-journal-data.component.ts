@@ -81,6 +81,7 @@ export class SurveyJournalDataComponent implements OnInit
 			'formControl': InputTextComponent.getFormControlByDefault({ 'pattern': '^[a-zA-Z\_áéíóúÁÉÍÓÚ][a-zA-Z\-\_áéíóúÁÉÍÓÚ\ 0-9]*$' }),
 			'name': this.journalData_ChildControlsPath.name as string,
 			'label': 'NOMBRE',
+			'placeholder': 'ESCR_NOMBRE_REVISTA',
 			'controlType': InputTextComponent,
 			'value': this._journalData.name,
 			'required': true,
@@ -93,6 +94,7 @@ export class SurveyJournalDataComponent implements OnInit
 			'formControl': InputUrlComponent.getFormControlByDefault(),
 			'name': this.journalData_ChildControlsPath.url as string,
 			'label': 'Url',
+			'placeholder': 'URL_GENERICA',
 			'controlType': InputUrlComponent,
 			'value': this._journalData.url,
 			'required': true,
@@ -105,6 +107,7 @@ export class SurveyJournalDataComponent implements OnInit
 			'formControl': InputIssnComponent.getFormControlByDefault(),
 			'name': this.journalData_ChildControlsPath.issn as string,
 			'label': 'ISSN',
+			/* The default `placeholder` is good enough. */
 			'controlType': InputIssnComponent,
 			'value': this._journalData.issn,
 			'required': true,
