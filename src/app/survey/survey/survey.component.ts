@@ -96,8 +96,7 @@ export class SurveyComponent implements OnInit
 
 			default:
 				{
-					console.error('There is a configuration error with the URL because the programme does not know what to do with it!');
-					break;
+					throw new Error(`For the '${ SurveyComponent.name }' control, the URL written has an error because the programme does not know what to do with it!`);
 				}
 		}
 

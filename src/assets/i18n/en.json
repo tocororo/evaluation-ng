@@ -90,6 +90,27 @@
 
     "DONDE_BUSCARLA": "Where to look for it: ",
 
-    "VERDADERO": "True",
-    "FALSO": "False"
+    "TOCO_NG_ERROR_MSG_REQUERIDO": "The value can not be empty.",
+    "TOCO_NG_HINT_TEXTO_POR_DEFECTO": "Write a valid value.",
+
+    "TOCO_NG_VERDADERO": "True",
+    "TOCO_NG_FALSO": "False",
+
+    "TOCO_NG_ISSN": "International Standard Serial Number",
+    "TOCO_NG_P_ISSN": "Print ISSN",
+    "TOCO_NG_E_ISSN": "Electronic ISSN",
+    "TOCO_NG_ISSN_L": "Linking ISSN",
+
+    "TOCO_NG_ERROR_MSG_ISSN_LONG_INVAL": "Its length must be 11.",
+    "TOCO_NG_ERROR_MSG_ISSN_LONG_Y_DIG_INVAL": "Its length must be 11, and all positions have digits (the last one can also have x or X).",
+    "TOCO_NG_ERROR_MSG_ISSN_DIG_INVAL": "All positions must have digits (the last one can also have x or X).",
+    "TOCO_NG_ERROR_MSG_ISSN_DIG_CHEQUEO_INVAL": "There is some wrong digit.",
+
+    "TOCO_NG_ERROR_MSG_NUM_INVAL": "The number is wrong.",
+    "TOCO_NG_ERROR_MSG_NUM_MINIMO": "The minimum number that can hold is: ",
+    "TOCO_NG_ERROR_MSG_NUM_MAXIMO": "The maximum number that can hold is: ",
+
+    "TOCO_NG_ERROR_MSG_TEXTO_INVAL": "The text is wrong.",
+
+    "TOCO_NG_ERROR_MSG_URL_INVAL": "The url is wrong."
 }

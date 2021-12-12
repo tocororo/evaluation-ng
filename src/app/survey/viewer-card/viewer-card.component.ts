@@ -133,8 +133,7 @@ export class ViewerCardComponent implements OnInit
 
 					default:
 						{
-							console.error('There is a configuration error with the category question type because the programme does not know what to do with it!');
-							break;
+							throw new Error(`For the '${ ViewerCardComponent.name }' control, the category question type value has an error because the programme does not know what to do with it!`);
 						}
 				}
 

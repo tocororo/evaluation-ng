@@ -90,6 +90,27 @@
 
     "DONDE_BUSCARLA": "Dónde buscarla: ",
 
-    "VERDADERO": "Verdadero",
-    "FALSO": "Falso"
+    "TOCO_NG_ERROR_MSG_REQUERIDO": "El valor no puede estar vacío.",
+    "TOCO_NG_HINT_TEXTO_POR_DEFECTO": "Escribe un valor válido.",
+
+    "TOCO_NG_VERDADERO": "Verdadero",
+    "TOCO_NG_FALSO": "Falso",
+
+    "TOCO_NG_ISSN": "Número Internacional Normalizado de Publicaciones Seriadas",
+    "TOCO_NG_P_ISSN": "ISSN Impreso",
+    "TOCO_NG_E_ISSN": "ISSN Electrónico",
+    "TOCO_NG_ISSN_L": "ISSN Vinculando",
+
+    "TOCO_NG_ERROR_MSG_ISSN_LONG_INVAL": "Su longitud debe ser 11.",
+    "TOCO_NG_ERROR_MSG_ISSN_LONG_Y_DIG_INVAL": "Su longitud debe ser 11, y todas las posiciones tienen dígitos (la última también puede tener x o X).",
+    "TOCO_NG_ERROR_MSG_ISSN_DIG_INVAL": "Todas las posiciones deben tener dígitos (la última también puede tener x o X).",
+    "TOCO_NG_ERROR_MSG_ISSN_DIG_CHEQUEO_INVAL": "Hay algún dígito incorrecto.",
+
+    "TOCO_NG_ERROR_MSG_NUM_INVAL": "El número está incorrecto.",
+    "TOCO_NG_ERROR_MSG_NUM_MINIMO": "El número mínimo que puede contener es: ",
+    "TOCO_NG_ERROR_MSG_NUM_MAXIMO": "El número máximo que puede contener es: ",
+
+    "TOCO_NG_ERROR_MSG_TEXTO_INVAL": "El texto está incorrecto.",
+
+    "TOCO_NG_ERROR_MSG_URL_INVAL": "La url está incorrecta."
 }
