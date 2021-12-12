@@ -110,6 +110,8 @@
     "TOCO_NG_ERROR_MSG_NUM_MINIMO": "The minimum number that can hold is: ",
     "TOCO_NG_ERROR_MSG_NUM_MAXIMO": "The maximum number that can hold is: ",
 
+    "TOCO_NG_HINT_TEXTO_SELECC_POR_DEFECTO": "Select a value.",
+
     "TOCO_NG_ERROR_MSG_TEXTO_INVAL": "The text is wrong.",
 
     "TOCO_NG_ERROR_MSG_URL_INVAL": "The url is wrong."
