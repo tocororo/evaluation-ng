@@ -2,6 +2,7 @@
 import { EntityBase, Entity, SelectOption, InputContent, Params } from 'toco-lib';
 
 /**
+ * More general implementation for the future: 
  * The evaluation data that is stored in the frontend and backend are divided into two parts: schema and answer. 
  *  * Schema: (EvaluationSchema) A class that contains all the information to create the survey form dynamically. 
  *  * Answer: (EvaluationAnswer) A class that contains all the information entered by the user in the survey form. 
@@ -9,11 +10,33 @@ import { EntityBase, Entity, SelectOption, InputContent, Params } from 'toco-lib
  *        * The `resultAndRecoms` field equal to `undefined` means that the evaluation has not been processed by the backend (because the backend is the one who produces this value). 
  *           * Examples of use of this case: 
  *              * When using the `SurveyComponent` component to add an evaluation in the first and second part. 
- *              * When using the `SurveyComponent` component to add an evaluation in the third part. 
  *        * The `resultAndRecoms` field different from `undefined` means that the evaluation was processed by the backend. 
  *           * Examples of use of this case: 
+ *              * When using the `SurveyComponent` component to add an evaluation in the third part. 
  *              * When using the `SurveyComponent` component to view an evaluation. 
  */
+
+
+/**
+ * An enum that represents the three main view types for doing an evaluation. 
+ */
+export enum EvaluationViewType
+{
+    /**
+     * Journal general data view. 
+     */
+    journalData = 'journalData',
+
+    /**
+     * Journal survey view. 
+     */
+    survey = 'survey',
+
+    /**
+     * Result and recommendations view. 
+     */
+    resultAndRecoms = 'resultAndRecoms'
+}
 
 /**
  * An enum that represents the type of an `CategoryQuestion`. 
@@ -37,7 +60,7 @@ export enum CategoryQuestionType
 }
 
 /**
- * Entity for CategoryQuestion based on schema `...-v1.0.0.json`. 
+ * Entity for `CategoryQuestion` based on schema `...-v1.0.0.json`. 
  * Represents a survey section category question. 
  */
 export class CategoryQuestion extends EntityBase
@@ -82,7 +105,23 @@ export class CategoryQuestion extends EntityBase
 }
 
 /**
- * Entity for SectionCategory based on schema `...-v1.0.0.json`. 
+ * Entity for `CategoryRecom` based on schema `...-v1.0.0.json`. 
+ * Represents a survey section category recommendation. 
+ */
+export class CategoryRecom extends EntityBase
+{
+    /**
+     * Recommendation id. 
+     */
+    id: string;
+    /**
+     * Recommendation value. 
+     */
+    value: string;
+}
+
+/**
+ * Entity for `SectionCategory` based on schema `...-v1.0.0.json`. 
  * Represents a survey section category. 
  */
 export class SectionCategory extends EntityBase
@@ -92,17 +131,19 @@ export class SectionCategory extends EntityBase
      */
     title: string;
     /**
-     * Category desription. 
+     * Category title evaluation value. 
+     * It is only used with the `ResultAndRecoms` type. 
      */
-    desc: string;
+    titleEvaluationValue?: string;
     /**
-     * An array of questions associated with the category. 
+     * If this field is used with the `Evaluation.sections` field, then its type is `Array<CategoryQuestion>` (an array of questions associated with the category). 
+     * If this field is used with the `Evaluation.resultAndRecoms` field, then its type is `Array<CategoryRecom>` (an array of recommendations associated with the category). 
      */
-    questions: Array<CategoryQuestion>;
+    questionsOrRecoms: Array<CategoryQuestion> | Array<CategoryRecom>;
 }
 
 /**
- * Entity for SurveySection based on schema `...-v1.0.0.json`. 
+ * Entity for `SurveySection` based on schema `...-v1.0.0.json`. 
  * Represents a survey section. 
  */
 export class SurveySection extends EntityBase
@@ -112,17 +153,22 @@ export class SurveySection extends EntityBase
      */
     title: string;
     /**
+     * Section title evaluation value. 
+     * It is only used with the `ResultAndRecoms` type. 
+     */
+    titleEvaluationValue?: string;
+    /**
      * An array of categories associated with the section. 
      */
     categories: Array<SectionCategory>;
 }
 
 /**
- * Entity for JournalGeneralData based on schema `...-v1.0.0.json`. 
+ * Entity for `JournalGeneralData` based on schema `...-v1.0.0.json`. 
  * Represents the journal general data that a user fills in the first step. 
  */
- export class JournalGeneralData extends EntityBase
- {
+export class JournalGeneralData extends EntityBase
+{
     /**
      * Journal name. 
      */
@@ -135,10 +181,31 @@ export class SurveySection extends EntityBase
      * Journal ISSN. 
      */
     issn: string;
- }
+}
 
 /**
- * Entity for Evaluation based on schema `...-v1.0.0.json`. 
+ * Entity for `ResultAndRecoms` based on schema `...-v1.0.0.json`. 
+ * Represents the result and recommendations data that are showed to the user as the result of the survey he did. 
+ */
+export class ResultAndRecoms extends EntityBase
+{
+    /**
+     * General evaluation name. 
+     */
+    generalEvaluationName: string;
+    /**
+     * General evaluation value. 
+     */
+    generalEvaluationValue: string;
+
+    /**
+     * An array of sections associated with the survey that contain its results. 
+     */
+    sections: Array<SurveySection>;
+}
+
+/**
+ * Entity for `Evaluation` based on schema `...-v1.0.0.json`. 
  */
  export class Evaluation extends Entity
  {
@@ -158,7 +225,7 @@ export class SurveySection extends EntityBase
      */
     journalData: JournalGeneralData;
 
-    /**************************************** Survey ******************************/
+    /********************************** Survey (Questions) ************************/
 
     /**
      * An array of sections associated with the survey. 
@@ -169,12 +236,13 @@ export class SurveySection extends EntityBase
 
     /**
      * Result and recommendations. 
+     * If this field is `undefined`, then the evaluation has NOT been done for the inserted data. 
      */
-    resultAndRecoms: Params<any>;
+    resultAndRecoms: ResultAndRecoms;
  }
 
 /**
- * Entity for EvaluationAnswer based on schema `...-v1.0.0.json`. 
+ * Entity for `EvaluationAnswer` based on schema `...-v1.0.0.json`. 
  * This class only contains the values that the user can add or modify. 
  */
 export class EvaluationAnswer extends Entity
@@ -195,7 +263,7 @@ export class EvaluationAnswer extends Entity
      */
     journalData: JournalGeneralData;
 
-    /**************************************** Survey ******************************/
+    /********************************** Survey (Questions) ************************/
 
     /**
      * Journal survey. 
@@ -206,6 +274,7 @@ export class EvaluationAnswer extends Entity
 
     /**
      * Result and recommendations. 
+     * If this field is `undefined`, then the evaluation has NOT been done for the inserted data. 
      */
-    resultAndRecoms: Params<any>;
+    resultAndRecoms: ResultAndRecoms;
 }

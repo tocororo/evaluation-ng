@@ -8,7 +8,7 @@ import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 import { ActionText, Hit, MessageHandler, StatusCode, HandlerComponent } from 'toco-lib';
 
-import { CategoryQuestion, CategoryQuestionType, Evaluation, EvaluationAnswer, SectionCategory, SurveySection } from '../evaluation.entity';
+import { CategoryQuestion, CategoryQuestionType, CategoryRecom, Evaluation, EvaluationAnswer, ResultAndRecoms, SectionCategory, SurveySection } from '../evaluation.entity';
 
 import { SurveyService } from '../survey.service';
 import { SurveyQuestionsComponent } from '../survey-questions/survey-questions.component';
@@ -43,7 +43,6 @@ export class SurveyComponent implements OnInit
 	public evaluationFormGroup: FormGroup;
 	public evalJournalDataFormGroup: FormGroup;
 	public evalSurveyFormGroup: FormGroup;
-	public evalResultAndRecomsFormGroup: FormGroup;
 
 	@ViewChild('stepper', { static: true })
 	private _matHorizontalStepper: MatHorizontalStepper;
@@ -71,7 +70,6 @@ export class SurveyComponent implements OnInit
 		this.evaluationFormGroup = undefined;
 		this.evalJournalDataFormGroup = undefined;
 		this.evalSurveyFormGroup = undefined;
-		this.evalResultAndRecomsFormGroup = undefined;
 		this._evaluation = undefined;
 	}
 
@@ -140,9 +138,7 @@ export class SurveyComponent implements OnInit
 		this.evaluationFormGroup = this._formBuilder.group({
 			'journalData': this.evalJournalDataFormGroup = this._formBuilder.group({ }),
 
-			'survey': this.evalSurveyFormGroup = this._formBuilder.group({ }),
-
-			'resultAndRecoms': this.evalResultAndRecomsFormGroup = this._formBuilder.group({ })
+			'survey': this.evalSurveyFormGroup = this._formBuilder.group({ })
 		});
 	}
 
@@ -151,19 +147,28 @@ export class SurveyComponent implements OnInit
 	 */
 	private _setNewLanguage(): void
 	{
-		this._surveyService.getEvaluationById(((this._evaluation) ? (this._evaluation.id) : undefined), this._transServ.currentLang).subscribe({
+		this._surveyService.getEvaluationById(
+			((this._evaluation) ? (this._evaluation.id) : undefined),
+			((this._evaluation) ? (this._evaluation.resultAndRecoms != undefined) : false),
+			this._transServ.currentLang
+		).subscribe({
 			next: (data: Hit<Evaluation>) => {
 
 				let i: number, j: number, k: number, l: number;
 
-				let old_sections: Array<SurveySection> = this._evaluation.sections;
-				let new_sections: Array<SurveySection> = data.metadata.sections;
+				let old_sections: Array<SurveySection>;
+				let new_sections: Array<SurveySection>;
 
 				let old_categories: Array<SectionCategory>;
 				let new_categories: Array<SectionCategory>;
 
 				let old_questions: Array<CategoryQuestion>;
 				let new_questions: Array<CategoryQuestion>;
+
+				/* Gets translations for sections. */
+
+				old_sections = this._evaluation.sections;
+				new_sections = data.metadata.sections;
 
 				for (i = 0; i < old_sections.length; ++i)
 				{
@@ -175,10 +180,9 @@ export class SurveyComponent implements OnInit
 					for (j = 0; j < old_categories.length; ++j)
 					{
 						old_categories[j].title = new_categories[j].title;
-						old_categories[j].desc = new_categories[j].desc;
 
-						old_questions = old_categories[j].questions;
-						new_questions = new_categories[j].questions;
+						old_questions = old_categories[j].questionsOrRecoms as Array<CategoryQuestion>;
+						new_questions = new_categories[j].questionsOrRecoms as Array<CategoryQuestion>;
 
 						for (k = 0; k < old_questions.length; ++k)
 						{
@@ -191,6 +195,48 @@ export class SurveyComponent implements OnInit
 								{
 									old_questions[k].selectOptions[l].label = new_questions[k].selectOptions[l].label;
 								}
+							}
+						}
+					}
+				}
+
+				console.log('this._evaluation.resultAndRecoms: ', this._evaluation.resultAndRecoms);
+
+				/* Gets translations for result and recommendations. */
+
+				if (this._evaluation.resultAndRecoms != undefined)  /* Very important to do this verification. */
+				{
+					let old_resultAndRecoms: ResultAndRecoms = this._evaluation.resultAndRecoms;
+					let new_resultAndRecoms: ResultAndRecoms = data.metadata.resultAndRecoms;
+
+					let old_recoms: Array<CategoryRecom>;
+					let new_recoms: Array<CategoryRecom>;
+
+					old_resultAndRecoms.generalEvaluationName = new_resultAndRecoms.generalEvaluationName;
+					old_resultAndRecoms.generalEvaluationValue = new_resultAndRecoms.generalEvaluationValue;
+
+					old_sections = old_resultAndRecoms.sections;
+					new_sections = new_resultAndRecoms.sections;
+
+					for (i = 0; i < old_sections.length; ++i)
+					{
+						old_sections[i].title = new_sections[i].title;
+						old_sections[i].titleEvaluationValue = new_sections[i].titleEvaluationValue;
+
+						old_categories = old_sections[i].categories;
+						new_categories = new_sections[i].categories;
+
+						for (j = 0; j < old_categories.length; ++j)
+						{
+							old_categories[j].title = new_categories[j].title;
+							old_categories[j].titleEvaluationValue = new_categories[j].titleEvaluationValue;
+
+							old_recoms = old_categories[j].questionsOrRecoms as Array<CategoryRecom>;
+							new_recoms = new_categories[j].questionsOrRecoms as Array<CategoryRecom>;
+
+							for (k = 0; k < old_recoms.length; ++k)
+							{
+								old_recoms[k].value = new_recoms[k].value;
 							}
 						}
 					}
@@ -216,8 +262,6 @@ export class SurveyComponent implements OnInit
 
 	public onSelectedStepHasChanged(event: StepperSelectionEvent): void
 	{
-		console.log('onSelectedStepHasChanged ', event.selectedIndex);
-
 		if (event.selectedIndex == 2)  /* = 2 means the step of result and recommendations. */
 		{
 			if (this._actionText == ActionText.add)  /* For viewing component, it does NOT need to do this. */
