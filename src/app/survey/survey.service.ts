@@ -10,8 +10,8 @@ import { cloneValue, Environment, Hit } from 'toco-lib';
 import { CategoryQuestionType, Evaluation, EvaluationAnswer } from './evaluation.entity';
 
 /**
- * Represents an object with all its values set to empty in Spanish language. 
- * An empty evaluation must have its `id` set to `undefined`. 
+ * Represents an object with all its values set to `undefined` in Spanish language. 
+ * An empty evaluation must have its `id` and `resultAndRecoms` fields set to `undefined`. 
  */
 const evaluationEmpty_Spanish: any = {
     'metadata': {
@@ -29,8 +29,7 @@ const evaluationEmpty_Spanish: any = {
                 'categories': [
                     {
                         'title': 'Indización',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_001_q_001',
@@ -65,8 +64,7 @@ const evaluationEmpty_Spanish: any = {
                     },
                     {
                         'title': 'Acceso',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_002_q_001',
@@ -142,8 +140,7 @@ const evaluationEmpty_Spanish: any = {
                     },
                     {
                         'title': 'Interoperabilidad',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_003_q_001',
@@ -204,8 +201,7 @@ const evaluationEmpty_Spanish: any = {
                     },
                     {
                         'title': 'Apertura',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.select,
                                 'id': 'c_004_q_001',
@@ -263,8 +259,7 @@ const evaluationEmpty_Spanish: any = {
                     },
                     {
                         'title': 'Internacionalización',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.select,
                                 'id': 'c_005_q_001',
@@ -380,9 +375,8 @@ const evaluationEmpty_Spanish: any = {
                         ]
                     },
                     {
-                        'title': 'Difusión y presencia en redes sociales generales y académicas',
-                        'desc': '',
-                        'questions': [
+                        'title': 'Redes sociales',
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_006_q_001',
@@ -445,8 +439,7 @@ const evaluationEmpty_Spanish: any = {
                 'categories': [
                     {
                         'title': 'Impacto académico',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_007_q_001',
@@ -500,8 +493,7 @@ const evaluationEmpty_Spanish: any = {
                     },
                     {
                         'title': 'Posición en rankings de revistas',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.select,
                                 'id': 'c_008_q_001',
@@ -531,13 +523,14 @@ const evaluationEmpty_Spanish: any = {
                     }
                 ]
             }
-        ]
+        ],
+        'resultAndRecoms': undefined  /* An empty evaluation must have its `resultAndRecoms` set to `undefined`. */
     }
 };
 
 /**
- * Represents an object with all its values set to empty in English language. 
- * An empty evaluation must have its `id` set to `undefined`. 
+ * Represents an object with all its values set to `undefined` in English language. 
+ * An empty evaluation must have its `id` and `resultAndRecoms` fields set to `undefined`. 
  */
 const evaluationEmpty_English: any = {
     'metadata': {
@@ -555,8 +548,7 @@ const evaluationEmpty_English: any = {
                 'categories': [
                     {
                         'title': 'Indexing',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_001_q_001',
@@ -591,8 +583,7 @@ const evaluationEmpty_English: any = {
                     },
                     {
                         'title': 'Access',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_002_q_001',
@@ -668,8 +659,7 @@ const evaluationEmpty_English: any = {
                     },
                     {
                         'title': 'Interoperability',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_003_q_001',
@@ -730,8 +720,7 @@ const evaluationEmpty_English: any = {
                     },
                     {
                         'title': 'Opening',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.select,
                                 'id': 'c_004_q_001',
@@ -789,8 +778,7 @@ const evaluationEmpty_English: any = {
                     },
                     {
                         'title': 'Internationalization',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.select,
                                 'id': 'c_005_q_001',
@@ -906,9 +894,8 @@ const evaluationEmpty_English: any = {
                         ]
                     },
                     {
-                        'title': 'Dissemination and presence in general and academic social networks',
-                        'desc': '',
-                        'questions': [
+                        'title': 'Social networks',
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_006_q_001',
@@ -971,8 +958,7 @@ const evaluationEmpty_English: any = {
                 'categories': [
                     {
                         'title': 'Academic impact',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_007_q_001',
@@ -1026,8 +1012,7 @@ const evaluationEmpty_English: any = {
                     },
                     {
                         'title': 'Position in journal rankings',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.select,
                                 'id': 'c_008_q_001',
@@ -1057,7 +1042,8 @@ const evaluationEmpty_English: any = {
                     }
                 ]
             }
-        ]
+        ],
+        'resultAndRecoms': undefined  /* An empty evaluation must have its `resultAndRecoms` set to `undefined`. */
     }
 };
 
@@ -1080,8 +1066,7 @@ const evaluationExample_Spanish: any = {
                 'categories': [
                     {
                         'title': 'Indización',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_001_q_001',
@@ -1116,8 +1101,7 @@ const evaluationExample_Spanish: any = {
                     },
                     {
                         'title': 'Acceso',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_002_q_001',
@@ -1193,8 +1177,7 @@ const evaluationExample_Spanish: any = {
                     },
                     {
                         'title': 'Interoperabilidad',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_003_q_001',
@@ -1255,8 +1238,7 @@ const evaluationExample_Spanish: any = {
                     },
                     {
                         'title': 'Apertura',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.select,
                                 'id': 'c_004_q_001',
@@ -1314,8 +1296,7 @@ const evaluationExample_Spanish: any = {
                     },
                     {
                         'title': 'Internacionalización',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.select,
                                 'id': 'c_005_q_001',
@@ -1431,9 +1412,8 @@ const evaluationExample_Spanish: any = {
                         ]
                     },
                     {
-                        'title': 'Difusión y presencia en redes sociales generales y académicas',
-                        'desc': '',
-                        'questions': [
+                        'title': 'Redes sociales',
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_006_q_001',
@@ -1496,8 +1476,7 @@ const evaluationExample_Spanish: any = {
                 'categories': [
                     {
                         'title': 'Impacto académico',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_007_q_001',
@@ -1551,8 +1530,7 @@ const evaluationExample_Spanish: any = {
                     },
                     {
                         'title': 'Posición en rankings de revistas',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.select,
                                 'id': 'c_008_q_001',
@@ -1583,6 +1561,7 @@ const evaluationExample_Spanish: any = {
                 ]
             }
         ]
+        /* The `resultAndRecoms` field is set when the data is gotten. */
     }
 };
 
@@ -1605,8 +1584,7 @@ const evaluationExample_English: any = {
                 'categories': [
                     {
                         'title': 'Indexing',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_001_q_001',
@@ -1641,8 +1619,7 @@ const evaluationExample_English: any = {
                     },
                     {
                         'title': 'Access',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_002_q_001',
@@ -1718,8 +1695,7 @@ const evaluationExample_English: any = {
                     },
                     {
                         'title': 'Interoperability',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_003_q_001',
@@ -1780,8 +1756,7 @@ const evaluationExample_English: any = {
                     },
                     {
                         'title': 'Opening',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.select,
                                 'id': 'c_004_q_001',
@@ -1839,8 +1814,7 @@ const evaluationExample_English: any = {
                     },
                     {
                         'title': 'Internationalization',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.select,
                                 'id': 'c_005_q_001',
@@ -1956,9 +1930,8 @@ const evaluationExample_English: any = {
                         ]
                     },
                     {
-                        'title': 'Dissemination and presence in general and academic social networks',
-                        'desc': '',
-                        'questions': [
+                        'title': 'Social networks',
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_006_q_001',
@@ -2021,8 +1994,7 @@ const evaluationExample_English: any = {
                 'categories': [
                     {
                         'title': 'Academic impact',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.bool,
                                 'id': 'c_007_q_001',
@@ -2076,8 +2048,7 @@ const evaluationExample_English: any = {
                     },
                     {
                         'title': 'Position in journal rankings',
-                        'desc': '',
-                        'questions': [
+                        'questionsOrRecoms': [
                             {
                                 'type': CategoryQuestionType.select,
                                 'id': 'c_008_q_001',
@@ -2108,7 +2079,248 @@ const evaluationExample_English: any = {
                 ]
             }
         ]
+        /* The `resultAndRecoms` field is set when the data is gotten. */
     }
+};
+
+/**
+ * Represents an object used as mock data in Spanish language. 
+ */
+const resultAndRecomsExample_Spanish: any = {
+    'generalEvaluationName': 'Evaluación general de la revista',
+    'generalEvaluationValue': "Nivel 'En desarrollo'",
+    'sections': [
+        {  /* Visibility Section */
+            'title': 'Evaluación de la visibilidad',
+            'titleEvaluationValue': 'MEDIA',
+            'categories': [
+                {
+                    'title': 'Indización',
+                    'titleEvaluationValue': 'MEDIO',
+                    'questionsOrRecoms': [
+                        /* In this case, there is not recommendations. */
+                    ]
+                },
+                {
+                    'title': 'Acceso',
+                    'titleEvaluationValue': 'MEDIO',
+                    'questionsOrRecoms': [
+                        {
+                            'id': 'c_002_r_001',
+                            'value': 'Evaluar cómo alinear las buenas prácticas de acceso abierto con las políticas editoriales'
+                        }
+                    ]
+                },
+                {
+                    'title': 'Interoperabilidad',
+                    'titleEvaluationValue': 'BAJO',
+                    'questionsOrRecoms': [
+                        {
+                            'id': 'c_003_r_001',
+                            'value': 'Implementar el protocolo OAI-PMH que permita la recopilación de metadatos por otros sistemas'
+                        },
+                        {
+                            'id': 'c_003_r_002',
+                            'value': 'Incluir como parte de su práctica editorial la solicitud del ORCID asociado al nombre de los autores y registrarlo como parte de sus metadatos'
+                        },
+                        {
+                            'id': 'c_003_r_003',
+                            'value': 'Explorar la posibilidad de incluir entre sus metadatos Identificador(es) Persistente(s) para organizaciones (ej.: GRID, ROR)'
+                        }
+                    ]
+                },
+                {
+                    'title': 'Apertura',
+                    'titleEvaluationValue': 'BAJO',
+                    'questionsOrRecoms': [
+                        {
+                            'id': 'c_004_r_001',
+                            'value': 'Evaluar cómo alinear las buenas prácticas de acceso abierto con las políticas editoriales'
+                        }
+                    ]
+                },
+                {
+                    'title': 'Internacionalización',
+                    'titleEvaluationValue': 'BAJO',
+                    'questionsOrRecoms': [
+                        {
+                            'id': 'c_005_r_001',
+                            'value': 'Promover el depósito de los datos de investigación en repositorios de acceso abierto como parte de su política editorial'
+                        },
+                        {
+                            'id': 'c_005_r_002',
+                            'value': 'Ofrecer sus contenidos bajo algun tipo de licencia Creative Common'
+                        },
+                        {
+                            'id': 'c_005_r_003',
+                            'value': 'Aumentar la representación de expertos y especialistas externos a la institución editora, considerando mayor presencia de afiliados a instituciones extranjeras'
+                        }
+                    ]
+                },
+                {
+                    'title': 'Redes sociales',
+                    'titleEvaluationValue': 'BAJO',
+                    'questionsOrRecoms': [
+                        {
+                            'id': 'c_006_r_001',
+                            'value': 'Evaluar posibilidades para potenciar la revista como una vía para fortalecer la colaboración interinstitucional a nivel nacional e internacional'
+                        },
+                        {
+                            'id': 'c_006_r_002',
+                            'value': 'Implementar funcionalidad de compartir contenidos en redes sociales'
+                        },
+                        {
+                            'id': 'c_006_r_003',
+                            'value': 'Crear y mantener activos perfiles tanto en redes sociales generales como en Mendeley y Researchgate para aumentar la difusión de sus publicaciones'
+                        }
+                    ]
+                }
+            ]
+        },
+        {  /* Impact Section */
+            'title': 'Evaluación del impacto',
+            'titleEvaluationValue': 'MEDIO',
+            'categories': [
+                {
+                    'title': 'Impacto académico',
+                    'titleEvaluationValue': 'MEDIO',
+                    'questionsOrRecoms': [
+                        {
+                            'id': 'c_007_r_001',
+                            'value': 'a) Orientar a los profesores que forman parte del consejo/comité editorial para el direccionamiento estratégico de la calidad de la revista, b) ofrecer pautas a los autores que les permitan mejorar el rigor y originalidad de los trabajos que envian a la revista indicándolas explícitamnete en las instrucciones a los autores y la política editorial así como en Editoriales, Cartas al editor o otros tipos de artículos publicados en la misma revista, c) mejorar la calidad de las revisiones a través de la mejora de los formularios de revisión, la elección de los revisores más adecuados para cada manuscrito, compartir las buenas prácticas de revisión, desarrollar competencias en los revisores novatos que les permitan reconocer las contribuciones potenciales de los manuscritos y cómo facilitar el desarrollo de ese potencial para elevar la calidad de los manuscritos aceptados y publicados'
+                        }
+                    ]
+                },
+                {
+                    'title': 'Posición en rankings de revistas',
+                    'titleEvaluationValue': 'BAJO',
+                    'questionsOrRecoms': [
+                        /* In this case, there is not recommendations. */
+                    ]
+                }
+            ]
+        }
+    ]
+};
+
+/**
+ * Represents an object used as mock data in English language. 
+ */
+const resultAndRecomsExample_English: any = {
+    'generalEvaluationName': 'Journal general evaluation',
+    'generalEvaluationValue': "'In development' level",
+    'sections': [
+        {  /* Visibility Section */
+            'title': 'Visibility evaluation',
+            'titleEvaluationValue': 'MEDIUM',
+            'categories': [
+                {
+                    'title': 'Indexing',
+                    'titleEvaluationValue': 'MEDIUM',
+                    'questionsOrRecoms': [
+                        /* In this case, there is not recommendations. */
+                    ]
+                },
+                {
+                    'title': 'Access',
+                    'titleEvaluationValue': 'MEDIUM',
+                    'questionsOrRecoms': [
+                        {
+                            'id': 'c_002_r_001',
+                            'value': 'Evaluate how to align good open access practices with editorial policies'
+                        }
+                    ]
+                },
+                {
+                    'title': 'Interoperability',
+                    'titleEvaluationValue': 'LOW',
+                    'questionsOrRecoms': [
+                        {
+                            'id': 'c_003_r_001',
+                            'value': 'Implement the OAI-PMH protocol that allows the collection of metadata by other systems'
+                        },
+                        {
+                            'id': 'c_003_r_002',
+                            'value': "Include the ORCID request associated with the authors' names as part of their editorial practice and register it as part of their metadata"
+                        },
+                        {
+                            'id': 'c_003_r_003',
+                            'value': 'Explore the possibility of including Persistent Identifier(s) for organizations (e.g.: GRID, ROR) among its metadata'
+                        }
+                    ]
+                },
+                {
+                    'title': 'Opening',
+                    'titleEvaluationValue': 'LOW',
+                    'questionsOrRecoms': [
+                        {
+                            'id': 'c_004_r_001',
+                            'value': 'Evaluate how to align good open access practices with editorial policies'
+                        }
+                    ]
+                },
+                {
+                    'title': 'Internationalization',
+                    'titleEvaluationValue': 'LOW',
+                    'questionsOrRecoms': [
+                        {
+                            'id': 'c_005_r_001',
+                            'value': 'Promote the deposit of research data in open access repositories as part of its editorial policy'
+                        },
+                        {
+                            'id': 'c_005_r_002',
+                            'value': 'Offer its contents under some type of Creative Common license'
+                        },
+                        {
+                            'id': 'c_005_r_003',
+                            'value': 'Increase the representation of experts and specialists external to the publishing institution, considering a greater presence of affiliates to foreign institutions'
+                        }
+                    ]
+                },
+                {
+                    'title': 'Social networks',
+                    'titleEvaluationValue': 'LOW',
+                    'questionsOrRecoms': [
+                        {
+                            'id': 'c_006_r_001',
+                            'value': 'Evaluate possibilities to promote the journal as a way to strengthen inter-institutional collaboration at the national and international level'
+                        },
+                        {
+                            'id': 'c_006_r_002',
+                            'value': 'Implement functionality to share content on social networks'
+                        },
+                        {
+                            'id': 'c_006_r_003',
+                            'value': 'Create and maintain active profiles both in general social networks and in Mendeley and Researchgate to increase the dissemination of your publications'
+                        }
+                    ]
+                }
+            ]
+        },
+        {  /* Impact Section */
+            'title': 'Impact evaluation',
+            'titleEvaluationValue': 'MEDIUM',
+            'categories': [
+                {
+                    'title': 'Academic impact',
+                    'titleEvaluationValue': 'MEDIUM',
+                    'questionsOrRecoms': [
+                        {
+                            'id': 'c_007_r_001',
+                            'value': 'a) Guide the professors who are part of the editorial board / committee for the strategic direction of the quality of the journal, b) offer guidelines to the authors that allow them to improve the rigor and originality of the works that they send to the journal, indicating them explicitly in the instructions to the authors and the editorial policy as well as in Editorials, Letters to the editor or other types of articles published in the same journal, c) improve the quality of the reviews through the improvement of the review forms, the choice of the most suitable reviewers for each manuscript, share good review practices, develop competencies in novice reviewers that allow them to recognize the potential contributions of manuscripts and how to facilitate the development of that potential to raise the quality of accepted and published manuscripts'
+                        }
+                    ]
+                },
+                {
+                    'title': 'Position in journal rankings',
+                    'titleEvaluationValue': 'LOW',
+                    'questionsOrRecoms': [
+                        /* In this case, there is not recommendations. */
+                    ]
+                }
+            ]
+        }
+    ]
 };
 
 /**
@@ -2136,33 +2348,35 @@ export class SurveyService
 	 * Constructs a `GET` request that interprets the body as a JSON object and returns 
 	 * the response body in the `Hit<Evaluation>` type. 
 	 * @param id Evaluation id. 
-	 * In the case of adding view, this `id` argument is `undefined`. 
+	 * In the case of adding view, this `id` argument is `undefined` (maybe only in the first use of this method). 
 	 * In the case of remaining views (viewing and editing views), this `id` argument is NOT `undefined`. 
+     * @param evaluationWasDone True if the evaluation was done for the inserted data; otherwise, false. 
 	 * @param currentLang Language currently used as string. 
 	 * The Spanish language is: 'es'. 
 	 * The English language is: 'en'. 
 	 * @return An `Observable` of the `HTTPResponse`, with a response body in the `Hit<Evaluation>` type. 
 	 */
-	public getEvaluationById(id: string, currentLang: string): Observable<Hit<Evaluation>>
+	public getEvaluationById(id: string, evaluationWasDone: boolean, currentLang: string): Observable<Hit<Evaluation>>
 	{
 //// Backend data //////////////////////////
 		// // TODO: Test and fix any issue when connecting to the backend. 
 
 		// /* In the case of adding view, this occurs when the `id` argument is `undefined`, 
-		// it needs to get an object with all its values set to empty. 
+		// it needs to get an object with all its values set to `undefined`, and 
+        // the `resultAndRecoms` field set to `undefined`. 
 		// This is a great optimization that you can implement in the backend. */
 		// // TODO: I think that we need to crete `_env.evaluationApi` field and use it instead of `_env.cuorApi`. 
 		// let req: string = this._env.cuorApi + 'evaluations/';
 
 		// /* In the case of remaining views (viewing and editing views), this occurs when the `id` argument is NOT `undefined`, 
-		// it needs to get an object equal to the store object. */
+		// it needs to get an object set to the stored data. */
 		// if (id)
 		// {
 		// 	req += id + '/';
 		// }
 		// // console.log(req);
 
-		// return this._http.get<Hit<Evaluation>>(req, { params: { 'currentLang': currentLang } }).pipe(
+		// return this._http.get<Hit<Evaluation>>(req, { params: { 'evaluationWasDone': ((evaluationWasDone) ? 'true' : 'false'), 'currentLang': currentLang } }).pipe(
 		// 	map(hit => {
 		// 		if (hit)
 		// 		{
@@ -2179,21 +2393,44 @@ export class SurveyService
 
 
 //// Mock data /////////////////////////////
+        let res: any;
+
 		if (id)
 		{
 			/* In the case of remaining views (viewing and editing views), this occurs when the `id` argument is NOT `undefined`, 
-			it needs to get an object equal to the store object. */
+			it needs to get an object set to the stored data. */
 
-			return ((currentLang == 'es') ? of(cloneValue(evaluationExample_Spanish)) : of(cloneValue(evaluationExample_English)));
+            if (currentLang == 'es')
+            {
+                res = cloneValue(evaluationExample_Spanish);
+                res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(resultAndRecomsExample_Spanish) : undefined);
+            }
+            else
+            {
+                res = cloneValue(evaluationExample_English);
+                res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(resultAndRecomsExample_English) : undefined);
+            }
 		}
 		else
 		{
 			/* In the case of adding view, this occurs when the `id` argument is `undefined`, 
-			it needs to get an object with all its values set to empty. 
+			it needs to get an object with all its values set to `undefined`, and 
+            the `resultAndRecoms` field set to `undefined`. 
 			This is a great optimization that you can implement in the backend. */
 
-			return ((currentLang == 'es') ? of(cloneValue(evaluationEmpty_Spanish)) : of(cloneValue(evaluationEmpty_English)));
+            if (currentLang == 'es')
+            {
+                res = cloneValue(evaluationEmpty_Spanish);
+                res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(resultAndRecomsExample_Spanish) : undefined);
+            }
+            else
+            {
+                res = cloneValue(evaluationEmpty_English);
+                res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(resultAndRecomsExample_English) : undefined);
+            }
 		}
+
+        return of(res);
 ////////////////////////////////////////////
 	}
 
@@ -2201,7 +2438,7 @@ export class SurveyService
 	 * Constructs a `PUT` request that interprets the body as a JSON object and returns 
 	 * an observable of the response. 
      * Sends the data that was inserted by the user (an `EvaluationAnswer` object 
-     * with the `resultAndRecoms` field equals `undefined`) to the backend in order to 
+     * with the `resultAndRecoms` field sets to `undefined`) to the backend in order to 
      * realize the processing and gets the result and recommendations. 
      * Then, the backend returns an object `EvaluationAnswer` with the `resultAndRecoms` 
      * field different of `undefined`, and this result is showed in the third part "Result and Recommendations". 
@@ -2224,25 +2461,28 @@ export class SurveyService
 
 //// Mock data /////////////////////////////
 		console.error('doEvaluation: There is not backend yet!', evaluation);
-        return ((currentLang == 'es') ? of({
-            'metadata': {
-                'id': '876acbf2-5a67-4b5c-92ca-040761d54595',
-                'user': evaluation.user,
-                'date': evaluation.date,
-                'journalData': evaluation.journalData,
-                'sections': evaluation.survey,
-                'resultAndRecoms': { 'res1': 'resultado 1', 'res2': 'resultado 2', 'res3': 'resultado 3' }
-            }
-        }) : of({
-            'metadata': {
-                'id': '876acbf2-5a67-4b5c-92ca-040761d54595',
-                'user': evaluation.user,
-                'date': evaluation.date,
-                'journalData': evaluation.journalData,
-                'sections': evaluation.survey,
-                'resultAndRecoms': { 'res1': 'result 1', 'res2': 'result 2', 'res3': 'result 3' }
-            }
-        }));
+        return ((currentLang == 'es')
+            ? of({
+                'metadata': {
+                    'id': '876acbf2-5a67-4b5c-92ca-040761d54595',
+                    'user': evaluation.user,
+                    'date': evaluation.date,
+                    'journalData': evaluation.journalData,
+                    'sections': evaluation.survey,
+                    'resultAndRecoms': cloneValue(resultAndRecomsExample_Spanish)
+                }
+            })
+            : of({
+                'metadata': {
+                    'id': '876acbf2-5a67-4b5c-92ca-040761d54595',
+                    'user': evaluation.user,
+                    'date': evaluation.date,
+                    'journalData': evaluation.journalData,
+                    'sections': evaluation.survey,
+                    'resultAndRecoms': cloneValue(resultAndRecomsExample_English)
+                }
+            })
+        );
 ////////////////////////////////////////////
 	}
 
