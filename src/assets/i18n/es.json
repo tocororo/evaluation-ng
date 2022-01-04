@@ -89,6 +89,7 @@
     "URL_GENERICA": "https://www.revista.com/",
 
     "DONDE_BUSCARLA": "Dónde buscarla: ",
+    "NO_HAY_RECOMENDACIONES": "(No hay ninguna recomendación)",
 
     "TOCO_NG_ERROR_MSG_REQUERIDO": "El valor no puede estar vacío.",
     "TOCO_NG_HINT_TEXTO_POR_DEFECTO": "Escribe un valor válido.",

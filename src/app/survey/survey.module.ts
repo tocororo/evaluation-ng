@@ -17,9 +17,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatStepperModule } from '@angular/material/stepper';
-import { MatTableModule } from '@angular/material/table';
+import { MatDividerModule } from '@angular/material/divider';
 
-import { CoreModule, TocoFormsModule, StaticsModule } from 'toco-lib';
+import { CoreModule, TocoFormsModule } from 'toco-lib';
 
 import { SurveyRoutingModule } from './survey-routing.module';
 import { SurveyComponent } from './survey/survey.component';
@@ -27,7 +27,8 @@ import { SurveyViewComponent } from './survey-view/survey-view.component';
 import { SurveyQuestionsComponent } from './survey-questions/survey-questions.component';
 import { SurveyResultAndRecomsComponent } from './survey-result-and-recoms/survey-result-and-recoms.component';
 import { SurveyJournalDataComponent } from './survey-journal-data/survey-journal-data.component';
-import { ViewerCardComponent } from './viewer-card/viewer-card.component';
+import { StaticViewerCardComponent } from './viewer-card/static-viewer-card/static-viewer-card.component';
+import { ViewerCardComponent } from './viewer-card/viewer-card/viewer-card.component';
 
 @NgModule({
 	declarations: [
@@ -36,6 +37,7 @@ import { ViewerCardComponent } from './viewer-card/viewer-card.component';
         SurveyQuestionsComponent,
 		SurveyResultAndRecomsComponent,
 		SurveyJournalDataComponent,
+		StaticViewerCardComponent,
 		ViewerCardComponent
 	],
 	imports: [
@@ -56,11 +58,10 @@ import { ViewerCardComponent } from './viewer-card/viewer-card.component';
 		MatExpansionModule,
 		MatMenuModule,
 		MatStepperModule,
-		MatTableModule,
+		MatDividerModule,
 
 		CoreModule,
 		TocoFormsModule,
-		StaticsModule,
 		SurveyRoutingModule
 	]
 })

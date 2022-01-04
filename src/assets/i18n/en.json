@@ -89,6 +89,7 @@
     "URL_GENERICA": "https://www.journal.com/",
 
     "DONDE_BUSCARLA": "Where to look for it: ",
+    "NO_HAY_RECOMENDACIONES": "(There is no recommendation)",
 
     "TOCO_NG_ERROR_MSG_REQUERIDO": "The value can not be empty.",
     "TOCO_NG_HINT_TEXTO_POR_DEFECTO": "Write a valid value.",

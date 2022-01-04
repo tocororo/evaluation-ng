@@ -6,7 +6,7 @@ import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { SelectContent, InputBoolComponent, InputNumberComponent, InputSelectComponent, 
 	TextInputAppearance, ValidatorArguments } from 'toco-lib';
 
-import { CategoryQuestionType, SurveySection, CategoryQuestion } from '../evaluation.entity';
+import { CategoryQuestionType, SurveySection, CategoryQuestion } from '../../evaluation.entity';
 
 @Component({
 	selector: 'app-viewer-card',
@@ -19,8 +19,6 @@ export class ViewerCardComponent implements OnInit
      * Represents the `CategoryQuestionType` enum for internal use. 
      */
 	public readonly categoryQuestionType: typeof CategoryQuestionType;
-
-	public readonly displayedColumns: string[] = [ 'question', 'answer' ];
 
 	public whereToLookForIt: string;
 
@@ -70,7 +68,7 @@ export class ViewerCardComponent implements OnInit
 
 		for (let category of this.surveySection.categories)
 		{
-			for (question of category.questions)
+			for (question of (category.questionsOrRecoms as Array<CategoryQuestion>))
 			{
 				switch (question.type)
 				{
