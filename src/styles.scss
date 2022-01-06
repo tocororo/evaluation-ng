@@ -252,8 +252,15 @@ $toco-theme: mat-light-theme($toco-primary, $toco-accent, $toco-warn);
     @include toco-app-theme($toco-theme);
 }
 
-.custom {
-    a{
+.color-primary
+{
+    color: mat-color($toco-primary);
+}
+
+.custom
+{
+    a
+    {
         color: mat-color($toco-primary);
     }
 }
@@ -320,6 +327,7 @@ body { margin: 0; }
     padding: 0.5em;
     margin: 0.5em;
     border-radius: 4px;
+    text-align: center;
 }
  .bg-primary-color {
     background-color: mat-color($toco-primary);

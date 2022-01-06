@@ -98,7 +98,7 @@ export class SurveyJournalDataComponent implements OnInit
 			'controlType': InputUrlComponent,
 			'value': this._journalData.url,
 			'required': true,
-			'width': '45%',
+			'width': '100%',
 			'appearance': TextInputAppearance.outline,
 			'ariaLabel': 'Url'
 		};
@@ -111,7 +111,7 @@ export class SurveyJournalDataComponent implements OnInit
 			'controlType': InputIssnComponent,
 			'value': this._journalData.issn,
 			'required': true,
-			'width': '45%',
+			'width': '100%',
 			'appearance': TextInputAppearance.outline,
 			'ariaLabel': 'ISSN'
 		};

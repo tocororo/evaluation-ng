@@ -1,7 +1,7 @@
 
 <mat-card *ngIf="evaluation">
 
-    <mat-card-content>
+    <!-- <mat-card-content>
 
         <static-text [desc]="'Nombre'" [value]="evaluation.name"></static-text>
 
@@ -34,7 +34,7 @@
         <static-text [desc]="'Url'" [value]="evaluation.url"></static-text>
         <static-text [desc]="'Url-OAI'" [value]="evaluation.url_oai"></static-text>
 
-    </mat-card-content>
+    </mat-card-content> -->
 
     <mat-card-actions align="end" class="mrb-0">
         <button mat-stroked-button *ngIf="hasPermission" color="primary" (click)="edit()"

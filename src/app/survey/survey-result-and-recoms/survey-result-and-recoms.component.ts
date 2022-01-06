@@ -1,8 +1,7 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 
-import { Params } from 'toco-lib';
+import { ResultAndRecoms } from '../evaluation.entity';
 
 /**
  * Represents a control that contains the result and recommendations associated with the survey. 
@@ -21,22 +20,15 @@ export class SurveyResultAndRecomsComponent implements OnInit
 	 * it is initialized. 
 	 */
 	@Input()
-	public _resultAndRecoms: Params<any>;
-
-	/**
-	 * Returns the result and recommendations `FormGroup`. 
-	 */
-	@Input()
-	public resultAndRecomsFormGroup: FormGroup;
+	public _resultAndRecoms: ResultAndRecoms;
 
 	public constructor()
 	{
 		this._resultAndRecoms = undefined;
-		this.resultAndRecomsFormGroup = undefined;
 	}
 
 	public ngOnInit(): void
 	{
-		console.log('Data got for SurveyResultAndRecomsComponent: ', this.resultAndRecomsFormGroup);
+		console.log('Data got for SurveyResultAndRecomsComponent: ', this._resultAndRecoms);
 	}
 }
