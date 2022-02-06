@@ -15,7 +15,7 @@ http://localhost:4200/survey/876acbf2-5a67-4b5c-92ca-040761d54595/view
  - Hacer un componente para "Listar las evaluaciones" similar a los componentes que ya existen para listar, por ejemplo, el de listar repositorios institucionales. 
  - En el proyecto "Sceiba", en el fichero "about.es.md", cambiar el día 2 por 27 en "[VLIR JOINT 2019-01-2". 
  - Creo que hay que adicionar un nuevo valor al `enum AuthBackend` para representar el Evaluation's backend. Se usa en "ContactService". 
- - Crear el ícono svg `eval.svg` y usarlo en el código html en los lugares de "eval.png". 
+ - Crear el ícono svg `evaluation.svg` y usarlo en el código html en los lugares de "evaluation1.png" y "evaluation2.png". 
  - Borrar todo lo que no se usa de la carpeta `assets`. 
  - Respecto a `toco-ng` (toco-lib) está muy mal la forma en que están creados los módulos: 
     * Cada componente que se usa tiene que tener su propio módulo como en Agular Material. Esto hace que la aplicación que los usa quede óptima! 
