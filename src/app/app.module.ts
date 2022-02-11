@@ -21,13 +21,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-import { Environment } from 'toco-lib';
+import { CoreModule, Environment } from 'toco-lib';
 import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundEvaluationComponent } from './page-not-found-evaluation/page-not-found-evaluation.component';
 import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
 
@@ -40,7 +40,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 	declarations: [
 		AppComponent,
 		HomeComponent,
-		PageNotFoundComponent,
+		PageNotFoundEvaluationComponent,
 		FooterComponent,
 		ContactComponent
 	],
@@ -72,6 +72,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		MatFormFieldModule,
 		MatInputModule,
 		MatSnackBarModule,
+
+		CoreModule,
 
 		AppRoutingModule
 	],

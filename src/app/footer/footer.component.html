@@ -1,5 +1,5 @@
 
-<!-- <img src="assets/icons/sceiba.footer.top.2.svg" alt="" style="margin-bottom: -8px; width: 100%;"> -->
+<!-- <img src="assets/icons/sceiba.footer.top.2.svg" alt="" style="margin-bottom: -8px; width: 100%;" /> -->
 <div class="w-100 bg-primary-color" fxLayout="row wrap" fxLayout.mx="column" fxLayoutAlign="center center">
 
     <div
@@ -17,13 +17,12 @@
             [ngStyle.xs]="{'padding-top': '40px', 'padding-bottom': '20px'}"
         >
         <a href="https://tocororo.upr.edu.cu" target="_blank" style="color: rgb(0, 0, 0, 0.87); text-decoration: none;">
-          <img src="/assets/images/tocororo.png" alt="Tocororo" width="50" height="50" [alt]="'PROYECTO_TOCORORO' | translate" >
-
+          <img src="/assets/images/tocororo.png" [alt]="'PROYECTO_TOCORORO' | translate" width="50" height="50" />
         </a>
 
-        <!-- <img src="/assets/images/tocororo.png" alt="Tocororo" width="50" height="50">
+        <!-- <img src="/assets/images/tocororo.png" [alt]="'PROYECTO_TOCORORO' | translate" width="50" height="50" />
             <span class="text-initial" style="max-width: 30em; padding-left: 10px; color: white;">
-                {{ 'PROYECTO_TOCORORO' | translate }}
+                {{ 'PROYECTO_TOCORORO_TEXTO' | translate }}
             </span> -->
         </div>
         <div class="footer-rigtside"
@@ -33,7 +32,7 @@
             [ngStyle.xs]="{'place-content': 'flex-end'}"
         >
             <a href="https://www.vliruos.be/en/projects/project/22?pid=4202" target="_blank" style="color: rgb(0, 0, 0, 0.87); text-decoration: none;">
-                <img src="/assets/images/vliruos_white.svg" [alt]="'PROYECTO_VLIR' | translate" width="240">
+                <img src="/assets/images/vliruos_white.svg" [alt]="'PROYECTO_VLIR' | translate" width="240" />
             </a>
         </div>
     </div>
@@ -129,7 +128,7 @@
 
     <div fxLayout="column wrap" fxLayoutAlign="center center" style="padding: 1em;">
         <a href="https://sceiba.cu" style="color: rgb(0, 0, 0, 0.87); text-decoration: none;">
-            <img src="/assets/icons/sceiba_white.svg" alt="Sceiba" width="120" height="50">
+            <img src="/assets/icons/sceiba_white.svg" [alt]="'SCEIBA' | translate" width="120" height="50" />
         </a>
         <p class="mat-h5" style="width: 80%; text-align: center; color:white; margin: 0;">
             {{ 'PORTAL_PUB' | translate }}
@@ -144,4 +143,4 @@
 
 </div>
 
-<!-- <span class="text-initial" style="max-width: 30em; text-align: center;">{{ 'PROYECTO_TOCORORO' | translate }}</span> -->
+<!-- <span class="text-initial" style="max-width: 30em; text-align: center;">{{ 'PROYECTO_TOCORORO_TEXTO' | translate }}</span> -->

@@ -24,6 +24,7 @@
     "AUT_REV_CIENT_CUBANAS": "Evaluation of University Scientific Journals",
     "EMPEZAR": "Get Started",
     "PROD_SERV": "Products and Services",
+    "SCEIBA": "Sceiba",
     "CATALOGO": "Catalog",
     "SCEIBA_CATALOGO": "Sceiba Catalog",
     "SCEIBA_CATALOGO_SUB": "Catalog of Cuban Scientific Publications",
@@ -53,19 +54,25 @@
     "CUERPO": "Body",
     "ESCRIBA_CUERPO": "Write the message body",
     "ENVIAR": "Send",
-    "PROYECTO_TOCORORO": "Tocororo Project, an effort for scientific communication in Cuba",
+    "PROYECTO_TOCORORO": "Tocororo Project",
+    "PROYECTO_TOCORORO_TEXTO": "Tocororo Project, an effort for scientific communication in Cuba",
     "PROYECTO_VLIR": "VLIR Project",
+    "PROYECTO_VLIR_TEXTO": "VLIR Project",
     "SCEIBA_PRIVACIDAD_1": "Sceiba is open source and open access and distributes its contents,",
     "SCEIBA_PRIVACIDAD_2": "unless otherwise noted, under the",
     "PORTAL_PUB": "Cuban scientific publications portal",
     "DESARROLLADO_CON": "Developed with",
+
     "TOCO_SEARCH_QUERY_INPUT": {
         "INPUT_SEARCH_LABEL": "Search",
         "INPUT_SEARCH_PLACEHOLDER": "Write a phrase and press Enter",
         "BUTTON_SEARCH": "Search"
     },
-    "PAGINA_NO_ENCONTRADA_DISCULPA": "Sorry, the page you requested could not be found!",
-    "PAGINA_NO_ENCONTRADA_REDIRECCION": "Let us take you Home",
+
+    "TOCO_NG_PAGINA_NO_ENCONT_DISCULPA": "Sorry, the page you requested could not be found!",
+    "TOCO_NG_PAGINA_NO_ENCONT_REDIRECCION": "Let us take you Home",
+    "TOCO_NG_PAGINA_NO_ENCONT_IMG_ALT_TEXT": "Evaluation",
+
     "TITULO_VISTA_DETALLES": "Details of the Evaluation",
     "TITULO_VISTA_ADICIONAR": "Evaluate Your Journal",
     "DATOS_REVISTA": "Journal Data",

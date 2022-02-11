@@ -13,7 +13,6 @@ http://localhost:4200/survey/876acbf2-5a67-4b5c-92ca-040761d54595/view
  - Pasar algunos campos desde "FormFieldContent" para "InputContent" para que las interfaces "ActionContent" y "ContainerContent" que heredan desde "FormFieldContent" no tengan problemas con campos que no usan y tengan los campos que les toca a cada a una. 
     * Arreglar la lógica de initialization y los comentarios que tienen que ver con esta modificación. 
  - Hacer un componente para "Listar las evaluaciones" similar a los componentes que ya existen para listar, por ejemplo, el de listar repositorios institucionales. 
- - En el proyecto "Sceiba", en el fichero "about.es.md", cambiar el día 2 por 27 en "[VLIR JOINT 2019-01-2". 
  - Creo que hay que adicionar un nuevo valor al `enum AuthBackend` para representar el Evaluation's backend. Se usa en "ContactService". 
  - Crear el ícono svg `evaluation.svg` y usarlo en el código html en los lugares de "evaluation1.png" y "evaluation2.png". 
  - Borrar todo lo que no se usa de la carpeta `assets`. 
