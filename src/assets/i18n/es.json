@@ -89,7 +89,7 @@
     "GUARDAR_Y_COMPARAR": "Guardar y comparar",
     "GUARDAR_Y_COMPARTIR": "Guardar y compartir",
     "GUARDAR_Y_SALIR": "Guardar y salir",
-    "EVAL_REV_GUARDADA": "¡La evaluación de la revista fue guardada correctamente!", 
+    "EVAL_REV_GUARDADA": "¡La evaluación de la revista fue guardada correctamente!",
     "OPERACION_EXITOSA": "Operación exitosa",
     "NOMBRE": "Nombre",
     "ESCR_NOMBRE_REVISTA": "Escriba el nombre de la revista",
@@ -122,5 +122,13 @@
 
     "TOCO_NG_ERROR_MSG_TEXTO_INVAL": "El texto está incorrecto.",
 
-    "TOCO_NG_ERROR_MSG_URL_INVAL": "La url está incorrecta."
+    "TOCO_NG_ERROR_MSG_URL_INVAL": "La url está incorrecta.",
+
+    "FOOTER_TEXT": "Sceiba tiene como objetivo establecer un sistema abierto centralizado que facilite el seguimiento y evaluación de las publicaciones científicas a nivel nacional",
+    "FOOTER_TEXT_ENLACE": "Enlaces",
+    "SIGUENOS": "Síguenos",
+    "FOOTER_TEXT_INFORMACION": "Enlaces de Interés",
+    "FOOTER_TEXT_DEVELOP": "desarrollado con",
+    "FOOTER_TEXT_AND": "y",
+    "SCEIBA_EVALUACIONES": "Sceiba Evaluaciones"
 }

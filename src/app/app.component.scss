@@ -26,7 +26,16 @@
 .MES{
     width: 190px !important;
 }
-
+.menu-full{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.font-bold{
+  font-weight: bold;
+}
 .triangle {
     position: relative;
     width: 0;
