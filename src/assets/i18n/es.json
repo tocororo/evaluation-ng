@@ -73,6 +73,15 @@
     "TOCO_NG_PAGINA_NO_ENCONT_REDIRECCION": "Vamos a llevarlo a la página Principal",
     "TOCO_NG_PAGINA_NO_ENCONT_IMG_ALT_TEXT": "Evaluación",
 
+    "EVALUA": "Evalúa",
+    "REVISTAS": "Revistas",
+    "EDITORIALES": "Editoriales",
+    "PUBLICACIONES": "Publicaciones",
+    "INSTITUCIONES": "Instituciones",
+    "OTRAS_HERRAMIENTAS": "Otras Herramientas",
+    "LECTURAS_RECOMENDADAS": "Lecturas Recomendadas",
+    "MIS_EVALUACIONES": "Mis Evaluaciones",
+
     "TITULO_VISTA_DETALLES": "Detalles de la Evaluación",
     "TITULO_VISTA_ADICIONAR": "Evalua Tu Revista",
     "DATOS_REVISTA": "Datos de la Revista",

@@ -73,6 +73,15 @@
     "TOCO_NG_PAGINA_NO_ENCONT_REDIRECCION": "Let us take you Home",
     "TOCO_NG_PAGINA_NO_ENCONT_IMG_ALT_TEXT": "Evaluation",
 
+    "EVALUA": "Evaluate",
+    "REVISTAS": "Journals",
+    "EDITORIALES": "Editorials",
+    "PUBLICACIONES": "Publications",
+    "INSTITUCIONES": "Institutions",
+    "OTRAS_HERRAMIENTAS": "Other Tools",
+    "LECTURAS_RECOMENDADAS": "Recommended Reading",
+    "MIS_EVALUACIONES": "My Evaluation",
+
     "TITULO_VISTA_DETALLES": "Details of the Evaluation",
     "TITULO_VISTA_ADICIONAR": "Evaluate Your Journal",
     "DATOS_REVISTA": "Journal Data",
