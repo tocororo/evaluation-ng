@@ -89,7 +89,7 @@
     "GUARDAR_Y_COMPARAR": "Save and compare",
     "GUARDAR_Y_COMPARTIR": "Save and share",
     "GUARDAR_Y_SALIR": "Save and exit",
-    "EVAL_REV_GUARDADA": "The journal evaluation was saved correctly!", 
+    "EVAL_REV_GUARDADA": "The journal evaluation was saved correctly!",
     "OPERACION_EXITOSA": "Successful operation",
     "NOMBRE": "Name",
     "ESCR_NOMBRE_REVISTA": "Write the journal name",
@@ -122,5 +122,12 @@
 
     "TOCO_NG_ERROR_MSG_TEXTO_INVAL": "The text is wrong.",
 
-    "TOCO_NG_ERROR_MSG_URL_INVAL": "The url is wrong."
+    "TOCO_NG_ERROR_MSG_URL_INVAL": "The url is wrong.",
+    "FOOTER_TEXT": "Sceiba aims to establish a centralized open system that facilitates the monitoring and evaluation of scientific publications at national level",
+    "FOOTER_TEXT_ENLACE": "Links",
+    "SIGUENOS": "Follow us",
+    "FOOTER_TEXT_INFORMACION": "General Information",
+    "FOOTER_TEXT_DEVELOP": "develop by",
+    "FOOTER_TEXT_AND": "and",
+    "SCEIBA_EVALUACIONES": "Sceiba Evaluations"
 }

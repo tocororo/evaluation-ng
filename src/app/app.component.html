@@ -18,12 +18,14 @@
         mat-button
         [routerLink]="['/']"
         style="white-space: normal; display: flex; align-items: center"
+
       >
         <img
-          src="/assets/images/proximamente/evaluation1.png"
+          src="/assets/icons/evaluations.svg"
           [alt]="'EVALUACION' | translate"
           style="height: 50px; margin-right: 6px"
         />
+        <span class="mat-h3">{{ 'SCEIBA_EVALUACIONES' | translate }}</span>
       </a>
     </div>
 
@@ -90,7 +92,16 @@
       >
         <mat-icon class="mat-18">account_circle</mat-icon>
       </button>
-
+    </div>
+    <div class="menu-full">
+      <span style="width: 5%;"></span>
+      <a mat-button class="font-bold" routerLink="/">Inicio</a>
+      <a mat-button class="font-bold" href="https://organizaciones.sceiba.cu" target="_blank">Organizaciones</a>
+      <a mat-button class="font-bold" href="https://personas.sceiba.cu" target="_blank">Personas</a>
+      <a mat-button class="font-bold" href="https://catalogo.sceiba.cu" target="_blank">Catálogo</a>
+      <a mat-button class="font-bold" href="https://revistasmes.sceiba.cu" target="_blank">Revistas MES</a>
+      <a mat-button class="font-bold" href="https://evaluaciones.sceiba.cu" target="_blank">Evaluación</a>
+      <a mat-button class="font-bold" href="https://vocabularios.sceiba.cu/es" target="_blank">Vocabularios</a>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
