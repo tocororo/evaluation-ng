@@ -9,6 +9,54 @@
     <!-- <img src="assets/icons/sceiba.top.bottom.2.svg" alt="" style="margin-top: -4px; width: 100%;"> -->
 
     <div class="w-100" fxLayout="row" fxLayoutAlign="center center">
+          <mat-accordion [multi]="'true'">
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="button-get-started color-primary">{{ 'EVALUA' | translate }}</mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div
+                    fxLayout="column"
+                    fxLayout.xs="column"
+                    fxLayoutAlign="space-between left"
+                >
+                  <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]">
+                      {{ 'REVISTAS' | translate }}
+                  </a>
+                  <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]">
+                    {{ 'EDITORIALES' | translate }}
+                  </a>
+                  <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]">
+                    {{ 'PUBLICACIONES' | translate }}
+                  </a>
+                  <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]">
+                    {{ 'PERSONAS' | translate }}
+                  </a>
+                  <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]">
+                    {{ 'INSTITUCIONES' | translate }}
+                  </a>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                  <mat-panel-title class="button-get-started color-primary">{{ 'OTRAS_HERRAMIENTAS' | translate }}</mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                  <mat-panel-title class="button-get-started color-primary">{{ 'LECTURAS_RECOMENDADAS' | translate }}</mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                  <mat-panel-title class="button-get-started color-primary">{{ 'MIS_EVALUACIONES' | translate }}</mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+        </mat-accordion>
         <div class="w-50 text-get-started" markdown [src]="'/assets/markdown/text.get-started.' + ((transServ.currentLang == 'es') ? 'es.md' : 'en.md')"></div>
         <a mat-raised-button class="button-get-started" style="color: white;" color="primary" [routerLink]="['survey', actionText.add]">
             {{ 'EMPEZAR' | translate }}
