@@ -74,6 +74,9 @@
     "MONITOREA_TEXTO": "identifica y da seguimiento a las tendencias de tus publicaciones científicas",
     "QUE_EVALUAR": "¿Qué vas a evaluar?",
     "QUE_METODOLOGIA": "¿Qué metodología vas a usar?",
+    "PUBLICACION": "Publicación",
+    "PERSON": "Persona",
+    "ORGANIZATION": "Organización",
 
     "TOCO_SEARCH_QUERY_INPUT": {
         "INPUT_SEARCH_LABEL": "Buscar",
