@@ -11,6 +11,10 @@ const routes: Routes = [
 		loadChildren: () => import('./survey/survey.module').then(mod => mod.SurveyModule)
 	},
 	{
+		path: 'help',
+		loadChildren: () => import('./help/help.module').then(mod => mod.HelpModule)
+	},
+	{
 		path: '',
 		component: HomeComponent,
 	},

@@ -349,3 +349,12 @@ body { margin: 0; }
     border: 1px solid;
     border-color: mat-color($toco-primary);
  }
+ .markdown-card-green-light{
+    background: #f3fff9;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 16px;
+}
+ .mat-menu-panel{
+    max-width: 330px !important;
+}
