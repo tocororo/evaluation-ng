@@ -24,10 +24,11 @@ import { environment } from 'src/environments/environment';
 import { CoreModule, Environment } from 'toco-lib';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundEvaluationComponent } from './page-not-found-evaluation/page-not-found-evaluation.component';
+import { HeaderComponent } from './header/header.component';
+import { MatRadioModule } from '@angular/material';
 
 
 
@@ -43,7 +44,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		HomeComponent,
 		PageNotFoundEvaluationComponent,
 		FooterComponent,
-		ContactComponent
+		HeaderComponent
 	],
 	imports: [
 		BrowserModule,
@@ -73,7 +74,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		MatFormFieldModule,
 		MatInputModule,
 		MatSnackBarModule,
-    MatExpansionModule,
+    	MatExpansionModule,
+		MatRadioModule,
 
 		CoreModule,
 
