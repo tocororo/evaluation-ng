@@ -29,6 +29,7 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundEvaluationComponent } from './page-not-found-evaluation/page-not-found-evaluation.component';
 import { HeaderComponent } from './header/header.component';
 import { MatRadioModule } from '@angular/material';
+import { MenuComponent } from './header/menu/menu.component';
 
 
 
@@ -44,7 +45,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		HomeComponent,
 		PageNotFoundEvaluationComponent,
 		FooterComponent,
-		HeaderComponent
+		HeaderComponent,
+		MenuComponent
 	],
 	imports: [
 		BrowserModule,
