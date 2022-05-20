@@ -44,3 +44,25 @@ mat-toolbar.footer-height{
     padding-right: 40px;
     margin-left: auto;
 }
+
+.social {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media screen and (max-width: 600px) {
+  .social {
+    width: 80%;
+    margin-top: 20px;
+  }
+}
+
+@media screen and (width: 1024px)  {
+  .social {
+    width: 30%;
+    margin-top: 20px;
+  }
+}
