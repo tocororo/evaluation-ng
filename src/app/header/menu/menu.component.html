@@ -1,0 +1,54 @@
+<ng-container *ngIf="menuApps; else simpleMenu">
+  <div  fxLayout="row wrap" fxLayoutAlign="space-around flex-end" >
+    <ng-container  *ngFor="let item of menuElements">
+      <a
+        [href]="item.href"
+        [target]="item.target"
+        class="apps mat-caption"
+        matTooltip="{{ item.nameTranslate | translate }}"
+      >
+        <img
+          [src]="item.img.src"
+          [alt]="item.nameTranslate | translate"
+          style="width: 55px; height: 55px"
+        />
+        <span>{{ item.nameTranslate | translate }}</span>
+      </a>
+      <mat-divider *ngIf="item.divider" class="w-90 my-10"></mat-divider>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-template #simpleMenu>
+<ng-container  *ngFor="let item of menuElements">
+
+      <a mat-menu-item
+         [routerLink]="item.href"
+         *ngIf="item.useRouterLink; else useHrefMenu"
+         (click)="item?.click()"
+      >
+        <mat-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
+        <span>{{item.nameTranslate | translate}}</span>
+      </a>
+
+    <ng-template #useHrefMenu>
+      <a mat-menu-item
+         [href]="item.href"
+         [target]="item.target"
+         *ngIf="item.href; else useNoHrefMenu"
+         (click)="item?.click()"
+      >
+        <mat-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
+        <span>{{item.nameTranslate | translate}}</span>
+      </a>
+    </ng-template>
+    <ng-template #useNoHrefMenu>
+      <a mat-menu-item
+         (click)="item?.click()"
+      >
+        <mat-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
+        <span>{{item.nameTranslate | translate}}</span>
+      </a>
+    </ng-template>
+  </ng-container>
+</ng-template>
