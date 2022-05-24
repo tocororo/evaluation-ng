@@ -8,7 +8,7 @@ import {MenuElement} from "../header.component";
   encapsulation: ViewEncapsulation.None,
 })
 export class MenuComponent implements OnInit {
-  @Input() menu: MenuElement[];
+  @Input() menuItems: MenuElement[];
 
   constructor() { }
 
