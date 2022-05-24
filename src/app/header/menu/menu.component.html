@@ -1,54 +1,42 @@
-<ng-container *ngIf="menuApps; else simpleMenu">
-  <div  fxLayout="row wrap" fxLayoutAlign="space-around flex-end" >
-    <ng-container  *ngFor="let item of menuElements">
-      <a
-        [href]="item.href"
-        [target]="item.target"
-        class="apps mat-caption"
-        matTooltip="{{ item.nameTranslate | translate }}"
-      >
-        <img
-          [src]="item.img.src"
-          [alt]="item.nameTranslate | translate"
-          style="width: 55px; height: 55px"
-        />
-        <span>{{ item.nameTranslate | translate }}</span>
-      </a>
-      <mat-divider *ngIf="item.divider" class="w-90 my-10"></mat-divider>
+<div
+  class="center-elements"
+  appearance="legacy"
+  aria-label="'MENU_INICIO' | translate"
+  fxLayout="row wrap"
+  fxLayoutAlign="center"
+  fxLayoutGap="8px"
+>
+  <ng-container *ngFor="let item of menu">
+    <!-- Handle branch node buttons here -->
+    <ng-container *ngIf="item.childrenMenu && item.childrenMenu.length > 0 && item.hidden !== false">
+      <ng-container *ngIf="item.icon; else noIcon">
+        <button mat-icon-button [matMenuTriggerFor]="menu.childMenu" matTooltip="{{ item.nameTranslate | translate }}">
+          <mat-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
+        </button>
+      </ng-container>
+      <ng-template #noIcon>
+        <button mat-button [matMenuTriggerFor]="menu.childMenu">
+          {{item.nameTranslate | translate }}
+        </button>
+      </ng-template>
+      <app-menu-item #menu [subMenuElements]="item.childrenMenu" [isMenuApps]="item.isMenuApps"></app-menu-item>
     </ng-container>
-  </div>
-</ng-container>
 
-<ng-template #simpleMenu>
-<ng-container  *ngFor="let item of menuElements">
 
-      <a mat-menu-item
-         [routerLink]="item.href"
-         *ngIf="item.useRouterLink; else useHrefMenu"
-         (click)="item?.click()"
-      >
-        <mat-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
-        <span>{{item.nameTranslate | translate}}</span>
-      </a>
-
-    <ng-template #useHrefMenu>
-      <a mat-menu-item
-         [href]="item.href"
-         [target]="item.target"
-         *ngIf="item.href; else useNoHrefMenu"
-         (click)="item?.click()"
-      >
-        <mat-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
-        <span>{{item.nameTranslate | translate}}</span>
-      </a>
-    </ng-template>
-    <ng-template #useNoHrefMenu>
-      <a mat-menu-item
-         (click)="item?.click()"
-      >
-        <mat-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
-        <span>{{item.nameTranslate | translate}}</span>
-      </a>
-    </ng-template>
+    <!-- Leaf node buttons here -->
+    <ng-container *ngIf="(!item.childrenMenu || item.childrenMenu.length === 0 ) && item.hidden !== false">
+      <ng-container *ngIf="item.useRouterLink; else useHrefMenu">
+        <button mat-button [routerLink]="item.href">
+          <mat-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
+          <span>{{ item.nameTranslate | translate }}</span>
+        </button>
+      </ng-container>
+      <ng-template #useHrefMenu>
+          <a mat-button [target]="item.target" [href]="item.href">
+            <mat-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
+            <span>{{item.nameTranslate | translate}}</span>
+          </a>
+      </ng-template>
+    </ng-container>
   </ng-container>
-</ng-template>
+</div>

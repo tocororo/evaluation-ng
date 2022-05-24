@@ -30,10 +30,10 @@ export class HeaderComponent implements OnInit {
    */
   @Input() public menuElements: MenuElement[];
 
-  public menuHelpOptions: MenuElement[];
   public menuLoginOptions: MenuElement[];
   public menuUserOptions: MenuElement[];
   public menuAppsOptions: MenuElement[];
+  public menuOptions: MenuElement[];
 
   @Input() public showMenuLang: boolean;
 
@@ -52,10 +52,6 @@ export class HeaderComponent implements OnInit {
     this.sceibaHost = this._env.sceibaHost;
 
     this.menuElements = ME;
-
-    this.menuHelpOptions = MHO;
-
-    this.menuAppsOptions = MA;
 
     this.menuLoginOptions = [
       {
@@ -115,6 +111,37 @@ export class HeaderComponent implements OnInit {
       },
     ];
 
+    this.menuOptions = [
+      {
+        nameTranslate: "APLICACIONES",
+        icon: "apps",
+        childrenMenu: MA,
+        isMenuApps: true
+      },
+      {
+        nameTranslate: "AYUDA",
+        icon: "help",
+        childrenMenu: MHO
+      },
+      {
+        nameTranslate: "USUARIO",
+        icon: "account_circle",
+        childrenMenu: this.menuLoginOptions,
+        hidden: !!this.name
+      },
+      {
+        nameTranslate: this.name,
+        icon: this.name,
+        childrenMenu: this.menuUserOptions,
+        hidden: !!this.name
+      },
+      {
+        nameTranslate: "AUTENTICARSE",
+        icon: "account_circle",
+        childrenMenu: this.menuLoginOptions
+      },
+    ];
+
     this._transServ.setDefaultLang('es');
     this._transServ.use('es');
     this._transServ.addLangs(this.languageAbbrs);
@@ -157,11 +184,14 @@ interface IMG {
 
 export interface MenuElement {
   nameTranslate: string;
-  href: string;
+  href?: string;
   target?: string;
   useRouterLink?: boolean;
   icon?: string;
   click?: () => void;
   img?: IMG;
   divider?: boolean;
+  hidden?: boolean;
+  isMenuApps?: boolean;
+  childrenMenu?: MenuElement[];
 }
