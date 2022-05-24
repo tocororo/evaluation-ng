@@ -63,6 +63,18 @@
     transform: rotate(-45deg);
 }
 
+.show-menu {
+    display: inline-block;
+}
+
+.hide-menu {
+    display: none;
+}
+
+.show-menu-elements {
+    display: flex;
+}
+
 .center-elements {
     width: auto;
 }

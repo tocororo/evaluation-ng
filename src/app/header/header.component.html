@@ -1,7 +1,9 @@
 <mat-toolbar class="mat-elevation-z8" style="position: relative; z-index: 2">
     <mat-toolbar-row
       fxLayout="row wrap"
+      fxLayout.xs="column"
       fxLayoutAlign="space-between center"
+      fxLayoutAlign.xs="space-between stretch"
       style="height: auto !important; min-height: 80px"
     >
       <div style="width: 330px; display: flex; align-items: center">
@@ -36,7 +38,7 @@
         fxLayoutAlign="center"
         fxLayoutGap="15px"
       >
-        <button
+        <button *ngIf="showMenuLang"
           mat-icon-button
           [matMenuTriggerFor]="menuLanguages"
           matTooltip="{{ 'IDIOMA' | translate }}"
@@ -90,17 +92,19 @@
           matTooltip="{{ 'AUTENTICARSE' | translate }}"
         >
           <mat-icon class="mat-18">account_circle</mat-icon>
-        </button> -->
+        </button>
+        <button mat-icon-button *ngIf="menuElements.length > 0" [matMenuTriggerFor]="menuHeader" [class]="showHideMenuHeader()">
+          <mat-icon>more_vert</mat-icon>
+        </button>
       </div>
-      <div class="menu-full">
+      <div *ngIf="menuElements.length > 0" [class]="showHideMenuHeaderElements()">
         <span style="width: 5%;"></span>
-        <a mat-button class="font-bold" routerLink="/">Inicio</a>
-        <a mat-button class="font-bold" href="https://organizaciones.sceiba.cu" target="_blank">Organizaciones</a>
-        <a mat-button class="font-bold" href="https://personas.sceiba.cu" target="_blank">Personas</a>
-        <a mat-button class="font-bold" href="https://catalogo.sceiba.cu" target="_blank">Catálogo</a>
-        <a mat-button class="font-bold" href="https://revistasmes.sceiba.cu" target="_blank">Revistas MES</a>
-        <a mat-button class="font-bold" href="https://evaluaciones.sceiba.cu" target="_blank">Evaluación</a>
-        <a mat-button class="font-bold" href="https://vocabularios.sceiba.cu/es" target="_blank">Vocabularios</a>
+        <ng-container *ngFor="let item of menuElements">
+          <a mat-button class="font-bold" [routerLink]="item.href" *ngIf="item.useRouterLink; else useHref">{{item.nameTranslate |translate}}</a>
+          <ng-template #useHref>
+            <a mat-button class="font-bold" [href]="item.href" [target]="item.target">{{item.nameTranslate |translate}}</a>
+          </ng-template>
+        </ng-container>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
@@ -115,7 +119,6 @@
       <mat-icon>radio_button_unchecked</mat-icon>
     </ng-template>
   </mat-menu>
-
 
   <mat-menu #menuHelp="matMenu">
     <!-- <a mat-menu-item [routerLink]="['/help/help']">
@@ -258,7 +261,7 @@
         <span>{{'REVISTAS' | translate}}</span>
       </a>
       <a
-        href="https://revistasmes.sceiba.cu"
+        href="https://cursos.sceiba.org"
         target="_blank"
         class="apps mat-caption"
         matTooltip="{{ 'SMOODLE' | translate }}"
@@ -285,3 +288,21 @@
       </a>
     </div>
   </mat-menu>
+<<<<<<< HEAD
+=======
+
+  <mat-menu #menuHeader="matMenu">
+    <ng-container *ngFor="let item of menuElements">
+      <a mat-menu-item [routerLink]="item.href" *ngIf="item.useRouterLink; else useHrefMenu">
+        <!-- <mat-icon>dialpad</mat-icon> -->
+        <span>{{item.nameTranslate |translate}}</span>
+      </a>
+      <ng-template #useHrefMenu>
+        <a mat-menu-item [href]="item.href" [target]="item.target">
+          <!-- <mat-icon>dialpad</mat-icon> -->
+          <span>{{item.nameTranslate |translate}}</span>
+        </a>
+      </ng-template>
+    </ng-container>
+  </mat-menu>
+>>>>>>> 6695ae3e797eaa09128e1349e7585d42459d4472
