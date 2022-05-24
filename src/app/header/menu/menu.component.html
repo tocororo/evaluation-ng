@@ -6,7 +6,7 @@
   fxLayoutAlign="center"
   fxLayoutGap="8px"
 >
-  <ng-container *ngFor="let item of menu">
+  <ng-container *ngFor="let item of menuItems">
     <!-- Handle branch node buttons here -->
     <ng-container *ngIf="item.childrenMenu && item.childrenMenu.length > 0 && item.hidden !== false">
       <ng-container *ngIf="item.icon; else noIcon">

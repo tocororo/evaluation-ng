@@ -46,7 +46,7 @@
           <mat-icon class="mat-18">translate</mat-icon>
         </button>
 
-        <app-menu [menu]="menuOptions" ></app-menu>
+        <app-menu [menuItems]="menuOptions" ></app-menu>
 
         <button mat-icon-button *ngIf="menuElements.length > 0" [matMenuTriggerFor]="menuHeader" [class]="showHideMenuHeader()">
           <mat-icon>more_vert</mat-icon>
@@ -54,7 +54,7 @@
       </div>
       <div *ngIf="menuElements.length > 0" [class]="showHideMenuHeaderElements()">
         <span style="width: 5%;"></span>
-        <app-menu [menu]="menuElements" ></app-menu>
+        <app-menu [menuItems]="menuElements" ></app-menu>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>

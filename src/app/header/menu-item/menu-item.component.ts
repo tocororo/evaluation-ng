@@ -9,7 +9,7 @@ import {MenuElement} from "../header.component";
 export class MenuItemComponent implements OnInit {
   @Input() subMenuElements: MenuElement[];
   @Input() isMenuApps = false;
-  @ViewChild('childMenu', { static: false }) public childMenu;
+  @ViewChild('childMenu', { static: true }) public childMenu;
 
   constructor() { }
 
