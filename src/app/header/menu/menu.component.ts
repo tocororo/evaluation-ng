@@ -1,14 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {MenuElement} from "../header.component";
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MenuComponent implements OnInit {
-  @Input() menuElements: MenuElement;
-  @Input() menuApps: boolean;
+  @Input() menu: MenuElement[];
 
   constructor() { }
 

@@ -30,6 +30,7 @@ import { PageNotFoundEvaluationComponent } from './page-not-found-evaluation/pag
 import { HeaderComponent } from './header/header.component';
 import { MatRadioModule } from '@angular/material';
 import { MenuComponent } from './header/menu/menu.component';
+import { MenuItemComponent } from './header/menu-item/menu-item.component';
 
 
 
@@ -46,7 +47,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		PageNotFoundEvaluationComponent,
 		FooterComponent,
 		HeaderComponent,
-		MenuComponent
+		MenuComponent,
+    MenuItemComponent
 	],
 	imports: [
 		BrowserModule,

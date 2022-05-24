@@ -46,65 +46,15 @@
           <mat-icon class="mat-18">translate</mat-icon>
         </button>
 
-        <!-- <button
-          mat-icon-button
-          [matMenuTriggerFor]="menuNetwork"
-          matTooltip="{{ 'REDES_SOC' | translate }}"
-        >
-          <mat-icon>share</mat-icon>
-        </button> -->
+        <app-menu [menu]="menuOptions" ></app-menu>
 
-        <button
-          mat-icon-button
-          [matMenuTriggerFor]="menuApps"
-          matTooltip="{{ 'APLICACIONES' | translate }}"
-        >
-          <mat-icon>apps</mat-icon>
-        </button>
-
-        <button
-          mat-icon-button
-          [matMenuTriggerFor]="menuHelp"
-          matTooltip="{{ 'AYUDA' | translate }}"
-        >
-          <mat-icon class="mat-18">help</mat-icon>
-        </button>
-
-        <!-- <button
-          mat-icon-button
-          [matMenuTriggerFor]="menuLogin"
-          matTooltip="{{ 'USUARIO' | translate }}"
-        >
-          <mat-icon class="mat-18">account_circle</mat-icon>
-        </button> -->
-
-        <button *ngIf="name"
-          mat-icon-button
-          [matMenuTriggerFor]="menuUser"
-          matTooltip="{{ name }}"
-        >
-          <mat-icon class="mat-18">person_pin</mat-icon>
-        </button>
-
-        <button *ngIf="!name"
-          mat-icon-button
-          [matMenuTriggerFor]="menuLogin"
-          matTooltip="{{ 'AUTENTICARSE' | translate }}"
-        >
-          <mat-icon class="mat-18">account_circle</mat-icon>
-        </button>
         <button mat-icon-button *ngIf="menuElements.length > 0" [matMenuTriggerFor]="menuHeader" [class]="showHideMenuHeader()">
           <mat-icon>more_vert</mat-icon>
         </button>
       </div>
       <div *ngIf="menuElements.length > 0" [class]="showHideMenuHeaderElements()">
         <span style="width: 5%;"></span>
-        <ng-container *ngFor="let item of menuElements">
-          <a mat-button class="font-bold" [routerLink]="item.href" *ngIf="item.useRouterLink; else useHref">{{item.nameTranslate |translate}}</a>
-          <ng-template #useHref>
-            <a mat-button class="font-bold" [href]="item.href" [target]="item.target">{{item.nameTranslate |translate}}</a>
-          </ng-template>
-        </ng-container>
+        <app-menu [menu]="menuElements" ></app-menu>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
@@ -120,40 +70,17 @@
     </ng-template>
   </mat-menu>
 
-  <mat-menu #menuHelp="matMenu">
-    <app-menu [menuElements]="menuHelpOptions" ></app-menu>
-    <!-- <a mat-menu-item [routerLink]="['/help/help']">
-        <mat-icon>help_outline</mat-icon>
-        {{ 'AYUDA' | translate }}
-    </a> -->
-  </mat-menu>
-
-  <mat-menu #menuLogin="matMenu">
-    <app-menu [menuElements]="menuLoginOptions" ></app-menu>
-  </mat-menu>
-
-  <mat-menu #menuUser="matMenu">
-    <app-menu [menuElements]="menuUserOptions" ></app-menu>
-    <!-- <a mat-menu-item [routerLink]="['/disambiguate']" *ngIf="hasPermission">
-      <mat-icon>mode_edit</mat-icon>
-      {{ 'DES_ORGANIZACIONES' | translate }}
-    </a>
-    <a mat-menu-item [routerLink]="['/import']" *ngIf="hasPermissionAdmin">
-      <mat-icon>file_upload</mat-icon>
-      <span class="mymatBadge" matBadge="beta" matBadgeColor="warn" matBadgePosition="after">{{ 'IMPORT' | translate }}</span>
-    </a> -->
-    <!-- <a mat-menu-item href="{{ sceibaHost }}admin/" *ngIf="hasPermissionAdmin">
-      <mat-icon>settings</mat-icon>
-      {{ 'ADMINISTRACION' | translate }}
-    </a> -->
-  </mat-menu>
-
-  <mat-menu #menuApps="matMenu">
-    <div fxLayout="row wrap" fxLayoutAlign="space-around flex-end">
-      <app-menu [menuElements]="menuAppsOptions" [menuApps]="true"></app-menu>
-    </div>
-  </mat-menu>
-
 <mat-menu #menuHeader="matMenu">
-  <app-menu [menuElements]="menuElements" ></app-menu>
+  <ng-container *ngFor="let item of menuElements">
+    <a mat-menu-item [routerLink]="item.href" *ngIf="item.useRouterLink; else useHrefMenu">
+      <!-- <mat-icon>dialpad</mat-icon> -->
+      <span>{{item.nameTranslate |translate}}</span>
+    </a>
+    <ng-template #useHrefMenu>
+      <a mat-menu-item [href]="item.href" [target]="item.target">
+        <!-- <mat-icon>dialpad</mat-icon> -->
+        <span>{{item.nameTranslate |translate}}</span>
+      </a>
+    </ng-template>
+  </ng-container>
 </mat-menu>
