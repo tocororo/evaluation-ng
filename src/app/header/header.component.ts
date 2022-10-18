@@ -82,7 +82,7 @@ export class HeaderComponent implements OnInit {
       {
         nameTranslate : "CAMBIAR_CONTRASEÑA",
         icon: "vpn_key",
-        href: `${ this.sceibaHost }account/settin/gs/password/`,
+        href: `${ this.sceibaHost }account/settings/password/`,
         useRouterLink : false
       },
       {
