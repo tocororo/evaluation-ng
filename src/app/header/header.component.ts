@@ -36,6 +36,8 @@ export class HeaderComponent implements OnInit {
   public menuOptions: MenuElement[];
 
   @Input() public showMenuLang: boolean;
+  @Input() public isAuthenticated: boolean = false;
+  @Input() public authenticated_name: string = '';
 
   public sceibaHost: string;
 
@@ -80,7 +82,7 @@ export class HeaderComponent implements OnInit {
       {
         nameTranslate : "CAMBIAR_CONTRASEÑA",
         icon: "vpn_key",
-        href: `${ this.sceibaHost }account/settings/password/`,
+        href: `${ this.sceibaHost }account/settin/gs/password/`,
         useRouterLink : false
       },
       {
@@ -127,18 +129,19 @@ export class HeaderComponent implements OnInit {
         nameTranslate: "USUARIO",
         icon: "account_circle",
         childrenMenu: this.menuLoginOptions,
-        hidden: !!this.name
+        hidden: !!this.isAuthenticated
       },
       {
-        nameTranslate: this.name,
-        icon: this.name,
+        nameTranslate: this.authenticated_name,
+        icon: 'person_pin',
         childrenMenu: this.menuUserOptions,
-        hidden: !!this.name
+        hidden: !!this.isAuthenticated
       },
       {
         nameTranslate: "AUTENTICARSE",
         icon: "account_circle",
-        childrenMenu: this.menuLoginOptions
+        childrenMenu: this.menuLoginOptions,
+        hidden: false
       },
     ];
 
