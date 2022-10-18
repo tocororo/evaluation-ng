@@ -29,13 +29,23 @@ export class HeaderComponent implements OnInit {
    * Gets a list of input `MenuElement` to build the menu of header
    */
   @Input() public menuElements: MenuElement[];
+  /**
+   * Gets a boolean value of input `showMenuLang` to show a manu
+   */
+  @Input() public showMenuLang: boolean;
+  /**
+   * Gets a value of input `isAuthenticated` to know when user is authenticated
+   */
+  @Input() public isAuthenticated: boolean = false;
+  /**
+   * Gets a value of input `autehnticated_name` to know the name of the authenticated user
+   */
+  @Input() public autehnticated_name: string = '';
 
   public menuLoginOptions: MenuElement[];
   public menuUserOptions: MenuElement[];
   public menuAppsOptions: MenuElement[];
   public menuOptions: MenuElement[];
-
-  @Input() public showMenuLang: boolean;
 
   public sceibaHost: string;
 
@@ -127,18 +137,19 @@ export class HeaderComponent implements OnInit {
         nameTranslate: "USUARIO",
         icon: "account_circle",
         childrenMenu: this.menuLoginOptions,
-        hidden: !!this.name
+        hidden: this.isAuthenticated
       },
       {
-        nameTranslate: this.name,
-        icon: this.name,
+        nameTranslate: this.autehnticated_name,
+        icon: 'person_pin',
         childrenMenu: this.menuUserOptions,
-        hidden: !!this.name
+        hidden: this.isAuthenticated
       },
       {
         nameTranslate: "AUTENTICARSE",
         icon: "account_circle",
-        childrenMenu: this.menuLoginOptions
+        childrenMenu: this.menuLoginOptions,
+        hidden: this.isAuthenticated
       },
     ];
 
