@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { convertLangFromNumberToString } from 'toco-lib';
+import {convertLangFromNumberToString, Environment} from 'toco-lib';
+import {MA, ME, MHO} from "./constants";
 
 @Component({
   selector: 'toco-header',
@@ -10,30 +11,37 @@ import { convertLangFromNumberToString } from 'toco-lib';
 export class HeaderComponent implements OnInit {
 
   /**
-    * Returns the available language texts. 
+    * Returns the available language texts.
     */
   public languageTexts: string[];
   /**
-   * Returns the available language abbreviations. 
+   * Returns the available language abbreviations.
    */
   public languageAbbrs: string[];
   /**
-   * Returns the language currently used as number. 
-   * The Spanish language is: 0. It is the default. 
-   * The English language is: 1. 
+   * Returns the language currently used as number.
+   * The Spanish language is: 0. It is the default.
+   * The English language is: 1.
    */
   public currentLang: number;
 
   /**
    * Gets a list of input `MenuElement` to build the menu of header
    */
-  @Input()
-  public menuElements: MenuElement[];
+  @Input() public menuElements: MenuElement[];
 
-  @Input()
-  public showMenuLang: boolean;
+  public menuLoginOptions: MenuElement[];
+  public menuUserOptions: MenuElement[];
+  public menuAppsOptions: MenuElement[];
+  public menuOptions: MenuElement[];
 
-  constructor(private _transServ: TranslateService) { }
+  @Input() public showMenuLang: boolean;
+
+  public sceibaHost: string;
+
+  public simpleMenu = false;
+
+  constructor(private _env: Environment, private _transServ: TranslateService) { }
 
   ngOnInit() {
     this.languageTexts = ['Español', 'English'];
@@ -41,56 +49,104 @@ export class HeaderComponent implements OnInit {
     this.currentLang = 0;  /* The default language is Spanish; that is, the zero index. */
     this.showMenuLang == undefined ? this.showMenuLang = false : null;
 
-    this.menuElements = [
+    this.sceibaHost = this._env.sceibaHost;
+
+    this.menuElements = ME;
+
+    this.menuLoginOptions = [
       {
-        nameTranslate : "INICIO",
-        href : "/",
-        target :"_blank",
-        useRouterLink : true
+        nameTranslate : "AUTENTICARSE",
+        icon: "lock",
+        href: null,
+        // click: () => this.login
+        click: () => console.log("login===")
       },
       {
-        nameTranslate : "ORGANIZACIONES",
-        href : "https://organizaciones.sceiba.cu",
-        target :"_blank",
-        useRouterLink : false
-      },
-      {
-        nameTranslate : "PERSONAS",
-        href : "https://personas.sceiba.cu",
-        target :"_blank",
-        useRouterLink : false
-      },
-      {
-        nameTranslate : "CATALOGO",
-        href : "https://catalogo.sceiba.cu",
-        target :"_blank",
-        useRouterLink : false
-      },
-      {
-        nameTranslate : "REVISTAS_MES",
-        href : "https://revistasmes.sceiba.cu",
-        target :"_blank",
-        useRouterLink : false
-      },
-      {
-        nameTranslate : "EVALUACION",
-        href : "https://evaluaciones.sceiba.cu",
-        target :"_blank",
-        useRouterLink : false
-      },
-      {
-        nameTranslate : "VOCABULARIO",
-        href : "https://vocabularios.sceiba.cu/es",
-        target :"_blank",
-        useRouterLink : false
+        nameTranslate : "REGISTRARSE",
+        icon: "assignment_ind",
+        href: null,
+        // click: () => this.login
+        click: () => console.log("login===")
       }
     ];
-    
+
+    this.menuUserOptions = [
+      {
+        nameTranslate : "PERFIL_USUARIO",
+        icon: "account_circle",
+        href: `${ this.sceibaHost }account/settings/profile/`,
+        useRouterLink : false
+      },
+      {
+        nameTranslate : "CAMBIAR_CONTRASEÑA",
+        icon: "vpn_key",
+        href: `${ this.sceibaHost }account/settings/password/`,
+        useRouterLink : false
+      },
+      {
+        nameTranslate : "SEGURIDAD",
+        icon: "security",
+        href: `${ this.sceibaHost }account/settings/security/`,
+        useRouterLink : false
+      },
+      {
+        nameTranslate : "APLICACIONES",
+        icon: "settings_applications",
+        href: `${ this.sceibaHost }account/settings/applications/`,
+        useRouterLink : false
+      },
+      {
+        nameTranslate : "SALIR",
+        icon: "exit_to_app",
+        href: null,
+        // click: () => this.logoff
+        click: () => console.log("logoff===")
+      },
+      {
+        nameTranslate : "YO",
+        icon: "exit_to_app",
+        href: null,
+        // click: () => this.me
+        click: () => console.log("me===")
+      },
+    ];
+
+    this.menuOptions = [
+      {
+        nameTranslate: "APLICACIONES",
+        icon: "apps",
+        childrenMenu: MA,
+        isMenuApps: true
+      },
+      {
+        nameTranslate: "AYUDA",
+        icon: "help",
+        childrenMenu: MHO
+      },
+      {
+        nameTranslate: "USUARIO",
+        icon: "account_circle",
+        childrenMenu: this.menuLoginOptions,
+        hidden: !!this.name
+      },
+      {
+        nameTranslate: this.name,
+        icon: this.name,
+        childrenMenu: this.menuUserOptions,
+        hidden: !!this.name
+      },
+      {
+        nameTranslate: "AUTENTICARSE",
+        icon: "account_circle",
+        childrenMenu: this.menuLoginOptions
+      },
+    ];
+
     this._transServ.setDefaultLang('es');
     this._transServ.use('es');
     this._transServ.addLangs(this.languageAbbrs);
   }
-  
+
   /*******************************************************************
    * Check if display is less than 600px to update menu classes
    * @returns String
@@ -104,8 +160,8 @@ export class HeaderComponent implements OnInit {
   }
 
   /**
-     * Sets the current language. 
-     * @param index Zero-based index that indicates the current language. 
+     * Sets the current language.
+     * @param index Zero-based index that indicates the current language.
      */
   public setLanguage(index: number): void {
     if (index != this.currentLang) {
@@ -121,9 +177,21 @@ export class HeaderComponent implements OnInit {
 
 }
 
-export interface MenuElement{
+interface IMG {
+  src: string;
+  style: string;
+}
+
+export interface MenuElement {
   nameTranslate: string;
-  href: string;
-  target: string;
-  useRouterLink: boolean;
+  href?: string;
+  target?: string;
+  useRouterLink?: boolean;
+  icon?: string;
+  click?: () => void;
+  img?: IMG;
+  divider?: boolean;
+  hidden?: boolean;
+  isMenuApps?: boolean;
+  childrenMenu?: MenuElement[];
 }
