@@ -28,6 +28,8 @@ import { AppComponent } from './app.component';
 import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { MenuItemComponent } from './header/menu-item/menu-item.component';
+import { MenuComponent } from './header/menu/menu.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundEvaluationComponent } from './page-not-found-evaluation/page-not-found-evaluation.component';
 
@@ -46,7 +48,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		PageNotFoundEvaluationComponent,
 		FooterComponent,
 		HeaderComponent,
-    ContactComponent
+    ContactComponent,
+		MenuComponent,
+    MenuItemComponent
 	],
 	imports: [
 		BrowserModule,
