@@ -7,37 +7,37 @@ export const ME = [
   },
   {
     nameTranslate : "ORGANIZACIONES",
-    href : "https://organizaciones.sceiba.cu",
+    href : "https://cuba-organizaciones.sceiba.org",
     target :"_blank",
     useRouterLink : false
   },
   {
     nameTranslate : "PERSONAS",
-    href : "https://personas.sceiba.cu",
+    href : "https://cuba-personas.sceiba.org",
     target :"_blank",
     useRouterLink : false
   },
   {
     nameTranslate : "CATALOGO",
-    href : "https://catalogo.sceiba.cu",
+    href : "https://cuba-catalogo.sceiba.org",
     target :"_blank",
     useRouterLink : false
   },
   {
     nameTranslate : "REVISTAS_MES",
-    href : "https://revistasmes.sceiba.cu",
+    href : "https://cuba-revistasmes.sceiba.org",
     target :"_blank",
     useRouterLink : false
   },
   {
     nameTranslate : "EVALUACION",
-    href : "https://evaluaciones.sceiba.cu",
+    href : "https://evaluaciones.sceiba.org",
     target :"_blank",
     useRouterLink : false
   },
   {
     nameTranslate : "VOCABULARIO",
-    href : "https://vocabularios.sceiba.cu/es",
+    href : "https://vocabularios.sceiba.org/es",
     target :"_blank",
     useRouterLink : false
   }
@@ -67,53 +67,68 @@ export const MHO = [
 export const MA = [
   {
     nameTranslate : "SCEIBA",
-    href : "https://sceiba.cu",
+    href : "https://cuba-sceiba.org",
     target: "_blank",
     useRouterLink : false,
-    img: {src: "/assets/images/svg/sceiba.svg", style: ""},
+    img: {src: "/assets/icons/apps/sceiba.svg", style: ""},
     divider: true
   },
   {
     nameTranslate : "BUSQUEDA",
-    href : "https://sceiba.cu/search",
+    href : "https://cuba-sceiba.org/search",
     target: "_blank",
     useRouterLink : false,
-    img: {src: "/assets/images/svg/faro_neg.svg", style: ""}
+    img: {src: "/assets/icons/apps/discover.svg", style: ""}
+  },
+  {
+    nameTranslate : "REVISTAS_MES",
+    href : "https://cuba-revistasmes.sceiba.org",
+    target: "_blank",
+    useRouterLink : false,
+    img: {src: "/assets/icons/apps/revistasmes.png", style: "width: 55px; height: 55px"}
+  },
+  {
+    nameTranslate : "SCEIBA_CATALOGO",
+    href : "https://cuba-catalogo.sceiba.org",
+    target: "_blank",
+    useRouterLink : false,
+    img: {src: "/assets/icons/apps/catalog.svg", style: "width: 55px; height: 55px"},
+    divider: true
   },
   {
     nameTranslate : "ORGANIZACIONES",
-    href : "https://organizaciones.sceiba.cu",
+    href : "https://cuba-organizaciones.sceiba.org",
     target: "_blank",
     useRouterLink : false,
-    img: {src: "/assets/images/svg/organizaciones.svg", style: "width: 60px; height: 60px;"}
+    img: {src: "/assets/icons/apps/organizaciones.svg", style: "width: 60px; height: 60px;"}
+  },
+  {
+    nameTranslate : "PERSONAS",
+    href : "https://cuba-personas.sceiba.org",
+    target: "_blank",
+    useRouterLink : false,
+    img: {src: "/assets/icons/apps/persons.svg", style: "width: 60px; height: 60px;"}
   },
   {
     nameTranslate : "VOCABULARIOS",
     href : "https://vocabularios.sceiba.cu",
     target: "_blank",
     useRouterLink : false,
-    img: {src: "/assets/images/svg/vocabs.svg", style: "width: 55px; height: 55px"},
+    img: {src: "/assets/icons/apps/vocabs.svg", style: "width: 55px; height: 55px"},
     divider: true
-  },
-  {
-    nameTranslate : "REVISTAS_MES",
-    href : "https://revistasmes.sceiba.cu",
-    target: "_blank",
-    useRouterLink : false,
-    img: {src: "/assets/images/svg/catalog.svg", style: "width: 55px; height: 55px"}
   },
   {
     nameTranslate : "SMOODLE",
     href : "https://cursos.sceiba.org",
     target: "_blank",
     useRouterLink : false,
-    img: {src: "/assets/images/svg/cast-for-education.svg", style: "width: 55px; height: 55px"}
+    img: {src: "/assets/icons/apps/scourses.svg", style: "width: 55px; height: 55px"}
   },
   {
     nameTranslate : "EVALUACION",
-    href : "https://evaluaciones.sceiba.cu",
+    href : "https://evaluaciones.sceiba.org",
     target: "_blank",
     useRouterLink : false,
-    img: {src: "/assets/images/svg/evaluations.svg", style: "width: 55px; height: 55px"}
+    img: {src: "/assets/icons/apps/evaluations.svg", style: "width: 55px; height: 55px"}
   },
 ];

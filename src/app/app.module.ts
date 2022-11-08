@@ -31,6 +31,7 @@ import { HeaderComponent } from './header/header.component';
 import { MenuItemComponent } from './header/menu-item/menu-item.component';
 import { MenuComponent } from './header/menu/menu.component';
 import { HomeComponent } from './home/home.component';
+import { SceibaMenuAppsComponent } from './menu-apps/menu-apps.component';
 import { PageNotFoundEvaluationComponent } from './page-not-found-evaluation/page-not-found-evaluation.component';
 
 
@@ -50,7 +51,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		HeaderComponent,
     ContactComponent,
 		MenuComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    SceibaMenuAppsComponent
 	],
 	imports: [
 		BrowserModule,
