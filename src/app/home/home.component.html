@@ -9,9 +9,9 @@
   <!-- <img src="assets/icons/sceiba.top.bottom.2.svg" alt="" style="margin-top: -4px; width: 100%;"> -->
 
   <div class="w-100 p1" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="45px" fxFlexFill>
-    <mat-accordion fxFlex="22" fxFlex.md="33" fxFlex.sm="100" fxFlex.xs="100" [multi]="'true'">
+    <mat-accordion   fxFlex="22" fxFlex.md="33" fxFlex.sm="100" fxFlex.xs="100" [multi]="'true'">
 
-      <mat-expansion-panel>
+      <mat-expansion-panel >
         <mat-expansion-panel-header>
           <mat-panel-title class="button-get-started color-primary">{{ 'EVALUA' | translate }}</mat-panel-title>
         </mat-expansion-panel-header>
@@ -20,16 +20,16 @@
           <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]">
             {{ 'REVISTAS' | translate }}
           </a>
-          <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]">
+          <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]" disabled="true" >
             {{ 'EDITORIALES' | translate }}
           </a>
-          <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]">
+          <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]" disabled="true">
             {{ 'PUBLICACIONES' | translate }}
           </a>
-          <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]">
+          <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]" disabled="true">
             {{ 'PERSONAS' | translate }}
           </a>
-          <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]">
+          <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]" disabled="true">
             {{ 'INSTITUCIONES' | translate }}
           </a>
         </div>
@@ -49,7 +49,7 @@
         </mat-expansion-panel-header>
       </mat-expansion-panel>
 
-      <mat-expansion-panel>
+      <mat-expansion-panel >
         <mat-expansion-panel-header>
           <mat-panel-title class="button-get-started color-primary">{{ 'MIS_EVALUACIONES' | translate }}
           </mat-panel-title>
@@ -57,19 +57,19 @@
       </mat-expansion-panel>
     </mat-accordion>
 
-    <div fxFlex="50" fxFlex.md="60" fxFlex.sm="100" fxFlex.xs="100" fxLayout="column wrap" fx.Layout.xs="column wrap" fxLayoutAlign="start">
-      <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between">
+    <div fxFlex="50" fxFlex.md="60" fxFlex.sm="100" fxFlex.xs="100" fxLayout="column wrap" fx.Layout.xs="column wrap" fxLayoutAlign="start" style="text-align:center; ">
+      <div fxLayout="row wrap" fxLayoutAlign="space-between">
         <span class="mat-h1 slogan">
           {{ 'MONITOREA' | translate }}
-          <p class="mat-caption" style="margin: 0; width: 14em;">{{ 'MONITOREA_TEXTO' | translate }}</p>
+          <p class="mat-caption" style="margin: 0; width: 14em; padding: 4%;">{{ 'MONITOREA_TEXTO' | translate }}</p>
         </span>
         <span class="mat-h1 slogan">
           {{ 'EVALUA1' | translate }}
-          <p class="mat-caption" style="margin: 0; width: 14em;">{{ 'VISIBILIDAD_IMPACTO' | translate }}</p>
+          <p class="mat-caption" style="margin: 0; width: 14em; padding: 4%;">{{ 'VISIBILIDAD_IMPACTO' | translate }}</p>
         </span>
         <span class="mat-h1 slogan">
           {{ 'TRANSFORMA' | translate }}
-          <p class="mat-caption" style="margin: 0; width: 14em;">{{ 'MEJOR_CALIDAD' | translate }}</p>
+          <p class="mat-caption" style="margin: 0; width: 14em; padding: 4%;">{{ 'MEJOR_CALIDAD' | translate }}</p>
         </span>
       </div>
       <div>
