@@ -48,7 +48,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		PageNotFoundEvaluationComponent,
 		FooterComponent,
 		HeaderComponent,
-    ContactComponent,
+        ContactComponent,
 		MenuComponent,
     MenuItemComponent
 	],
@@ -80,7 +80,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		MatFormFieldModule,
 		MatInputModule,
 		MatSnackBarModule,
-    MatExpansionModule,
+        MatExpansionModule,
 		MatRadioModule,
 
 		CoreModule,

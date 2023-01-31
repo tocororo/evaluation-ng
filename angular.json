@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "evaluation-ng"
+  "defaultProject": "evaluation-ng",
+  "cli": {
+    "analytics": "b6ca432c-0c2c-463d-b1d7-55e7192f2f02"
+  }
 }
