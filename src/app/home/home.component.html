@@ -54,6 +54,11 @@
           <mat-panel-title class="button-get-started color-primary">{{ 'MIS_EVALUACIONES' | translate }}
           </mat-panel-title>
         </mat-expansion-panel-header>
+        <div fxLayout="column" fxLayout.xs="column" fxLayoutAlign="space-between left">
+          <a mat-button class="button-get-started color-primary" [routerLink]="['evaluation']">
+            {{ 'LISTA_EVALUACIONES' | translate }}
+          </a>
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
 
