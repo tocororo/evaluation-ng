@@ -1,4 +1,5 @@
 
+
 import { EntityBase, Entity, SelectOption, InputContent, Params } from 'toco-lib';
 
 /**
@@ -172,7 +173,7 @@ export class JournalGeneralData extends EntityBase
     /**
      * Journal name. 
      */
-    name: string;
+     name: string;
     /**
      * Journal URL page. 
      */
@@ -241,10 +242,23 @@ export class ResultAndRecoms extends EntityBase
     resultAndRecoms: ResultAndRecoms;
  }
 
+/**  
+ * This interfax has data  
+ */
+
+ export interface MyEvaluation
+  {
+    name: string;
+    date: string;
+    status: boolean;
+    
+  }
+ 
 /**
  * Entity for `EvaluationAnswer` based on schema `...-v1.0.0.json`. 
  * This class only contains the values that the user can add or modify. 
  */
+  
 export class EvaluationAnswer extends Entity
 {
     /**

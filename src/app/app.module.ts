@@ -33,8 +33,7 @@ import { MenuComponent } from './header/menu/menu.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundEvaluationComponent } from './page-not-found-evaluation/page-not-found-evaluation.component';
 import { MyEvaluationComponent } from './my-evaluation/my-evaluation.component';
-
-
+import {MatTableModule} from '@angular/material/table';
 
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
@@ -84,6 +83,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		MatSnackBarModule,
         MatExpansionModule,
 		MatRadioModule,
+        MatTableModule,
 
 		CoreModule,
 
