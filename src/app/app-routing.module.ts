@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
+import { MyEvaluationComponent } from './my-evaluation/my-evaluation.component';
 import { PageNotFoundEvaluationComponent } from './page-not-found-evaluation/page-not-found-evaluation.component';
 
 const routes: Routes = [
@@ -13,6 +14,10 @@ const routes: Routes = [
 	{
 		path: 'help',
 		loadChildren: () => import('./help/help.module').then(mod => mod.HelpModule)
+	},
+	{
+		path: 'evaluation',
+		component: MyEvaluationComponent,
 	},
 	{
 		path: '',

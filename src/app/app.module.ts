@@ -32,6 +32,7 @@ import { MenuItemComponent } from './header/menu-item/menu-item.component';
 import { MenuComponent } from './header/menu/menu.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundEvaluationComponent } from './page-not-found-evaluation/page-not-found-evaluation.component';
+import { MyEvaluationComponent } from './my-evaluation/my-evaluation.component';
 
 
 
@@ -50,7 +51,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		HeaderComponent,
         ContactComponent,
 		MenuComponent,
-    MenuItemComponent
+        MenuItemComponent,
+        MyEvaluationComponent
 	],
 	imports: [
 		BrowserModule,
