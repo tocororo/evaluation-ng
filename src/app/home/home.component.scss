@@ -1,5 +1,6 @@
 .main-title {
     margin: 0;
+    font-size: x-large;
 }
 
 .text-get-started {
@@ -9,8 +10,8 @@
 }
 
 .button-get-started {
-    height: 2.0em;
-    font-size: 24px;
+    height: 3.0em;
+    font-size: 15px;
     line-height: 46px;
 }
 
@@ -23,6 +24,44 @@
     -moz-background-size: contain;
     -o-background-size: contain;
 }
+
+.mat-radio-group {
+    margin: 35px;
+}
+.mat-radio-button{
+    margin-top: 16px;
+}
+.mat-card{
+   align-self: center;
+   margin: 12px;
+}
+
+
+/*** mat-expansion-panel ***/
+.mat-expansion-panel {
+    box-shadow:none;
+    
+}
+
+
+.mat-radio-group {
+    margin: 35px;
+}
+.mat-radio-button{
+    margin-top: 16px;
+}
+.mat-card{
+   align-self: center;
+   margin: 12px;
+}
+
+
+/*** mat-expansion-panel ***/
+.mat-expansion-panel {
+    box-shadow:none;
+    
+}
+
 
 .a-grey {
     color: #000;
