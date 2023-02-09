@@ -2,31 +2,30 @@
 <div style="padding: 0 16px; flex-flow: row wrap; box-sizing: border-box; display: flex; place-content: center space-between;
 align-items: center; "
 >
-<header >
-  <h2 style="text-align: center;">Mis Evaluaciones</h2>
-  
+<header>
+  <p >Mis Evaluaciones</p> 
 </header>
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 90%; margin: 4%; font-size: 15px;">
+<table mat-table [dataSource]="evaluations" class="mat-elevation-z8" style="width: 90%; margin: 4%; font-size: 15px;">
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef > Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <td mat-cell *matCellDef="let element"> Revista </td>
   </ng-container>
 
   <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef> Fecha </th>
-    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.datetime}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="status">
+  <ng-container matColumnDef="state">
     <th mat-header-cell *matHeaderCellDef> Estatus </th>
-    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.state}} </td>
   </ng-container>
 
 
   <ng-container matColumnDef="view">
     <th mat-header-cell *matHeaderCellDef> </th>
-    <td mat-cell *matCellDef="let element">  <mat-icon>visibility</mat-icon> </td>
+    <td mat-cell *matCellDef="let element"> <mat-icon [routerLink]="['/survey/'+ element.uuid +'/add']" (click)="getEvaluationsById(element.uuid)">visibility</mat-icon> </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

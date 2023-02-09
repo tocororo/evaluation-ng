@@ -107,7 +107,7 @@ export class SurveyComponent implements OnInit
 				 * its name begins with an underscore to remember you that you can change its value ONLY 
 				 * when the application language will be changed. */
 				this._evaluation = data.evaluation.metadata;
-
+				
 				this._initFormData();
 
 				/* The component ends its loading task. It is set here and not in the `complete` property because the `complete` notification is not sent. */
@@ -133,6 +133,11 @@ export class SurveyComponent implements OnInit
 	/**
 	 * Initializes the form data. 
 	 */
+
+    public addSurvey(){
+		this._surveyService.addSurvey().subscribe()
+	}
+
 	private _initFormData(): void
 	{
 		this.evaluationFormGroup = this._formBuilder.group({
@@ -140,6 +145,7 @@ export class SurveyComponent implements OnInit
 
 			'survey': this.evalSurveyFormGroup = this._formBuilder.group({ })
 		});
+		console.log('Estoy en el initFromData')
 	}
 
 	/**
@@ -264,7 +270,7 @@ export class SurveyComponent implements OnInit
 	{
 		if (event.selectedIndex == 2)  /* = 2 means the step of result and recommendations. */
 		{
-			if (this._actionText == ActionText.add)  /* For viewing component, it does NOT need to do this. */
+			if (this._actionText == ActionText.add || this._actionText == `${ActionText.add}/77h`)  /* For viewing component, it does NOT need to do this. */
 			{
 				/* The component begins its updating task. */
 				this.hasTaskInProgress = true;

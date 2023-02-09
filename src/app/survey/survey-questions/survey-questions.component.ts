@@ -49,5 +49,6 @@ export class SurveyQuestionsComponent implements OnInit
 	public ngOnInit(): void
 	{
 		console.log('Data got for SurveyQuestionsComponent: ', this.surveyFormGroup);
+		
 	}
 }

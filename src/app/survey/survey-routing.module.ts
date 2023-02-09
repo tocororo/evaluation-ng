@@ -30,6 +30,12 @@ const surveyRoutes: Routes = [
             {
                 path: ActionText.add,
                 component: SurveyQuestionsComponent
+                
+            },
+            {
+                path: ':uuid/' + ActionText.add,
+                component: SurveyQuestionsComponent
+                
             },
             {
                 path: '',

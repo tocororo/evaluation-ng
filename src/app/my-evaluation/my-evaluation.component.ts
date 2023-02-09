@@ -1,18 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MyEvaluation } from '../survey/evaluation.entity';
 
-let objectDate = new Date();
+import { MyEvaluationService } from '../my-evaluationService.service';
+import { Evaluations } from '../survey/evaluation.entity';
 
-let day = objectDate.getDate();
-let month = objectDate.getMonth();
-let year = objectDate.getFullYear();
-
-let dateformat = day + "/" + month + "/" + year;
+import { ActionText } from 'toco-lib';
 
 
-const ELEMENT_DATA: MyEvaluation[] = [{date: dateformat, name: 'David', status: true},
-                                      {date: dateformat, name: 'Mario', status: false},
-                                      {date: dateformat, name: 'Maria', status: true}];
 
 @Component({
   selector: 'app-my-evaluation',
@@ -23,13 +16,52 @@ const ELEMENT_DATA: MyEvaluation[] = [{date: dateformat, name: 'David', status: 
 
 export class MyEvaluationComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'date', 'status', 'view'];
-  dataSource = ELEMENT_DATA;
+  evaluations!: Evaluations[] 
 
-  constructor() { }
+  displayedColumns: string[] = ['name', 'date', 'state', 'view'];
+  // List evaluations
+  dataSource: any 
+  
+  constructor(
+    private MyEvaluationService: MyEvaluationService) { }
 
   ngOnInit() {
+    this.getEvaluations();
+    
   }
 
+  public changeDate(date : Date){
+
+    let objectDate = new Date(date);
+
+    let day = objectDate.getDate();
+    let month = objectDate.getMonth();
+    let year = objectDate.getFullYear();
+
+    let dateformat = day + "/" + month + "/" + year;
+   
+    return dateformat;
+  }
+
+  private getEvaluations(){
+    this.MyEvaluationService.findAllEvaluations().subscribe(
+      (evaluationData: any) => {
+        this.evaluations = evaluationData.data.evaluations.data.map(item=>({...item, datetime: this.changeDate(item.datetime)}))
+      });
+  } 
+
+  private getEvaluationsById(uuid : number){
+    this.MyEvaluationService.getEvaluationsById(uuid).subscribe(
+      (evaluationData: any )=> {this.evaluations = evaluationData.data 
+      });
+  }
+
+
+
+} 
+
+
   
-}
+
+  
+

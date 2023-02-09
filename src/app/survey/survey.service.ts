@@ -42,6 +42,7 @@ export class SurveyService
     
         }
      this.survey = this._http.post(`${this._env.sceibaApi}${'evaluation/new'}`,json); 
+	 console.log(typeof this.survey)
      return this.survey;
 
     }
@@ -113,12 +114,12 @@ export class SurveyService
             if (currentLang == 'es')
             {
                 res.metadata = this.getSurvey;
-                res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
+                //res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
             }
             else
             {
-                res = cloneValue(this.getSurvey);
-                res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
+                res = this.getSurvey;
+                //res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
             }
 		}
 		else
@@ -131,12 +132,12 @@ export class SurveyService
             if (currentLang == 'es')
             {
                 res = this.getSurvey;
-                res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
+               // res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
             }
             else
             {
-                res = cloneValue(this.getSurvey);
-                res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
+                res = this.getSurvey;
+               //  res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
             }
 		}
 

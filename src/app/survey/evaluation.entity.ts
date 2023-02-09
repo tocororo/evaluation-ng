@@ -292,3 +292,23 @@ export class EvaluationAnswer extends Entity
      */
     resultAndRecoms: ResultAndRecoms;
 }
+
+
+enum State {
+    INITIAL = "initial",
+    PROCESSING = "processing",
+    FINISH = "finish",
+    ERROR = "error",
+  };
+  
+export class Evaluations
+{
+    id: number;
+    uuid: string;
+    state: State
+    datetime: Date;
+    notes: string;
+    user_id: number;
+    data: JSON;
+
+}
