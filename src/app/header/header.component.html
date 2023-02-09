@@ -24,6 +24,11 @@
       <app-menu [menuItems]="menuOptions"></app-menu>
 
 
+
+      <button *ngIf="user" mat-icon-button [matMenuTriggerFor]="menuUser" matTooltip="{{ name }}">
+        <mat-icon class="mat-18">person_pin</mat-icon>
+      </button>
+
       <!-- Autentication -->
       <toco-authentication *ngIf="!user" [oauthInfo]="oauthInfo" [isButtonLogin]="'true'" [isButtonLoginIcon]="'true'"
         [isButtonLoginText]="'AUTENTICARSE' | translate">
@@ -42,6 +47,8 @@
 
   </mat-toolbar-row>
 </mat-toolbar>
+
+
 
 <mat-menu #menuLanguages="matMenu">
   <a *ngFor="let lang of languageTexts; let i = index" mat-menu-item (click)="setLanguage(i)">
@@ -87,43 +94,41 @@
 
 <mat-menu #menuUser="matMenu">
   <!-- <a mat-menu-item [routerLink]="['/disambiguate']" *ngIf="hasPermission">
-      <mat-icon>mode_edit</mat-icon>
-      {{ 'DES_ORGANIZACIONES' | translate }}
-    </a>
-    <a mat-menu-item [routerLink]="['/import']" *ngIf="hasPermissionAdmin">
-      <mat-icon>file_upload</mat-icon>
-      <span class="mymatBadge" matBadge="beta" matBadgeColor="warn" matBadgePosition="after">{{ 'IMPORT' | translate }}</span>
-    </a> -->
+    <mat-icon>mode_edit</mat-icon>
+    {{ 'DES_ORGANIZACIONES' | translate }}
+  </a>
+  <a mat-menu-item [routerLink]="['/import']" *ngIf="hasPermissionAdmin">
+    <mat-icon>file_upload</mat-icon>
+    <span class="mymatBadge" matBadge="beta" matBadgeColor="warn" matBadgePosition="after">{{ 'IMPORT' | translate }}</span>
+  </a> -->
 
-  <!-- <a mat-menu-item href="{{ sceibaHost }}account/settings/profile/">
-      <mat-icon>account_circle</mat-icon>
-      {{ 'PERFIL_USUARIO' | translate }}
-    </a>
-    <a mat-menu-item href="{{ sceibaHost }}account/settings/password/">
-      <mat-icon>vpn_key</mat-icon>
-      {{ 'CAMBIAR_CONTRASEÑA' | translate }}
-    </a>
-    <a mat-menu-item href="{{ sceibaHost }}account/settings/security/">
-      <mat-icon>security</mat-icon>
-      {{ 'SEGURIDAD' | translate }}
-    </a>
-    <a mat-menu-item href="{{ sceibaHost }}account/settings/applications/">
-      <mat-icon>settings_applications</mat-icon>
-      {{ 'APLICACIONES' | translate }}
-    </a>
-    <a mat-menu-item href="{{ sceibaHost }}admin/" *ngIf="hasPermissionAdmin">
-      <mat-icon>settings</mat-icon>
-      {{ 'ADMINISTRACION' | translate }}
-    </a>
-    <a mat-menu-item (click)="logoff()">
-      <mat-icon>exit_to_app</mat-icon>
-      {{ 'SALIR' | translate }}
-    </a>
-    <a mat-menu-item (click)="me()">
-      <mat-icon>exit_to_app</mat-icon>
-      {{ 'YO' | translate }}
-    </a> -->
+  <a mat-menu-item href="{{ sceibaHost }}account/settings/profile/">
+    <mat-icon>account_circle</mat-icon>
+    {{ 'PERFIL_USUARIO' | translate }}
+  </a>
+  <a mat-menu-item href="{{ sceibaHost }}account/settings/password/">
+    <mat-icon>vpn_key</mat-icon>
+    {{ 'CAMBIAR_CONTRASEÑA' | translate }}
+  </a>
+  <a mat-menu-item href="{{ sceibaHost }}account/settings/security/">
+    <mat-icon>security</mat-icon>
+    {{ 'SEGURIDAD' | translate }}
+  </a>
+  <a mat-menu-item href="{{ sceibaHost }}account/settings/applications/">
+    <mat-icon>settings_applications</mat-icon>
+    {{ 'APLICACIONES' | translate }}
+  </a>
+  <!-- <a mat-menu-item href="{{ sceibaHost }}admin/" *ngIf="hasPermissionAdmin">
+    <mat-icon>settings</mat-icon>
+    {{ 'ADMINISTRACION' | translate }}
+  </a> -->
+  <a mat-menu-item (click)="logoff()">
+    <mat-icon>exit_to_app</mat-icon>
+    {{ 'SALIR' | translate }}
+  </a>
+
 </mat-menu>
+
 
 <mat-menu #menuApps="matMenu">
   <div fxLayout="row wrap" fxLayoutAlign="space-around flex-end">

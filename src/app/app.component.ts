@@ -112,6 +112,8 @@ export class AppComponent {
 
 	public get name() {
 		let user = JSON.parse(this.oauthStorage.getItem("user"));
+		console.log(`Userrrrrrr: ${user}`);
+
 		if (!user) return null;
 		return user['email'];
 	}

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { convertLangFromNumberToString, Environment, OauthInfo, User } from 'toco-lib';
 import { MA, ME, MHO } from "./constants";
+import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'toco-header',
@@ -55,7 +56,9 @@ export class HeaderComponent implements OnInit {
 
   public simpleMenu = false;
 
-  constructor(private _env: Environment, private _transServ: TranslateService) { }
+  constructor(private _env: Environment, private oauthStorage: OAuthStorage, private _transServ: TranslateService, private oauthService: OAuthService) {
+
+  }
 
   ngOnInit() {
     this.languageTexts = ['Español', 'English'];
@@ -190,6 +193,12 @@ export class HeaderComponent implements OnInit {
       this._transServ.use(currentLangAsString);
       // this._recaptchaDynamicLanguageLoaderServ.updateLanguage(currentLangAsString);
     }
+  }
+
+  public logoff() {
+    this.oauthService.logOut();
+    this.oauthStorage.removeItem("user");
+    this.user = undefined;
   }
 
 }
