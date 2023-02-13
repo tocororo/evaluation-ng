@@ -3,7 +3,7 @@
 
 <toco-progress [loading]="hasTaskInProgress"></toco-progress>
 
-<form [formGroup]="evaluationFormGroup">
+<form [formGroup]="evaluationFormGroup" (submit)="goToSurvey()">
 
     <mat-horizontal-stepper [linear]="'true'" #stepper style="margin-top: 0.6em;" (selectionChange)="onSelectedStepHasChanged($event)">
         <mat-step [stepControl]="evalJournalDataFormGroup">
@@ -31,29 +31,31 @@
 
         <mat-step [stepControl]="evalSurveyFormGroup">
             <ng-template matStepLabel>{{ 'ENCUESTA' | translate }}</ng-template>
-            <router-outlet (activate)="onChildLoaded($event)"></router-outlet>
-            <div
-                fxLayout="row wrap"
-                fxLayout.xs="row"
-                fxLayoutAlign="end center"
-                style="margin-top: 1.5em;"
-            >
-                <button mat-raised-button style="color: white;" color="primary" type="button"
-                    [matTooltip]="'IR_A_DATOS_REVISTA' | translate"
-                    (click)="goToJournalData()"
-                >
-                    {{ 'ANTERIOR' | translate }}
-                    <mat-icon>navigate_before</mat-icon>
-                </button>
-                <button mat-raised-button style="color: white; margin-left: 1.5em;" color="primary" type="button"
-                    [matTooltip]="'IR_A_RESULTADO_Y_RECOMENDACIONES' | translate"
-                    (click)="goToResultAndRecoms()"
-                    [disabled]="evalSurveyFormGroup.invalid"
-                >
-                    {{ 'SIGUIENTE' | translate }}
-                    <mat-icon>navigate_next</mat-icon>
-                </button>
-            </div>
+            <ng-container *ngIf="_evaluation.sections">
+              <router-outlet (activate)="onChildLoaded($event)"></router-outlet>
+              <div
+                  fxLayout="row wrap"
+                  fxLayout.xs="row"
+                  fxLayoutAlign="end center"
+                  style="margin-top: 1.5em;"
+              >
+                  <button mat-raised-button style="color: white;" color="primary" type="button"
+                      [matTooltip]="'IR_A_DATOS_REVISTA' | translate"
+                      (click)="goToJournalData()"
+                  >
+                      {{ 'ANTERIOR' | translate }}
+                      <mat-icon>navigate_before</mat-icon>
+                  </button>
+                  <button mat-raised-button style="color: white; margin-left: 1.5em;" color="primary" type="button"
+                      [matTooltip]="'IR_A_RESULTADO_Y_RECOMENDACIONES' | translate"
+                      (click)="goToResultAndRecoms()"
+                      [disabled]="evalSurveyFormGroup.invalid"
+                  >
+                      {{ 'SIGUIENTE' | translate }}
+                      <mat-icon>navigate_next</mat-icon>
+                  </button>
+              </div>
+          </ng-container>
         </mat-step>
 
         <mat-step>

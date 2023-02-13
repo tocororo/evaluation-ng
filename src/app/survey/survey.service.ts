@@ -34,18 +34,7 @@ export class SurveyService
     
     survey: any = [];
 
-    addSurvey(){
-        const json = {
-            name:'Ernesto',
-            url:'https://www.hlal.com',
-            issn: '0317-8471',
-    
-        }
-     this.survey = this._http.post(`${this._env.sceibaApi}${'evaluation/new'}`,json); 
-	 console.log(typeof this.survey)
-     return this.survey;
-
-    }
+	
 
 
     getSurvey(){
@@ -67,7 +56,7 @@ export class SurveyService
 	 * @return An `Observable` of the `HTTPResponse`, with a response body in the `Hit<Evaluation>` type. 
 	 */
     
-	public getEvaluationById(id: string, evaluationWasDone: boolean, currentLang: string): Observable<Hit<Evaluation>>
+	public getEvaluationById(evaluation: any, id: string, evaluationWasDone: boolean, currentLang: string): Observable<Hit<Evaluation>>
 	{
 //// Backend data //////////////////////////
 		// // TODO: Test and fix any issue when connecting to the backend. 
@@ -104,47 +93,52 @@ export class SurveyService
 
 
 //// Mock data /////////////////////////////
-        let res: any;
+        const mockData = evaluation ? {} : {
+         // 'metadata': {
+             'id': '',
+             'user': '',
+             'date': new Date(),
+               'journalData': {
+                  'name': 'asdas',
+                  'url': 'https://www.sda',
+                  'issn': '0317 – 8471'
+                 },
+				 'sections': undefined,
+				'resultAndRecoms': undefined 
+             /* The `resultAndRecoms` field is set when the data is gotten. */
+          // }
+         };
 
-		if (id)
-		{
+
+     let data:{} = mockData.journalData;
+
+        let res: any;
 			/* In the case of remaining views (viewing and editing views), this occurs when the `id` argument is NOT `undefined`, 
 			it needs to get an object set to the stored data. */
 
             if (currentLang == 'es')
             {
-                res.metadata = this.getSurvey;
+                res = {'metadata': id ? true : mockData};
                 //res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
             }
             else
             {
-                res = this.getSurvey;
+                res = {'metadata': id ? true : mockData };
                 //res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
             }
-		}
-		else
-		{
-			/* In the case of adding view, this occurs when the `id` argument is `undefined`, 
-			it needs to get an object with all its values set to `undefined`, and 
-            the `resultAndRecoms` field set to `undefined`. 
-			This is a great optimization that you can implement in the backend. */
-
-            if (currentLang == 'es')
-            {
-                res = this.getSurvey;
-               // res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
-            }
-            else
-            {
-                res = this.getSurvey;
-               //  res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
-            }
-		}
 
         return of(res);
+	}	
 ////////////////////////////////////////////
-	}
+		
 
+	addSurvey(data): any{
+		
+     this.survey = this._http.post(`${this._env.sceibaApi}${'evaluation/new'}`, data); 
+	 console.log(typeof this.survey)
+     return this.survey;
+
+    }
 	/**
 	 * Constructs a `PUT` request that interprets the body as a JSON object and returns 
 	 * an observable of the response. 
