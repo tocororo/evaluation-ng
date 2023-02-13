@@ -18,12 +18,11 @@ import { SurveyQuestionsComponent } from '../survey-questions/survey-questions.c
 	templateUrl: './survey.component.html',
 	styleUrls: ['./survey.component.scss']
 })
-export class SurveyComponent implements OnInit
-{
+export class SurveyComponent implements OnInit {
 	/**
 	 * It is like a readonly field, and it is only used to initialize the form; for that reason,
 	 * its name begins with an underscore to remember you that you can NOT change its value after
-     * it is initialized.
+	 * it is initialized.
 	 * Returns the action through a text.
 	 */
 	public _actionText: ActionText;
@@ -50,7 +49,7 @@ export class SurveyComponent implements OnInit
 	/**
 	 * It is like a readonly field, and it is only used to initialize the form; for that reason,
 	 * its name begins with an underscore to remember you that you can NOT change its value after
-     * it is initialized.
+	 * it is initialized.
 	 */
 	public _evaluation: Evaluation;
 
@@ -59,8 +58,7 @@ export class SurveyComponent implements OnInit
 		private _transServ: TranslateService,
 		private _surveyService: SurveyService,
 		private _dialog: MatDialog,
-		private _snackBar: MatSnackBar)
-	{
+		private _snackBar: MatSnackBar) {
 		this._actionText = undefined;
 		this.title = '';
 
@@ -73,13 +71,11 @@ export class SurveyComponent implements OnInit
 		this._evaluation = undefined;
 	}
 
-	public ngOnInit(): void
-	{
+	public ngOnInit(): void {
 		/* The string `ActionText.add` is the value of the last route sub-path that is specified in the `*-routing.module.ts` file. */
 		this._actionText = this._activatedRoute.snapshot.children[0].url[(this._activatedRoute.snapshot.children[0].url.length - 1)].path as ActionText;
 
-		switch (this._actionText)
-		{
+		switch (this._actionText) {
 			case ActionText.view:
 				{
 					this.title = 'TITULO_VISTA_DETALLES';
@@ -94,7 +90,7 @@ export class SurveyComponent implements OnInit
 
 			default:
 				{
-					throw new Error(`For the '${ SurveyComponent.name }' control, the URL written has an error because the programme does not know what to do with it!`);
+					throw new Error(`For the '${SurveyComponent.name}' control, the URL written has an error because the programme does not know what to do with it!`);
 				}
 		}
 
@@ -133,20 +129,18 @@ export class SurveyComponent implements OnInit
 	/**
 	 * Initializes the form data.
 	 */
-	private _initFormData(): void
-	{
+	private _initFormData(): void {
 		this.evaluationFormGroup = this._formBuilder.group({
-			'journalData': this.evalJournalDataFormGroup = this._formBuilder.group({ }),
+			'journalData': this.evalJournalDataFormGroup = this._formBuilder.group({}),
 
-			'survey': this.evalSurveyFormGroup = this._formBuilder.group({ })
+			'survey': this.evalSurveyFormGroup = this._formBuilder.group({})
 		});
 	}
 
 	/**
 	 * Sets the new language.
 	 */
-	private _setNewLanguage(evaluation?): void
-	{
+	private _setNewLanguage(evaluation?): void {
 		this._surveyService.getEvaluationById(
 			((this._evaluation) ? (this._evaluation.id) : undefined),
 			((this._evaluation) ? (this._evaluation.resultAndRecoms != undefined) : false),
@@ -163,22 +157,17 @@ export class SurveyComponent implements OnInit
 		// console.log('New data got by SurveyComponent because the language changed: ', this._evaluation);
 	}
 
-	public onChildLoaded(component: SurveyQuestionsComponent): void
-	{
-		if (this._actionText != undefined)
-		{
+	public onChildLoaded(component: SurveyQuestionsComponent): void {
+		if (this._actionText != undefined) {
 			component._actionText = this._actionText;
 			component._survey = this._evaluation.sections;
 			component.surveyFormGroup = this.evalSurveyFormGroup;
 		}
 	}
 
-	public onSelectedStepHasChanged(event: StepperSelectionEvent): void
-	{
-		if (event.selectedIndex == 2)  /* = 2 means the step of result and recommendations. */
-		{
-			if (this._actionText == ActionText.add || this._actionText == `${ActionText.add}/77h`)  /* For viewing component, it does NOT need to do this. */
-			{
+	public onSelectedStepHasChanged(event: StepperSelectionEvent): void {
+		if (event.selectedIndex == 2)  /* = 2 means the step of result and recommendations. */ {
+			if (this._actionText == ActionText.add || this._actionText == `${ActionText.add}/77h`)  /* For viewing component, it does NOT need to do this. */ {
 				/* The component begins its updating task. */
 				this.hasTaskInProgress = true;
 
@@ -206,13 +195,13 @@ export class SurveyComponent implements OnInit
 		}
 	}
 
-	public goToSurvey(): void
-	{
+	public goToSurvey(): void {
 		this._surveyService.addSurvey(this.evaluationFormGroup.value.journalData).
-		subscribe(res => {
-			console.log(this.evaluationFormGroup.value.survey)
-			this._evaluation = res.data.evaluation
-		})
+			subscribe(res => {
+				console.log(this.evaluationFormGroup.value.survey)
+				this._evaluation = res.data.evaluation.data
+				this._surveyService.survey = res.data.evaluation
+			})
 
 		/* Selects and focuses the next step in list. */
 		this._matHorizontalStepper.next();
@@ -220,27 +209,23 @@ export class SurveyComponent implements OnInit
 
 	}
 
-	public goToSurveyBack(): void
-	{
+	public goToSurveyBack(): void {
 		/* Selects and focuses the previous step in list. */
 		this._matHorizontalStepper.previous();
 	}
 
-	public goToJournalData(): void
-	{
-    this._evaluation.sections = undefined
+	public goToJournalData(): void {
+		this._evaluation.sections = undefined
 		/* Selects and focuses the previous step in list. */
 		this._matHorizontalStepper.previous();
 	}
 
-	public goToResultAndRecoms(): void
-	{
+	public goToResultAndRecoms(): void {
 		/* Selects and focuses the next step in list. */
 		this._matHorizontalStepper.next();
 	}
 
-	public save(): void
-	{
+	public save(): void {
 		/* The component begins its updating task. */
 		this.hasTaskInProgress = true;
 
