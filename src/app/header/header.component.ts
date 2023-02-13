@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import {convertLangFromNumberToString, Environment} from 'toco-lib';
-import {MA, ME, MHO} from "./constants";
+import { convertLangFromNumberToString, Environment, OauthInfo, User } from 'toco-lib';
+import { MA, ME, MHO } from "./constants";
+import { OAuthService, OAuthStorage } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'toco-header',
@@ -24,6 +25,10 @@ export class HeaderComponent implements OnInit {
    * The English language is: 1.
    */
   public currentLang: number;
+
+  @Input() public oauthInfo: OauthInfo
+
+  @Input() public user: User;
 
   /**
    * Gets a list of input `MenuElement` to build the menu of header
@@ -51,7 +56,9 @@ export class HeaderComponent implements OnInit {
 
   public simpleMenu = false;
 
-  constructor(private _env: Environment, private _transServ: TranslateService) { }
+  constructor(private _env: Environment, private oauthStorage: OAuthStorage, private _transServ: TranslateService, private oauthService: OAuthService) {
+
+  }
 
   ngOnInit() {
     this.languageTexts = ['Español', 'English'];
@@ -65,14 +72,14 @@ export class HeaderComponent implements OnInit {
 
     this.menuLoginOptions = [
       {
-        nameTranslate : "AUTENTICARSE",
+        nameTranslate: "AUTENTICARSE",
         icon: "lock",
         href: null,
         // click: () => this.login
         click: () => console.log("login===")
       },
       {
-        nameTranslate : "REGISTRARSE",
+        nameTranslate: "REGISTRARSE",
         icon: "assignment_ind",
         href: null,
         // click: () => this.login
@@ -82,38 +89,38 @@ export class HeaderComponent implements OnInit {
 
     this.menuUserOptions = [
       {
-        nameTranslate : "PERFIL_USUARIO",
+        nameTranslate: "PERFIL_USUARIO",
         icon: "account_circle",
-        href: `${ this.sceibaHost }account/settings/profile/`,
-        useRouterLink : false
+        href: `${this.sceibaHost}account/settings/profile/`,
+        useRouterLink: false
       },
       {
-        nameTranslate : "CAMBIAR_CONTRASEÑA",
+        nameTranslate: "CAMBIAR_CONTRASEÑA",
         icon: "vpn_key",
-        href: `${ this.sceibaHost }account/settings/password/`,
-        useRouterLink : false
+        href: `${this.sceibaHost}account/settings/password/`,
+        useRouterLink: false
       },
       {
-        nameTranslate : "SEGURIDAD",
+        nameTranslate: "SEGURIDAD",
         icon: "security",
-        href: `${ this.sceibaHost }account/settings/security/`,
-        useRouterLink : false
+        href: `${this.sceibaHost}account/settings/security/`,
+        useRouterLink: false
       },
       {
-        nameTranslate : "APLICACIONES",
+        nameTranslate: "APLICACIONES",
         icon: "settings_applications",
-        href: `${ this.sceibaHost }account/settings/applications/`,
-        useRouterLink : false
+        href: `${this.sceibaHost}account/settings/applications/`,
+        useRouterLink: false
       },
       {
-        nameTranslate : "SALIR",
+        nameTranslate: "SALIR",
         icon: "exit_to_app",
         href: null,
         // click: () => this.logoff
         click: () => console.log("logoff===")
       },
       {
-        nameTranslate : "YO",
+        nameTranslate: "YO",
         icon: "exit_to_app",
         href: null,
         // click: () => this.me
@@ -158,6 +165,8 @@ export class HeaderComponent implements OnInit {
     this._transServ.addLangs(this.languageAbbrs);
   }
 
+
+
   /*******************************************************************
    * Check if display is less than 600px to update menu classes
    * @returns String
@@ -184,6 +193,12 @@ export class HeaderComponent implements OnInit {
       this._transServ.use(currentLangAsString);
       // this._recaptchaDynamicLanguageLoaderServ.updateLanguage(currentLangAsString);
     }
+  }
+
+  public logoff() {
+    this.oauthService.logOut();
+    this.oauthStorage.removeItem("user");
+    this.user = undefined;
   }
 
 }

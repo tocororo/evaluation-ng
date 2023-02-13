@@ -19,10 +19,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { MarkdownModule } from 'ngx-markdown';
-import { environment } from 'src/environments/environment';
-import { CoreModule, Environment } from 'toco-lib';
+import { environment, allowedURLS } from 'src/environments/environment';
+
+import {
+	AngularMaterialModule, AuthenticationModule, CoreModule, Environment, OrganizationServiceNoAuth, SearchModule,
+	SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule
+} from 'toco-lib';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContactComponent } from './contact/contact.component';
@@ -33,12 +38,17 @@ import { MenuComponent } from './header/menu/menu.component';
 import { HomeComponent } from './home/home.component';
 import { SceibaMenuAppsComponent } from './menu-apps/menu-apps.component';
 import { PageNotFoundEvaluationComponent } from './page-not-found-evaluation/page-not-found-evaluation.component';
+// import {
+// 	AngularMaterialModule,OrganizationServiceNoAuth, SearchModule,
+// 	SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule
+//   } from 'toco-lib';
 import { MyEvaluationComponent } from './my-evaluation/my-evaluation.component';
 import {MatTableModule} from '@angular/material/table';
+export function storageFactory(): OAuthStorage {
+	return sessionStorage
+}
 
-
-export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
-{
+export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
@@ -49,22 +59,22 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		PageNotFoundEvaluationComponent,
 		FooterComponent,
 		HeaderComponent,
-        ContactComponent,
+    		ContactComponent,
 		MenuComponent,
-        MenuItemComponent,
+    		MenuItemComponent,
         MyEvaluationComponent,
-    SceibaMenuAppsComponent
+		SceibaMenuAppsComponent
 	],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
 		HttpClientModule,
 		TranslateModule.forRoot({
-		  loader: {
-			  provide: TranslateLoader,
-			  useFactory: (createTranslateLoader),
-			  deps: [HttpClient]
-		  }
+			loader: {
+				provide: TranslateLoader,
+				useFactory: (createTranslateLoader),
+				deps: [HttpClient]
+			}
 		}),
 		ReactiveFormsModule,
 		FlexLayoutModule,
@@ -83,18 +93,28 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader
 		MatFormFieldModule,
 		MatInputModule,
 		MatSnackBarModule,
-        MatExpansionModule,
+    		MatExpansionModule,
 		MatRadioModule,
         MatTableModule,
 
+		AngularMaterialModule,
 		CoreModule,
+		StaticsModule,
+		TocoFormsModule,
+		AuthenticationModule,
 
-		AppRoutingModule
+		AppRoutingModule,
+		OAuthModule.forRoot({
+			resourceServer: {
+				allowedUrls: allowedURLS,
+				sendAccessToken: true
+			}
+		}),
 	],
 	providers: [
-		{ provide: Environment, useValue: environment }
+		{ provide: Environment, useValue: environment },
+		{ provide: OAuthStorage, useFactory: storageFactory },
 	],
 	bootstrap: [AppComponent]
 })
-export class AppModule
-{ }
+export class AppModule { }
