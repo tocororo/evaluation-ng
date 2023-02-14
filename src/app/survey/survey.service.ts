@@ -59,11 +59,11 @@ export class SurveyService {
         it needs to get an object set to the stored data. */
 
         if (currentLang == 'es') {
-            res = { 'metadata': id ? true : metadata };
+            res = id ?  metadata : metadata;
             //res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
         }
         else {
-            res = { 'metadata': id ? true : metadata };
+            res = id ?  metadata : metadata;
             //res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
         }
 
@@ -85,13 +85,14 @@ export class SurveyService {
      * The English language is: 'en'.
      * @return An `Observable` of the `HTTPResponse`, with a response body in the `Hit<Evaluation>` type.
      */
+
     public doEvaluation(evaluation: EvaluationAnswer, currentLang: string): Observable<any> {
         const _evaluation = { ...this.survey }
         _evaluation.data.sections = evaluation.survey;
 
-        console.log('****************', _evaluation);
+        let metadata: any = {}
 
-        this.processSurvey(_evaluation).subscribe((res) => console.log(res));
+        this.processSurvey(_evaluation).subscribe((res) => metadata = res.data);
 
 
         //// Backend data //////////////////////////
@@ -108,22 +109,22 @@ export class SurveyService {
         return ((currentLang == 'es')
             ? of({
                 'metadata': {
-                    'id': '876acbf2-5a67-4b5c-92ca-040761d54595',
-                    'user': evaluation.user,
-                    'date': evaluation.date,
-                    'journalData': evaluation.journalData,
-                    'sections': evaluation.survey,
-                    'resultAndRecoms': cloneValue(this.getSurvey)
+                    'id': metadata.uuid,
+                    'user': metadata.user,
+                    'date': metadata.date,
+                    'journalData': metadata.journalData,
+                    'sections': metadata.sections,
+                    'resultAndRecoms': metadata.resultAndRecoms
                 }
             })
             : of({
                 'metadata': {
-                    'id': '876acbf2-5a67-4b5c-92ca-040761d54595',
-                    'user': evaluation.user,
-                    'date': evaluation.date,
-                    'journalData': evaluation.journalData,
-                    'sections': evaluation.survey,
-                    'resultAndRecoms': cloneValue(this.getSurvey)
+                    'id': metadata.uuid,
+                    'user': metadata.user,
+                    'date': metadata.date,
+                    'journalData': metadata.journalData,
+                    'sections': metadata.sections,
+                    'resultAndRecoms': metadata.resultAndRecoms
                 }
             })
         );
