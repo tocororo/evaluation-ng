@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { cloneValue, Environment, Hit } from 'toco-lib';
 
@@ -31,6 +32,7 @@ export class SurveyService {
     public constructor(private _env: Environment, private _router: Router, private _http: HttpClient) { }
 
     survey: any = []
+    evaluationProcessed: any = {}
 
 
     /**
@@ -90,45 +92,9 @@ export class SurveyService {
         const _evaluation = { ...this.survey }
         _evaluation.data.sections = evaluation.survey;
 
-        let metadata: any = {}
-
-        this.processSurvey(_evaluation).subscribe((res) => metadata = res.data);
-
-
-        //// Backend data //////////////////////////
-        // // TODO: Poner correctamente el campo `this._env.sceibaApi` o crear un `this._env.evaluationApi`.
-        // const url: string = this._env.sceibaApi + this._prefix + '/do';
-
-        // this._httpOptions['params'] = { 'currentLang': currentLang };
-        // return this._http.put<Hit<EvaluationAnswer>>(url, JSON.stringify(evaluation), this._httpOptions);
-        ////////////////////////////////////////////
-
-
-        //// Mock data /////////////////////////////
-        // console.error('doEvaluation: There is not backend yet!', evaluation);
-        return ((currentLang == 'es')
-            ? of({
-                'metadata': {
-                    'id': metadata.uuid,
-                    'user': metadata.user,
-                    'date': metadata.date,
-                    'journalData': metadata.journalData,
-                    'sections': metadata.sections,
-                    'resultAndRecoms': metadata.resultAndRecoms
-                }
-            })
-            : of({
-                'metadata': {
-                    'id': metadata.uuid,
-                    'user': metadata.user,
-                    'date': metadata.date,
-                    'journalData': metadata.journalData,
-                    'sections': metadata.sections,
-                    'resultAndRecoms': metadata.resultAndRecoms
-                }
-            })
-        );
-        ////////////////////////////////////////////
+        return this.processSurvey(_evaluation).pipe(map((res:any) =>
+            ({metadata: res.data.evaluation.data})
+            ));
     }
 
     public editEvaluation(evaluation: EvaluationAnswer): Observable<any> {
