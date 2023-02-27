@@ -1,0 +1,32 @@
+<div>
+    <h2>Revista : {{ evaluationData.data.journalData.name }}</h2>
+    <h3>Descripcion : {{ evaluationData.data.description }}</h3>
+    <p>ISSN : {{ evaluationData.data.journalData.issn}}</p>
+
+
+    <p>Ver Revista :
+        <a target="_blank" href="{{ evaluationData.data.journalData.url }}">
+            {{ evaluationData.data.journalData.url }}
+        </a>
+    </p>
+
+    <h2>{{ evaluationData.data.resultAndRecoms.generalEvaluationName }}</h2>
+
+    <!-- TODO: Eliminar los for anidados definiedo varaiable en el archivo .ts para cada una de las listas que vamos a recorrer -->
+    <ul *ngFor="let section of evaluationData.data.sections;">
+        <li>
+            <p>Seccion: {{section.title}}</p>
+            <ul *ngFor="let category of section.categories">
+                <li>
+                    <p>Categoria: {{ category.title }}</p>
+                    <ul *ngFor="let questionOrRecom of category.questionsOrRecoms">
+                        <li>
+                            <span>{{questionOrRecom.desc}}: {{ questionOrRecom.answer }}</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
