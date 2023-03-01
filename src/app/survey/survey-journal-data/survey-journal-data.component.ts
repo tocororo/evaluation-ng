@@ -70,6 +70,7 @@ export class SurveyJournalDataComponent implements OnInit
 		this._initFormData();
 
 		console.log('Data got for SurveyJournalDataComponent: ', this.journalDataFormGroup);
+	    
 	}
 
 	/**
@@ -129,5 +130,9 @@ export class SurveyJournalDataComponent implements OnInit
 		this.journalDataFormGroup.addControl(this.journalData_ChildControlsPath.issn as string,
 			this.issnContent.formControl
 		);
+
+		
+
+
 	}
 }

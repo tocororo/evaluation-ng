@@ -1,356 +1,325 @@
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import {
+  MatDialog,
+  MatHorizontalStepper,
+  MatSnackBar,
+} from "@angular/material";
+import { StepperSelectionEvent } from "@angular/cdk/stepper";
+import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, MatHorizontalStepper, MatSnackBar } from '@angular/material';
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import {
+  ActionText,
+  Hit,
+  MessageHandler,
+  StatusCode,
+  HandlerComponent,
+} from "toco-lib";
 
-import { ActionText, Hit, MessageHandler, StatusCode, HandlerComponent } from 'toco-lib';
+import {
+  Evaluation,
+  EvaluationAnswer,
+  Evaluations,
+} from "../evaluation.entity";
 
-import { CategoryQuestion, CategoryQuestionType, CategoryRecom, Evaluation, EvaluationAnswer, ResultAndRecoms, SectionCategory, SurveySection } from '../evaluation.entity';
-
-import { SurveyService } from '../survey.service';
-import { SurveyQuestionsComponent } from '../survey-questions/survey-questions.component';
+import { SurveyService } from "../survey.service";
+import { SurveyQuestionsComponent } from "../survey-questions/survey-questions.component";
 
 @Component({
-	selector: 'app-survey',
-	templateUrl: './survey.component.html',
-	styleUrls: ['./survey.component.scss']
+  selector: "app-survey",
+  templateUrl: "./survey.component.html",
+  styleUrls: ["./survey.component.scss"],
 })
-export class SurveyComponent implements OnInit
-{
-	/**
-	 * It is like a readonly field, and it is only used to initialize the form; for that reason, 
-	 * its name begins with an underscore to remember you that you can NOT change its value after 
-     * it is initialized. 
-	 * Returns the action through a text. 
-	 */
-	public _actionText: ActionText;
+export class SurveyComponent implements OnInit {
+  /**
+   * It is like a readonly field, and it is only used to initialize the form; for that reason,
+   * its name begins with an underscore to remember you that you can NOT change its value after
+   * it is initialized.
+   * Returns the action through a text.
+   */
+  public _actionText: ActionText;
 
-	/**
-	 * Returns the title. 
-	 */
-	public title: string;
+  /**
+   * Returns the title.
+   */
+  public title: string;
 
-	/**
-	 * Returns true if the component has a task in progress; otherwise, false. 
-	 * Example of task is: loading, updating, etc. 
-	 * By default, its value is `true` because it represents the loading task. 
-	 */
-	public hasTaskInProgress: boolean;
- 
-	public evaluationFormGroup: FormGroup;
-	public evalJournalDataFormGroup: FormGroup;
-	public evalSurveyFormGroup: FormGroup;
+  /**
+   * Returns true if the component has a task in progress; otherwise, false.
+   * Example of task is: loading, updating, etc.
+   * By default, its value is `true` because it represents the loading task.
+   */
+  public hasTaskInProgress: boolean;
 
-	@ViewChild('stepper', { static: true })
-	private _matHorizontalStepper: MatHorizontalStepper;
+  public evaluationFormGroup: FormGroup;
+  public evalJournalDataFormGroup: FormGroup;
+  public evalSurveyFormGroup: FormGroup;
 
-	/**
-	 * It is like a readonly field, and it is only used to initialize the form; for that reason, 
-	 * its name begins with an underscore to remember you that you can NOT change its value after 
-     * it is initialized. 
-	 */
-	public _evaluation: Evaluation;
+  public fullEvaluation: Evaluations = undefined;
 
-	public constructor(private _activatedRoute: ActivatedRoute,
-		private _formBuilder: FormBuilder,
-		private _transServ: TranslateService,
-		private _surveyService: SurveyService,
-		private _dialog: MatDialog,
-		private _snackBar: MatSnackBar)
-	{
-		this._actionText = undefined;
-		this.title = '';
+  @ViewChild("stepper", { static: true })
+  private _matHorizontalStepper: MatHorizontalStepper;
 
-		/* The component begins its loading task. */
-		this.hasTaskInProgress = true;
+  /**
+   * It is like a readonly field, and it is only used to initialize the form; for that reason,
+   * its name begins with an underscore to remember you that you can NOT change its value after
+   * it is initialized.
+   */
+  public _evaluation: Evaluation;
+  public _evaluationUUID: string;
 
-		this.evaluationFormGroup = undefined;
-		this.evalJournalDataFormGroup = undefined;
-		this.evalSurveyFormGroup = undefined;
-		this._evaluation = undefined;
-	}
+  public constructor(
+    private _activatedRoute: ActivatedRoute,
+    private _formBuilder: FormBuilder,
+    private _transServ: TranslateService,
+    private _surveyService: SurveyService,
+    private _dialog: MatDialog,
+    private _snackBar: MatSnackBar,
+    private router: Router
+  ) {
+    this._actionText = undefined;
+    this.title = "";
 
-	public ngOnInit(): void
-	{
-		/* The string `ActionText.add` is the value of the last route sub-path that is specified in the `*-routing.module.ts` file. */
-		this._actionText = this._activatedRoute.snapshot.children[0].url[(this._activatedRoute.snapshot.children[0].url.length - 1)].path as ActionText;
+    /* The component begins its loading task. */
+    this.hasTaskInProgress = true;
 
-		switch (this._actionText)
-		{
-			case ActionText.view:
-				{
-					this.title = 'TITULO_VISTA_DETALLES';
-					break;
-				}
+    this.evaluationFormGroup = undefined;
+    this.evalJournalDataFormGroup = undefined;
+    this.evalSurveyFormGroup = undefined;
+    this._evaluation = undefined;
+  }
 
-			case ActionText.add:
-				{
-					this.title = 'TITULO_VISTA_ADICIONAR';
-					break;
-				}
+  public ngOnInit(): void {
+    console.log("Loading Stepper !!!!!!!!!!!!!");
 
-			default:
-				{
-					throw new Error(`For the '${ SurveyComponent.name }' control, the URL written has an error because the programme does not know what to do with it!`);
-				}
-		}
+    /* The string `ActionText.add` is the value of the last route sub-path that is specified in the `*-routing.module.ts` file. */
+    this._actionText = this._activatedRoute.snapshot.children[0].url[
+      this._activatedRoute.snapshot.children[0].url.length - 1
+    ].path as ActionText;
 
-		this._activatedRoute.data.subscribe({
-			next: (data: { 'evaluation': Hit<Evaluation> }) => {
-				/* It is necessary to work with a copy because the `_evaluation` field has some internal fields 
-				 * that will be changed when the application language will be changed. 
-				 * The previous scene is the only case that will change the `_evaluation` field; so in the rest of the case, 
-				 * it is like a readonly field, and it is only used to initialize the form. For that reason, 
-				 * its name begins with an underscore to remember you that you can change its value ONLY 
-				 * when the application language will be changed. */
-				this._evaluation = data.evaluation.metadata;
+    switch (this._actionText) {
+      case ActionText.view: {
+        this.title = "TITULO_VISTA_DETALLES";
+        break;
+      }
 
-				this._initFormData();
+      case ActionText.add: {
+        this.title = "TITULO_VISTA_ADICIONAR";
+        break;
+      }
 
-				/* The component ends its loading task. It is set here and not in the `complete` property because the `complete` notification is not sent. */
-				this.hasTaskInProgress = false;
-			},
-			error: (err: any) => {
-				/* The component ends its loading task. */
-				this.hasTaskInProgress = false;
+      default: {
+        throw new Error(
+          `For the '${SurveyComponent.name}' control, the URL written has an error because the programme does not know what to do with it!`
+        );
+      }
+    }
 
-				const m = new MessageHandler(this._snackBar);
-				m.showMessage(StatusCode.OK, err.message)
-			}
-		});
+    this._activatedRoute.data.subscribe({
+      next: ({ evaluation: { data } }: any) => {
+        /* It is necessary to work with a copy because the `_evaluation` field has some internal fields
+         * that will be changed when the application language will be changed.
+         * The previous scene is the only case that will change the `_evaluation` field; so in the rest of the case,
+         * it is like a readonly field, and it is only used to initialize the form. For that reason,
+         * its name begins with an underscore to remember you that you can change its value ONLY
+         * when the application language will be changed. */
 
-		/* Changes the translation when the language changes. */
-		this._transServ.onLangChange.subscribe((params: LangChangeEvent) => {
-			this._setNewLanguage();
-		});
+        this._evaluation = data.evaluation.data;
+        this._evaluationUUID = data.evaluation.uuid;
 
-		console.log('Data got for SurveyComponent: ', this._evaluation, this.evaluationFormGroup);
-	}
+        this._initFormData();
 
-	/**
-	 * Initializes the form data. 
-	 */
-	private _initFormData(): void
-	{
-		this.evaluationFormGroup = this._formBuilder.group({
-			'journalData': this.evalJournalDataFormGroup = this._formBuilder.group({ }),
+        /* The component ends its loading task. It is set here and not in the `complete` property because the `complete` notification is not sent. */
+        this.hasTaskInProgress = false;
+      },
+      error: (err: any) => {
+        /* The component ends its luuidading task. */
+        this.hasTaskInProgress = false;
 
-			'survey': this.evalSurveyFormGroup = this._formBuilder.group({ })
-		});
-	}
+        const m = new MessageHandler(this._snackBar);
+        m.showMessage(StatusCode.OK, err.message);
+      },
+    });
 
-	/**
-	 * Sets the new language. 
-	 */
-	private _setNewLanguage(): void
-	{
-		this._surveyService.getEvaluationById(
-			((this._evaluation) ? (this._evaluation.id) : undefined),
-			((this._evaluation) ? (this._evaluation.resultAndRecoms != undefined) : false),
-			this._transServ.currentLang
-		).subscribe({
-			next: (data: Hit<Evaluation>) => {
+    /* Changes the translation when the language changes. */
+    this._transServ.onLangChange.subscribe((params: LangChangeEvent) => {
+      this._setNewLanguage();
+    });
 
-				let i: number, j: number, k: number, l: number;
+    console.log(
+      "Data got for SurveyComponent: ",
+      this._evaluation,
+      this.evaluationFormGroup
+    );
+  }
 
-				let old_sections: Array<SurveySection>;
-				let new_sections: Array<SurveySection>;
+  /**
+   * Initializes the form data.
+   */
+  private _initFormData(): void {
+    this.evaluationFormGroup = this._formBuilder.group({
+      journalData: (this.evalJournalDataFormGroup = this._formBuilder.group(
+        {}
+      )),
 
-				let old_categories: Array<SectionCategory>;
-				let new_categories: Array<SectionCategory>;
+      survey: (this.evalSurveyFormGroup = this._formBuilder.group({})),
+    });
+  }
 
-				let old_questions: Array<CategoryQuestion>;
-				let new_questions: Array<CategoryQuestion>;
+  /**
+   * Sets the new language.
+   */
+  private _setNewLanguage(evaluation?): void {
+    this._surveyService.getOneEvaluationById(this._evaluationUUID).subscribe({
+      next: ({ data }: Evaluations) => {
+        this._evaluation = data.evaluation.data;
+        this._evaluationUUID = data.evaluation.uuid;
+      },
+      error: (err: any) => {
+        const m = new MessageHandler(this._snackBar);
+        m.showMessage(StatusCode.OK, err.message);
+      },
+    });
+    // console.log('New data got by SurveyComponent because the language changed: ', this._evaluation);
+  }
 
-				/* Gets translations for sections. */
+  public onChildLoaded(component: SurveyQuestionsComponent): void {
+    if (this._actionText != undefined) {
+      component._actionText = this._actionText;
+      component._survey = this._evaluation.sections;
+      component.surveyFormGroup = this.evalSurveyFormGroup;
+    }
+  }
 
-				old_sections = this._evaluation.sections;
-				new_sections = data.metadata.sections;
+  public onSelectedStepHasChanged(event: StepperSelectionEvent): void {
+    if (event.selectedIndex == 1) {
+      this.hasTaskInProgress = true;
+      this._surveyService
+        .addSurvey({
+          ...this.evaluationFormGroup.value.journalData,
+          uuid: this._evaluationUUID,
+        })
+        .subscribe({
+          next: ({ data }: Evaluations) => {
+            this._evaluation = data.evaluation.data;
+            this.hasTaskInProgress = false;
+          },
+          error: (err: any) => {
+            const m = new MessageHandler(this._snackBar);
+            m.showMessage(StatusCode.OK, err.message);
+            this.hasTaskInProgress = false;
+          },
+        });
+    }
 
-				for (i = 0; i < old_sections.length; ++i)
-				{
-					old_sections[i].title = new_sections[i].title;
+    if (event.selectedIndex == 2) {
+      /* = 2 means the step of result and recommendations. */ if (
+        this._actionText == ActionText.add ||
+        this._actionText == `${ActionText.add}/77h`
+      ) {
+        /* For viewing component, it does NOT need to do this. */ /* The component begins its updating task. */
+        this.hasTaskInProgress = true;
 
-					old_categories = old_sections[i].categories;
-					new_categories = new_sections[i].categories;
+        // console.log('Do Evaluation: ', this.evaluationFormGroup.valid, this.evaluationFormGroup);
 
-					for (j = 0; j < old_categories.length; ++j)
-					{
-						old_categories[j].title = new_categories[j].title;
+        this._surveyService
+          .doEvaluation(
+            this.evaluationFormGroup.value,
+            this._evaluationUUID,
+            this._transServ.currentLang
+          )
+          .subscribe({
+            next: (result: Evaluations) => {
+              // console.log('Do Evaluation result: ', result);
 
-						old_questions = old_categories[j].questionsOrRecoms as Array<CategoryQuestion>;
-						new_questions = new_categories[j].questionsOrRecoms as Array<CategoryQuestion>;
+              /* Copies the result to show in the third part "Result and Recommendations". */
+              this._evaluation.resultAndRecoms = result.data.resultAndRecoms;
 
-						for (k = 0; k < old_questions.length; ++k)
-						{
-							old_questions[k].desc = new_questions[k].desc;
-							old_questions[k].hint = new_questions[k].hint;
+              /* The component ends its loading task. It is set here and not in the `complete` property because the `complete` notification is not sent. */
+              this.hasTaskInProgress = false;
+            },
+            error: (err: any) => {
+              /* The component ends its updating task. */
+              this.hasTaskInProgress = false;
 
-							if (old_questions[k].type == CategoryQuestionType.select)
-							{
-								for (l = 0; l < old_questions[k].selectOptions.length; ++l)
-								{
-									old_questions[k].selectOptions[l].label = new_questions[k].selectOptions[l].label;
-								}
-							}
-						}
-					}
-				}
+              const m = new MessageHandler(this._snackBar);
+              m.showMessage(StatusCode.OK, err.message);
+            },
+          });
+      }
+    }
+  }
 
-				console.log('this._evaluation.resultAndRecoms: ', this._evaluation.resultAndRecoms);
+  public goToSurvey(): void {
+    /* Selects and focuses the next step in list. */
+    this._matHorizontalStepper.next();
+  }
 
-				/* Gets translations for result and recommendations. */
+  public goToSurveyBack(): void {
+    /* Selects and focuses the previous step in list. */
+    this._matHorizontalStepper.previous();
+  }
 
-				if (this._evaluation.resultAndRecoms != undefined)  /* Very important to do this verification. */
-				{
-					let old_resultAndRecoms: ResultAndRecoms = this._evaluation.resultAndRecoms;
-					let new_resultAndRecoms: ResultAndRecoms = data.metadata.resultAndRecoms;
+  public goToJournalData(): void {
+    this._evaluation.sections = undefined;
+    /* Selects and focuses the previous step in list. */
+    this._matHorizontalStepper.previous();
+  }
 
-					let old_recoms: Array<CategoryRecom>;
-					let new_recoms: Array<CategoryRecom>;
+  public goToResultAndRecoms(): void {
+    /* Selects and focuses the next step in list. */
+    this._matHorizontalStepper.next();
+  }
 
-					old_resultAndRecoms.generalEvaluationName = new_resultAndRecoms.generalEvaluationName;
-					old_resultAndRecoms.generalEvaluationValue = new_resultAndRecoms.generalEvaluationValue;
+  public save(): void {
+    /* The component begins its updating task. */
+    this.hasTaskInProgress = true;
 
-					old_sections = old_resultAndRecoms.sections;
-					new_sections = new_resultAndRecoms.sections;
+    console.log(
+      "Save Evaluation: ",
+      this.evaluationFormGroup.valid,
+      this.evaluationFormGroup
+    );
 
-					for (i = 0; i < old_sections.length; ++i)
-					{
-						old_sections[i].title = new_sections[i].title;
-						old_sections[i].titleEvaluationValue = new_sections[i].titleEvaluationValue;
+    this._surveyService.saveEvaluation(this._evaluationUUID).subscribe({
+      next: (result: Hit<EvaluationAnswer>) => {
+        console.log("Save Evaluation result: ", result);
+      },
+      error: (err: any) => {
+        /* The component ends its updating task. */
+        this.hasTaskInProgress = false;
 
-						old_categories = old_sections[i].categories;
-						new_categories = new_sections[i].categories;
+        const m = new MessageHandler(this._snackBar);
+        m.showMessage(StatusCode.OK, err.message);
+      },
+      complete: () => {
+        /* The component ends its updating task. */
+        this.hasTaskInProgress = false;
 
-						for (j = 0; j < old_categories.length; ++j)
-						{
-							old_categories[j].title = new_categories[j].title;
-							old_categories[j].titleEvaluationValue = new_categories[j].titleEvaluationValue;
+        let message: string = "";
+        this._transServ.get("EVAL_REV_GUARDADA").subscribe((res: string) => {
+          message = res;
+        });
+        let title: string = "";
+        this._transServ.get("OPERACION_EXITOSA").subscribe((res: string) => {
+          title = res;
+        });
 
-							old_recoms = old_categories[j].questionsOrRecoms as Array<CategoryRecom>;
-							new_recoms = new_categories[j].questionsOrRecoms as Array<CategoryRecom>;
+        // const m = new MessageHandler(null, this._dialog);
+        // m.showMessage(
+        //   StatusCode.OK,
+        //   message,
+        //   HandlerComponent.dialog,
+        //   title,
+        //   "50%"
+        // );
 
-							for (k = 0; k < old_recoms.length; ++k)
-							{
-								old_recoms[k].value = new_recoms[k].value;
-							}
-						}
-					}
-				}
-			},
-			error: (err: any) => {
-				const m = new MessageHandler(this._snackBar);
-				m.showMessage(StatusCode.OK, err.message)
-			}
-		});
-		console.log('New data got by SurveyComponent because the language changed: ', this._evaluation);
-	}
+        const m = new MessageHandler(this._snackBar);
+        m.showMessage(StatusCode.OK, message, HandlerComponent.snackBar, title);
 
-	public onChildLoaded(component: SurveyQuestionsComponent): void
-	{
-		if (this._actionText != undefined)
-		{
-			component._actionText = this._actionText;
-			component._survey = this._evaluation.sections;
-			component.surveyFormGroup = this.evalSurveyFormGroup;
-		}
-	}
-
-	public onSelectedStepHasChanged(event: StepperSelectionEvent): void
-	{
-		if (event.selectedIndex == 2)  /* = 2 means the step of result and recommendations. */
-		{
-			if (this._actionText == ActionText.add)  /* For viewing component, it does NOT need to do this. */
-			{
-				/* The component begins its updating task. */
-				this.hasTaskInProgress = true;
-	
-				console.log('Do Evaluation: ', this.evaluationFormGroup.valid, this.evaluationFormGroup);
-	
-				this._surveyService.doEvaluation(this.evaluationFormGroup.value, this._transServ.currentLang).subscribe({
-					next: (result: Hit<EvaluationAnswer>) => {
-						console.log('Do Evaluation result: ', result);
-	
-						/* Copies the result to show in the third part "Result and Recommendations". */
-						this._evaluation.resultAndRecoms = result.metadata.resultAndRecoms;
-	
-						/* The component ends its loading task. It is set here and not in the `complete` property because the `complete` notification is not sent. */
-						this.hasTaskInProgress = false;
-					},
-					error: (err: any) => {
-						/* The component ends its updating task. */
-						this.hasTaskInProgress = false;
-	
-						const m = new MessageHandler(this._snackBar);
-						m.showMessage(StatusCode.OK, err.message)
-					}
-				});
-			}
-		}
-	}
-
-	public goToSurvey(): void
-	{
-		/* Selects and focuses the next step in list. */
-		this._matHorizontalStepper.next();
-	}
-
-	public goToSurveyBack(): void
-	{
-		/* Selects and focuses the previous step in list. */
-		this._matHorizontalStepper.previous();
-	}
-
-	public goToJournalData(): void
-	{
-		/* Selects and focuses the previous step in list. */
-		this._matHorizontalStepper.previous();
-	}
-
-	public goToResultAndRecoms(): void
-	{
-		/* Selects and focuses the next step in list. */
-		this._matHorizontalStepper.next();
-	}
-
-	public save(): void
-	{
-		/* The component begins its updating task. */
-		this.hasTaskInProgress = true;
-
-		console.log('Save Evaluation: ', this.evaluationFormGroup.valid, this.evaluationFormGroup);
-
-		this._surveyService.editEvaluation(this.evaluationFormGroup.value).subscribe({
-			next: (result: Hit<EvaluationAnswer>) => {
-				console.log('Save Evaluation result: ', result);
-			},
-			error: (err: any) => {
-				/* The component ends its updating task. */
-				this.hasTaskInProgress = false;
-
-				const m = new MessageHandler(this._snackBar);
-				m.showMessage(StatusCode.OK, err.message)
-			},
-			complete: () => {
-				/* The component ends its updating task. */
-				this.hasTaskInProgress = false;
-
-				let message: string = '';
-				this._transServ.get('EVAL_REV_GUARDADA').subscribe((res: string) => {
-					message = res;
-				});
-				let title: string = '';
-				this._transServ.get('OPERACION_EXITOSA').subscribe((res: string) => {
-					title = res;
-				});
-
-				const m = new MessageHandler(null, this._dialog);
-				m.showMessage(StatusCode.OK, message, HandlerComponent.dialog, title, '50%');
-			}
-		});
-	}
+        this.router.navigate(["evaluation", this._evaluationUUID, "view"]);
+      },
+    });
+  }
 }

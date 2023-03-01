@@ -1,35 +1,75 @@
-import { Component, OnInit } from '@angular/core';
-import { MyEvaluation } from '../survey/evaluation.entity';
+import { Component, OnInit, ViewChild } from "@angular/core";
 
-let objectDate = new Date();
+import { EvaluationService } from "../evaluationService.service";
+import { Evaluations } from "../survey/evaluation.entity";
 
-let day = objectDate.getDate();
-let month = objectDate.getMonth();
-let year = objectDate.getFullYear();
-
-let dateformat = day + "/" + month + "/" + year;
-
-
-const ELEMENT_DATA: MyEvaluation[] = [{date: dateformat, name: 'David', status: true},
-                                      {date: dateformat, name: 'Mario', status: false},
-                                      {date: dateformat, name: 'Maria', status: true}];
+import { ActionText } from "toco-lib";
+import { Router } from "@angular/router";
+import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
 
 @Component({
-  selector: 'app-my-evaluation',
-  templateUrl: './my-evaluation.component.html',
-  styleUrls: ['./my-evaluation.component.scss']
+  selector: "app-my-evaluation",
+  templateUrl: "./my-evaluation.component.html",
+  styleUrls: ["./my-evaluation.component.scss"],
 })
-
-
 export class MyEvaluationComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'date', 'status', 'view'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ["name", "type", "methodology", "date", "state", "options"];
+  // List evaluations
+  dataSource: MatTableDataSource<Evaluations[]>;
 
-  constructor() { }
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  ngOnInit() {
+  constructor(
+    private evaluationService: EvaluationService,
+    private router: Router
+  ) {
+
   }
 
-  
+  ngOnInit() {
+    this.getEvaluations();
+  }
+
+  public changeDate(date: Date) {
+    let objectDate = new Date(date);
+
+    const day = objectDate.getDate();
+    const month = objectDate.getMonth();
+    const year = objectDate.getFullYear();
+
+    const dateformat = day + "/" + month + "/" + year;
+
+    return dateformat;
+  }
+
+  public getEvaluations() {
+    this.evaluationService
+      .findAllEvaluations()
+      .subscribe(({data}: any) => {
+        this.dataSource = new MatTableDataSource(data.evaluations.map((item) => ({
+          ...item,
+          datetime: this.changeDate(item.datetime),
+        })));
+      });
+  }
+
+  public cloneEvaluation(uuid: string) {
+    this.evaluationService
+      .cloneEvaluation(uuid)
+      .subscribe(({ data: { evaluation } }: Evaluations) => {
+        console.log("data===", evaluation);
+
+        this.router.navigate(["/survey/" + evaluation.uuid + "/add"]);
+      });
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 }

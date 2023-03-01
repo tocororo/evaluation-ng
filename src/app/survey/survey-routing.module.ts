@@ -24,12 +24,13 @@ const surveyRoutes: Routes = [
         },
 		children: [
             {
-                path: ':uuid/' + ActionText.view,
+                path: ActionText.view,
                 component: SurveyViewComponent
             },
             {
                 path: ActionText.add,
                 component: SurveyQuestionsComponent
+                
             },
             {
                 path: '',

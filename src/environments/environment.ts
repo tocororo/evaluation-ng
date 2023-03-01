@@ -15,10 +15,10 @@ import { Environment } from "toco-lib";
 
 export class EnvironmentImpl implements Environment {
   production = false;
-  sceibaHost = 'https://cuba-iroko.sceiba.org/';
-  cuorHost = 'https://cuba-iroko.sceiba.org/';
-  sceibaApi = 'https://cuba-iroko.sceiba.org/api/';
-  cuorApi = 'https://cuba-iroko.sceiba.org/api/';
+  sceibaHost = 'https://10.2.83.228:5000/';
+  cuorHost = 'https://10.2.83.228:5000/';
+  sceibaApi = 'https://10.2.83.228:5000/api/';
+  cuorApi = 'https://10.2.83.228:5000/api/';
 
   appHost = 'https://localhost:4200';
   appName = 'Sceiba';
@@ -27,7 +27,7 @@ export class EnvironmentImpl implements Environment {
   websiteUsername_Facebook = '@sceiba';
 
   oauthRedirectUri = 'https://localhost:4200/';
-  oauthClientId = 'uLYRoa4mN5870eBby4bElHkrzpDUPFlWTios9njy';
+  oauthClientId = 'DBDJOwtCoAxSfKEtjuMcUilXTusd6wfi7nt9fBK6';
   oauthScope = 'user:email';
   topOrganizationPID = '';
   cachableUrls = [];
@@ -35,9 +35,8 @@ export class EnvironmentImpl implements Environment {
   matomoUrl = 'https://crai-stats.upr.edu.cu/';
   matomoSiteId = 7;
 
-
   sceiba = 'https://cuba.sceiba.org';
-  discover = '/search';
+  discover = 'https://cuba.sceiba.org/search';
   catalog = 'https://cuba-catalogo.sceiba.org/';
   revistasmes = 'https://cuba-revistasmes.sceiba.org/';
   organizations = 'https://cuba-organizaciones.sceiba.org/';
@@ -48,7 +47,7 @@ export class EnvironmentImpl implements Environment {
 
   oauthInfo = {
     serverHost: this.sceibaHost,
-    loginUrl: this.sceibaHost + 'oauth/internal/authorize',
+    loginUrl: this.sceibaHost + 'oauth/authorize',
     tokenEndpoint: this.sceibaHost + 'oauth/token',
     userInfoEndpoint: this.sceibaApi + 'me',
     appHost: this.appHost,
@@ -57,7 +56,6 @@ export class EnvironmentImpl implements Environment {
     oauthClientId: this.oauthClientId,
     oauthScope: this.oauthScope,
   }
-
 }
 
 export const environment = new EnvironmentImpl();

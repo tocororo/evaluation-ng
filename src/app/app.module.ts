@@ -44,6 +44,8 @@ import { PageNotFoundEvaluationComponent } from './page-not-found-evaluation/pag
 //   } from 'toco-lib';
 import { MyEvaluationComponent } from './my-evaluation/my-evaluation.component';
 import {MatTableModule} from '@angular/material/table';
+import { EvaluationViewComponent } from './evaluation-view/evaluation-view.component';
+import { CategoryTableComponent } from './evaluation-view/category-table/category-table.component';
 export function storageFactory(): OAuthStorage {
 	return sessionStorage
 }
@@ -63,7 +65,9 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 		MenuComponent,
     		MenuItemComponent,
         MyEvaluationComponent,
-		SceibaMenuAppsComponent
+		SceibaMenuAppsComponent,
+		EvaluationViewComponent,
+		CategoryTableComponent,
 	],
 	imports: [
 		BrowserModule,
