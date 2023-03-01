@@ -17,7 +17,8 @@
         </mat-expansion-panel-header>
 
         <div fxLayout="column" fxLayout.xs="column" fxLayoutAlign="space-between left">
-          <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]">
+          <a mat-button class="button-get-started color-primary"
+          (click)="createEvaluation()">
             {{ 'REVISTAS' | translate }}
           </a>
           <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]" disabled="true" >
@@ -55,7 +56,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div fxLayout="column" fxLayout.xs="column" fxLayoutAlign="space-between left">
-          <a mat-button class="button-get-started color-primary" [routerLink]="['evaluation']">
+          <a mat-button class="button-get-started color-primary" [routerLink]="['evaluations']">
             {{ 'LISTA_EVALUACIONES' | translate }}
           </a>
         </div>
@@ -93,14 +94,14 @@
               style="width: 70px; height: 70px;"/>
               <mat-radio-button value="1" checked>{{ 'PUBLICACION' | translate }}</mat-radio-button>
             </div>
-          </mat-card> 
+          </mat-card>
           <mat-card>
             <div fxLayout="column" fxLayoutAlign="center center" style="width: min-content; ">
               <img  src="/assets/images/svg/person.svg" [alt]="'EVALUACION' | translate"
                 style="width: 70px; height: 70px;"/>
               <mat-radio-button value="2">{{ 'PERSON' | translate }}</mat-radio-button>
             </div>
-          </mat-card>  
+          </mat-card>
         </mat-radio-group>
         <p>{{ 'QUE_METODOLOGIA' | translate }}</p>
         <mat-radio-group aria-label="Select an option">

@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
-import { SelectContent, InputBoolComponent, InputNumberComponent, InputSelectComponent, 
+import { SelectContent, InputBoolComponent, InputNumberComponent, InputSelectComponent,
 	TextInputAppearance, ValidatorArguments } from 'toco-lib';
 
 import { CategoryQuestionType, SurveySection, CategoryQuestion } from '../../evaluation.entity';
@@ -16,23 +16,24 @@ import { CategoryQuestionType, SurveySection, CategoryQuestion } from '../../eva
 export class ViewerCardComponent implements OnInit
 {
     /**
-     * Represents the `CategoryQuestionType` enum for internal use. 
+     * Represents the `CategoryQuestionType` enum for internal use.
      */
 	public readonly categoryQuestionType: typeof CategoryQuestionType;
 
 	public whereToLookForIt: string;
 
 	/**
-	 * Returns the `FormGroup` parent. 
+	 * Returns the `FormGroup` parent.
 	 */
 	@Input()
 	public parentFormGroup: FormGroup;
 	/**
-	 * Returns the `SurveySection`. 
-	 * It is used to create controls. 
+	 * Returns the `SurveySection`.
+	 * It is used to create controls.
 	 */
 	@Input()
 	public surveySection: SurveySection;
+  public step: number;
 
 	public constructor(private _transServ: TranslateService)
 	{
@@ -57,7 +58,7 @@ export class ViewerCardComponent implements OnInit
 	}
 
 	/**
-	 * Initializes the form data. 
+	 * Initializes the form data.
 	 */
 	private _initFormData(): void
 	{
@@ -142,7 +143,7 @@ export class ViewerCardComponent implements OnInit
 	}
 
 	/**
-	 * Does the translation. 
+	 * Does the translation.
 	 */
 	private _doTranslation(): void
 	{
@@ -150,4 +151,16 @@ export class ViewerCardComponent implements OnInit
 			this.whereToLookForIt = res;
 		});
 	}
+
+  public setStep(index: number) {
+    this.step = index;
+  }
+
+  public nextStep() {
+    this.step++;
+  }
+
+  public prevStep() {
+    this.step--;
+  }
 }

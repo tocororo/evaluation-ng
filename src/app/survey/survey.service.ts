@@ -9,7 +9,9 @@ import { cloneValue, Environment, Hit } from "toco-lib";
 import {
   CategoryQuestionType,
   Evaluation,
+  Evaluations,
   EvaluationAnswer,
+  JournalGeneralData,
 } from "./evaluation.entity";
 import { evaluationEmpty_English, evaluationEmpty_Spanish } from "./constants";
 
@@ -36,46 +38,8 @@ export class SurveyService {
     private _http: HttpClient
   ) {}
 
-  survey: any = [];
+  evaluation: any = [];
   evaluationProcessed: any = {};
-
-  /**
-   * Constructs a `GET` request that interprets the body as a JSON object and returns
-   * the response body in the `Hit<Evaluation>` type.
-   * @param id Evaluation id.
-   * In the case of adding view, this `id` argument is `undefined` (maybe only in the first use of this method).
-   * In the case of remaining views (viewing and editing views), this `id` argument is NOT `undefined`.
-   * @param evaluationWasDone True if the evaluation was done for the inserted data; otherwise, false.
-   * @param currentLang Language currently used as string.
-   * The Spanish language is: 'es'.
-   * The English language is: 'en'.
-   * @return An `Observable` of the `HTTPResponse`, with a response body in the `Hit<Evaluation>` type.
-   */
-
-  public getEvaluationById(
-    id: string,
-    evaluationWasDone: boolean,
-    currentLang: string
-  ): Observable<Hit<Evaluation>> {
-    //// Mock data /////////////////////////////
-    const emptyMetadata =
-      currentLang == "es" ? evaluationEmpty_Spanish : evaluationEmpty_English;
-    const metadata = emptyMetadata;
-
-    let res: any;
-    /* In the case of remaining views (viewing and editing views), this occurs when the `id` argument is NOT `undefined`,
-        it needs to get an object set to the stored data. */
-
-    if (currentLang == "es") {
-      res = id ? metadata : metadata;
-      //res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
-    } else {
-      res = id ? metadata : metadata;
-      //res.metadata.resultAndRecoms = ((evaluationWasDone) ? cloneValue(this.getSurvey) : undefined);
-    }
-
-    return of(res);
-  }
   ////////////////////////////////////////////
 
   /**
@@ -94,14 +58,12 @@ export class SurveyService {
    */
 
   public doEvaluation(
-    evaluation: EvaluationAnswer,
+    evaluationAnswer: EvaluationAnswer,
+    uuid: string,
     currentLang: string
   ): Observable<any> {
-    const _evaluation = { ...this.survey };
-    _evaluation.data.sections = evaluation.survey;
-
-    return this.processSurvey(_evaluation).pipe(
-      map((res: any) => ({ metadata: res.data.evaluation.data }))
+    return this.processSurvey({ uuid, sections: evaluationAnswer.survey }).pipe(
+      map((res: any) => res.data.evaluation)
     );
   }
 
@@ -120,36 +82,30 @@ export class SurveyService {
     ////////////////////////////////////////////
   }
 
-  // Clone btn on list of evaluation
-  cloneEvaluation(data, uuid): any {
-    return this._http.post(
-      `${this._env.sceibaApi}evaluation/clone/${uuid}`,
-      data
-    );
-  }
-
-  // On stepper init
-  getEvaluation(data): any {
-    return this._http.post(`${this._env.sceibaApi}evaluation/new`, data);
+  getOneEvaluationById(uuid: string): Observable<any> {
+    return this._http.get<any>(`${this._env.sceibaApi}${"evaluation"}/${uuid}`);
   }
 
   // First stepp
   // TODO: send {uuid, name ,ISSN} in the body
-  addSurvey(data): any {
-    return this._http.post(`${this._env.sceibaApi}evaluation/init`, data);
+  addSurvey(data: JournalGeneralData & { uuid: string }): Observable<any> {
+    return this._http.post<any>(`${this._env.sceibaApi}evaluation/init`, data);
   }
 
   // Second stepp
   // TODO: send the evaluation object in the body
-  processSurvey(data): any {
-    return this._http.post(`${this._env.sceibaApi}evaluation/process`, data);
+  processSurvey(data): Observable<Evaluations[]> {
+    return this._http.post<Evaluations[]>(
+      `${this._env.sceibaApi}evaluation/process`,
+      data
+    );
   }
 
   // Last stepp
-  saveEvaluation(data, uuid): any {
-    return this._http.post(
+  saveEvaluation(uuid): Observable<any> {
+    return this._http.post<any>(
       `${this._env.sceibaApi}evaluation/save/${uuid}`,
-      data
+      {}
     );
   }
 }

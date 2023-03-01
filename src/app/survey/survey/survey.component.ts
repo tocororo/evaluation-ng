@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import {
   MatDialog,
@@ -18,14 +18,9 @@ import {
 } from "toco-lib";
 
 import {
-  CategoryQuestion,
-  CategoryQuestionType,
-  CategoryRecom,
   Evaluation,
   EvaluationAnswer,
-  ResultAndRecoms,
-  SectionCategory,
-  SurveySection,
+  Evaluations,
 } from "../evaluation.entity";
 
 import { SurveyService } from "../survey.service";
@@ -61,6 +56,8 @@ export class SurveyComponent implements OnInit {
   public evalJournalDataFormGroup: FormGroup;
   public evalSurveyFormGroup: FormGroup;
 
+  public fullEvaluation: Evaluations = undefined;
+
   @ViewChild("stepper", { static: true })
   private _matHorizontalStepper: MatHorizontalStepper;
 
@@ -70,6 +67,7 @@ export class SurveyComponent implements OnInit {
    * it is initialized.
    */
   public _evaluation: Evaluation;
+  public _evaluationUUID: string;
 
   public constructor(
     private _activatedRoute: ActivatedRoute,
@@ -77,7 +75,8 @@ export class SurveyComponent implements OnInit {
     private _transServ: TranslateService,
     private _surveyService: SurveyService,
     private _dialog: MatDialog,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router: Router
   ) {
     this._actionText = undefined;
     this.title = "";
@@ -118,14 +117,16 @@ export class SurveyComponent implements OnInit {
     }
 
     this._activatedRoute.data.subscribe({
-      next: (data: { evaluation: Hit<Evaluation> }) => {
+      next: ({ evaluation: { data } }: any) => {
         /* It is necessary to work with a copy because the `_evaluation` field has some internal fields
          * that will be changed when the application language will be changed.
          * The previous scene is the only case that will change the `_evaluation` field; so in the rest of the case,
          * it is like a readonly field, and it is only used to initialize the form. For that reason,
          * its name begins with an underscore to remember you that you can change its value ONLY
          * when the application language will be changed. */
-        this._evaluation = data.evaluation.metadata;
+
+        this._evaluation = data.evaluation.data;
+        this._evaluationUUID = data.evaluation.uuid;
 
         this._initFormData();
 
@@ -133,7 +134,7 @@ export class SurveyComponent implements OnInit {
         this.hasTaskInProgress = false;
       },
       error: (err: any) => {
-        /* The component ends its loading task. */
+        /* The component ends its luuidading task. */
         this.hasTaskInProgress = false;
 
         const m = new MessageHandler(this._snackBar);
@@ -170,21 +171,16 @@ export class SurveyComponent implements OnInit {
    * Sets the new language.
    */
   private _setNewLanguage(evaluation?): void {
-    this._surveyService
-      .getEvaluationById(
-        this._evaluation ? this._evaluation.id : undefined,
-        this._evaluation
-          ? this._evaluation.resultAndRecoms != undefined
-          : false,
-        this._transServ.currentLang
-      )
-      .subscribe({
-        next: (data: Hit<Evaluation>) => {},
-        error: (err: any) => {
-          const m = new MessageHandler(this._snackBar);
-          m.showMessage(StatusCode.OK, err.message);
-        },
-      });
+    this._surveyService.getOneEvaluationById(this._evaluationUUID).subscribe({
+      next: ({ data }: Evaluations) => {
+        this._evaluation = data.evaluation.data;
+        this._evaluationUUID = data.evaluation.uuid;
+      },
+      error: (err: any) => {
+        const m = new MessageHandler(this._snackBar);
+        m.showMessage(StatusCode.OK, err.message);
+      },
+    });
     // console.log('New data got by SurveyComponent because the language changed: ', this._evaluation);
   }
 
@@ -197,6 +193,26 @@ export class SurveyComponent implements OnInit {
   }
 
   public onSelectedStepHasChanged(event: StepperSelectionEvent): void {
+    if (event.selectedIndex == 1) {
+      this.hasTaskInProgress = true;
+      this._surveyService
+        .addSurvey({
+          ...this.evaluationFormGroup.value.journalData,
+          uuid: this._evaluationUUID,
+        })
+        .subscribe({
+          next: ({ data }: Evaluations) => {
+            this._evaluation = data.evaluation.data;
+            this.hasTaskInProgress = false;
+          },
+          error: (err: any) => {
+            const m = new MessageHandler(this._snackBar);
+            m.showMessage(StatusCode.OK, err.message);
+            this.hasTaskInProgress = false;
+          },
+        });
+    }
+
     if (event.selectedIndex == 2) {
       /* = 2 means the step of result and recommendations. */ if (
         this._actionText == ActionText.add ||
@@ -210,15 +226,15 @@ export class SurveyComponent implements OnInit {
         this._surveyService
           .doEvaluation(
             this.evaluationFormGroup.value,
+            this._evaluationUUID,
             this._transServ.currentLang
           )
           .subscribe({
-            next: (result: Hit<EvaluationAnswer>) => {
+            next: (result: Evaluations) => {
               // console.log('Do Evaluation result: ', result);
 
               /* Copies the result to show in the third part "Result and Recommendations". */
-              this._evaluation.resultAndRecoms =
-                result.metadata.resultAndRecoms;
+              this._evaluation.resultAndRecoms = result.data.resultAndRecoms;
 
               /* The component ends its loading task. It is set here and not in the `complete` property because the `complete` notification is not sent. */
               this.hasTaskInProgress = false;
@@ -236,17 +252,8 @@ export class SurveyComponent implements OnInit {
   }
 
   public goToSurvey(): void {
-    this._surveyService
-      .addSurvey(this.evaluationFormGroup.value.journalData)
-      .subscribe((res) => {
-        console.log(this.evaluationFormGroup.value.survey);
-        this._evaluation = res.data.evaluation.data;
-        this._surveyService.survey = res.data.evaluation;
-      });
-
     /* Selects and focuses the next step in list. */
     this._matHorizontalStepper.next();
-    //this._evaluation = 'res';
   }
 
   public goToSurveyBack(): void {
@@ -275,41 +282,44 @@ export class SurveyComponent implements OnInit {
       this.evaluationFormGroup
     );
 
-    this._surveyService
-      .editEvaluation(this.evaluationFormGroup.value)
-      .subscribe({
-        next: (result: Hit<EvaluationAnswer>) => {
-          console.log("Save Evaluation result: ", result);
-        },
-        error: (err: any) => {
-          /* The component ends its updating task. */
-          this.hasTaskInProgress = false;
+    this._surveyService.saveEvaluation(this._evaluationUUID).subscribe({
+      next: (result: Hit<EvaluationAnswer>) => {
+        console.log("Save Evaluation result: ", result);
+      },
+      error: (err: any) => {
+        /* The component ends its updating task. */
+        this.hasTaskInProgress = false;
 
-          const m = new MessageHandler(this._snackBar);
-          m.showMessage(StatusCode.OK, err.message);
-        },
-        complete: () => {
-          /* The component ends its updating task. */
-          this.hasTaskInProgress = false;
+        const m = new MessageHandler(this._snackBar);
+        m.showMessage(StatusCode.OK, err.message);
+      },
+      complete: () => {
+        /* The component ends its updating task. */
+        this.hasTaskInProgress = false;
 
-          let message: string = "";
-          this._transServ.get("EVAL_REV_GUARDADA").subscribe((res: string) => {
-            message = res;
-          });
-          let title: string = "";
-          this._transServ.get("OPERACION_EXITOSA").subscribe((res: string) => {
-            title = res;
-          });
+        let message: string = "";
+        this._transServ.get("EVAL_REV_GUARDADA").subscribe((res: string) => {
+          message = res;
+        });
+        let title: string = "";
+        this._transServ.get("OPERACION_EXITOSA").subscribe((res: string) => {
+          title = res;
+        });
 
-          const m = new MessageHandler(null, this._dialog);
-          m.showMessage(
-            StatusCode.OK,
-            message,
-            HandlerComponent.dialog,
-            title,
-            "50%"
-          );
-        },
-      });
+        // const m = new MessageHandler(null, this._dialog);
+        // m.showMessage(
+        //   StatusCode.OK,
+        //   message,
+        //   HandlerComponent.dialog,
+        //   title,
+        //   "50%"
+        // );
+
+        const m = new MessageHandler(this._snackBar);
+        m.showMessage(StatusCode.OK, message, HandlerComponent.snackBar, title);
+
+        this.router.navigate(["evaluation", this._evaluationUUID, "view"]);
+      },
+    });
   }
 }

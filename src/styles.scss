@@ -210,7 +210,7 @@ $md-greylight: (
 
 /* - colors - */
 $toco-primary: mat-palette(/*$md-azullight*/$md-green);
-$toco-accent: mat-palette($md-grey);
+$toco-accent: mat-palette($md-grey, A700);
 //$toco-warn: mat-palette($mat-grey, 200, 100, 900);
 $toco-warn: mat-palette($mat-deep-orange);
 
@@ -234,6 +234,7 @@ $toco-theme: mat-light-theme($toco-primary, $toco-accent, $toco-warn);
     $alternate-primary: mat-palette($mat-grey, 800);
     $alternate-accent:  mat-palette($md-blue);
     $toco-warn: mat-palette($mat-deep-orange);
+    $toco-warn: mat-palette($mat-deep-orange);
 
     $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent, $toco-warn);
 
@@ -255,6 +256,21 @@ $toco-theme: mat-light-theme($toco-primary, $toco-accent, $toco-warn);
 .color-primary
 {
     color: mat-color($toco-primary);
+}
+
+.bg-primary
+{
+    background-color: mat-color($toco-primary);
+}
+
+.bg-warn
+{
+    background-color: mat-color($toco-warn);
+}
+
+.bg-accent
+{
+    background-color: mat-color($toco-accent);
 }
 
 .custom
@@ -345,7 +361,7 @@ body { margin: 0; }
  .ligth-green-card {
     //background-color: mat-color($toco-primary, 50);
     background-color: rgba(0,127,63,0.1);
-    color: black;    
+    color: black;
     border: 1px solid;
     border-color: mat-color($toco-primary);
  }

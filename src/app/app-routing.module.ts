@@ -9,7 +9,7 @@ import { PageNotFoundEvaluationComponent } from "./page-not-found-evaluation/pag
 
 const routes: Routes = [
   {
-    path: "survey",
+    path: "survey/:uuid",
     loadChildren: () =>
       import("./survey/survey.module").then((mod) => mod.SurveyModule),
   },
@@ -24,7 +24,7 @@ const routes: Routes = [
       import("./help/help.module").then((mod) => mod.HelpModule),
   },
   {
-    path: "evaluation",
+    path: "evaluations",
     component: MyEvaluationComponent,
   },
   {
