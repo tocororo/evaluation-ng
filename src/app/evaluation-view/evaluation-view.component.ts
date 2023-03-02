@@ -56,11 +56,4 @@ export class EvaluationViewComponent implements OnInit {
     this.step = index;
   }
 
-  public nextStep() {
-    this.step++;
-  }
-
-  public prevStep() {
-    this.step--;
-  }
 }

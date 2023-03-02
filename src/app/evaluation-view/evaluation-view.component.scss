@@ -15,7 +15,7 @@
 }
 
 .header-item a {
-  font-size: 24px;
+  // font-size: 24px;
   color: #007e3e;
   text-decoration: none;
   position: relative;
@@ -41,6 +41,7 @@
 }
 
 .header-item h1,
+.header-item h2,
 .header-item h3 {
   margin: 0;
   margin-right: 8px;
@@ -63,8 +64,9 @@ li {
 }
 
 .sect-eval div {
+  font-size: 14px;
   border: 1 solid transparent;
-  padding: 10px 15px;
+  padding: 8px 12px;
   border-radius: 20px;
   color: white;
   -webkit-border-radius: 20px;
