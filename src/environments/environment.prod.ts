@@ -33,17 +33,17 @@ export class EnvironmentImpl implements Environment {
   evaluations = "https://evaluaciones.sceiba.org/";
 
 
-  // oauthInfo = {
-  //   serverHost: this.sceibaHost,
-  //   loginUrl: this.sceibaHost + 'oauth/authorize',
-  //   tokenEndpoint: this.sceibaHost + 'oauth/token',
-  //   userInfoEndpoint: this.sceibaApi + 'me',
-  //   appHost: this.appHost,
-  //   appName: this.appName,
-  //   oauthRedirectUri: this.oauthRedirectUri,
-  //   oauthClientId: this.oauthClientId,
-  //   oauthScope: this.oauthScope,
-  // }
+  oauthInfo = {
+    serverHost: this.sceibaHost,
+    loginUrl: this.sceibaHost + 'oauth/authorize',
+    tokenEndpoint: this.sceibaHost + 'oauth/token',
+    userInfoEndpoint: this.sceibaApi + 'me',
+    appHost: this.appHost,
+    appName: this.appName,
+    oauthRedirectUri: this.oauthRedirectUri,
+    oauthClientId: this.oauthClientId,
+    oauthScope: this.oauthScope,
+  }
 }
 
 export const environment = new EnvironmentImpl();
