@@ -15,10 +15,10 @@ import { Environment } from "toco-lib";
 
 export class EnvironmentImpl implements Environment {
   production = false;
-  sceibaHost = 'https://cuba-iroko.sceiba.org/';
-  cuorHost = 'https://cuba-iroko.sceiba.org/';
-  sceibaApi = 'https://cuba-iroko.sceiba.org/api/';
-  cuorApi = 'https://cuba-iroko.sceiba.org/api/';
+  sceibaHost = 'https://10.16.64.222:5000/';
+  cuorHost = 'https://10.16.64.222:5000/';
+  sceibaApi = 'https://10.16.64.222:5000/api/';
+  cuorApi = 'https://10.16.64.222:5000/api/';
 
   appHost = 'https://localhost:4200';
   appName = 'Sceiba';
@@ -27,7 +27,7 @@ export class EnvironmentImpl implements Environment {
   websiteUsername_Facebook = '@sceiba';
 
   oauthRedirectUri = 'https://localhost:4200/';
-  oauthClientId = 'vvi64JKH9LxtFs6RbBFI3ERrfxcYWYd0QltCPXnK';
+  oauthClientId = 'DBDJOwtCoAxSfKEtjuMcUilXTusd6wfi7nt9fBK6';
   oauthScope = 'user:email';
   topOrganizationPID = '';
   cachableUrls = [];
@@ -47,7 +47,7 @@ export class EnvironmentImpl implements Environment {
 
   oauthInfo = {
     serverHost: this.sceibaHost,
-    loginUrl: this.sceibaHost + 'oauth/authorize',
+    loginUrl: this.sceibaHost + 'oauth/internal/authorize',
     tokenEndpoint: this.sceibaHost + 'oauth/token',
     userInfoEndpoint: this.sceibaApi + 'me',
     appHost: this.appHost,
