@@ -1,6 +1,13 @@
 <toco-progress [loading]="hasTaskInProgress"></toco-progress>
 
-<h1 style="margin: 25px"> Evaluación </h1>
+<div fxLayout="column" fxLayoutAlign="center center">
+
+
+<h1>
+  {{ 'EVALUACION' |
+      translate }}
+</h1>
+
 <form [formGroup]="evaluationFormGroup" (submit)="goToSurvey()">
 
     <mat-horizontal-stepper [linear]="'true'" #stepper style="margin-top: 0.6em;" (selectionChange)="onSelectedStepHasChanged($event)">
@@ -109,3 +116,4 @@
     </mat-horizontal-stepper>
 
 </form>
+</div>

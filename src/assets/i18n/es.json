@@ -21,7 +21,8 @@
     "ADMINISTRACION": "Administración",
     "SALIR": "Salir",
     "YO": "Yo",
-    "AUT_REV_CIENT_CUBANAS": "Autoevaluación de Revistas Científicas Universitarias",
+    "AUT_REV_CIENT_CUBANAS": "Sceiba Evaluaciones",
+    "AUT_REV_CIENT_CUBANAS_SUB": "Una herramienta para el monitoreo y evaluación de la actividad científica",
     "EMPEZAR": "Empezar",
     "PROD_SERV": "Productos y Servicios",
     "SCEIBA": "Sceiba",
@@ -155,5 +156,8 @@
     "FOOTER_TEXT_INFORMACION": "Enlaces de Interés",
     "FOOTER_TEXT_DEVELOP": "desarrollado con",
     "FOOTER_TEXT_AND": "y",
-    "SCEIBA_EVALUACIONES": "Sceiba Evaluaciones"
+    "SCEIBA_EVALUACIONES": "Sceiba Evaluaciones",
+    "VIEW": "Ver",
+    "CLONE": "Clonar",
+    "EDIT": "Editar"
 }

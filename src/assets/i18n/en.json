@@ -21,7 +21,8 @@
     "ADMINISTRACION": "Settings",
     "SALIR": "Exit",
     "YO": "Me",
-    "AUT_REV_CIENT_CUBANAS": "Evaluation of University Scientific Journals",
+    "AUT_REV_CIENT_CUBANAS": "Sceiba Evaluaciones",
+    "AUT_REV_CIENT_CUBANAS_SUB": "A tool for science evaluation and monitoring",
     "EMPEZAR": "Get Started",
     "PROD_SERV": "Products and Services",
     "SCEIBA": "Sceiba",
@@ -155,5 +156,8 @@
     "FOOTER_TEXT_INFORMACION": "General Information",
     "FOOTER_TEXT_DEVELOP": "develop by",
     "FOOTER_TEXT_AND": "and",
-    "SCEIBA_EVALUACIONES": "Sceiba Evaluations"
+    "SCEIBA_EVALUACIONES": "Sceiba Evaluations",
+    "VIEW": "View",
+    "CLONE": "Clone",
+    "EDIT": "Edit"
 }

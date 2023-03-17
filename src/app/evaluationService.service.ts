@@ -1,20 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Environment } from 'toco-lib';
 import { Evaluations } from './survey/evaluation.entity';
-import {Environment} from 'toco-lib'
 
 @Injectable({
   providedIn: 'root'
 })
 export class EvaluationService {
 
-  private _revitaURL: string = "evaluation/user/list"
+  private _userEvaluationsURL: string = "evaluation/user/list"
 
   constructor( private httpClient: HttpClient, private env: Environment) { }
 
-  findAllEvaluations(): Observable<Evaluations[]>{
-    return this.httpClient.get<Evaluations[]>(`${this.env.sceibaApi}${this._revitaURL}`);
+  getUserEvaluations(): Observable<Evaluations[]>{
+    return this.httpClient.get<Evaluations[]>(`${this.env.sceibaApi}${this._userEvaluationsURL}`);
   }
 
   getEvaluationsById(uuid: string): Observable<any>{
@@ -23,6 +23,7 @@ export class EvaluationService {
   }
 
   createEvaluation(): Observable<any>{
+
     return this.httpClient.post<any>(`${this.env.sceibaApi}${'evaluation/new'}`, {});
   }
 

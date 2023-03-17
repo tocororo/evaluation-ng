@@ -1,30 +1,28 @@
+import { StepperSelectionEvent } from "@angular/cdk/stepper";
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import {
   MatDialog,
   MatHorizontalStepper,
-  MatSnackBar,
+  MatSnackBar
 } from "@angular/material";
-import { StepperSelectionEvent } from "@angular/cdk/stepper";
+import { ActivatedRoute, Router } from "@angular/router";
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 
 import {
-  ActionText,
-  Hit,
+  ActionText, HandlerComponent, Hit,
   MessageHandler,
-  StatusCode,
-  HandlerComponent,
+  StatusCode
 } from "toco-lib";
 
 import {
   Evaluation,
   EvaluationAnswer,
-  Evaluations,
+  Evaluations
 } from "../evaluation.entity";
 
-import { SurveyService } from "../survey.service";
 import { SurveyQuestionsComponent } from "../survey-questions/survey-questions.component";
+import { SurveyService } from "../survey.service";
 
 @Component({
   selector: "app-survey",
@@ -99,7 +97,7 @@ export class SurveyComponent implements OnInit {
     ].path as ActionText;
 
     switch (this._actionText) {
-      case ActionText.view: {
+      case ActionText.edit: {
         this.title = "TITULO_VISTA_DETALLES";
         break;
       }

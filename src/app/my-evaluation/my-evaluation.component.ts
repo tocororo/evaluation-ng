@@ -3,9 +3,8 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { EvaluationService } from "../evaluationService.service";
 import { Evaluations } from "../survey/evaluation.entity";
 
-import { ActionText } from "toco-lib";
-import { Router } from "@angular/router";
 import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-my-evaluation",
@@ -46,12 +45,23 @@ export class MyEvaluationComponent implements OnInit {
 
   public getEvaluations() {
     this.evaluationService
-      .findAllEvaluations()
+      .getUserEvaluations()
       .subscribe(({data}: any) => {
         this.dataSource = new MatTableDataSource(data.evaluations.map((item) => ({
           ...item,
           datetime: this.changeDate(item.datetime),
         })));
+      });
+  }
+
+
+  public editEvaluation(uuid: string) {
+    this.evaluationService
+      .getEvaluationsById(uuid)
+      .subscribe(({ data: { evaluation } }: Evaluations) => {
+        console.log("data===", evaluation);
+
+        this.router.navigate(["/survey/" + evaluation.uuid + "/add"]);
       });
   }
 
@@ -64,6 +74,7 @@ export class MyEvaluationComponent implements OnInit {
         this.router.navigate(["/survey/" + evaluation.uuid + "/add"]);
       });
   }
+
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();

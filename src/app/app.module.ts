@@ -22,11 +22,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { MarkdownModule } from 'ngx-markdown';
-import { environment, allowedURLS } from 'src/environments/environment';
+import { allowedURLS, environment } from 'src/environments/environment';
 
 import {
-	AngularMaterialModule, AuthenticationModule, CoreModule, Environment, OrganizationServiceNoAuth, SearchModule,
-	SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule
+  AngularMaterialModule, AuthenticationModule, CoreModule, Environment, HTTP_INTERCEPTOR_PROVIDERS, StaticsModule, TocoFormsModule
 } from 'toco-lib';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,10 +41,10 @@ import { PageNotFoundEvaluationComponent } from './page-not-found-evaluation/pag
 // 	AngularMaterialModule,OrganizationServiceNoAuth, SearchModule,
 // 	SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule
 //   } from 'toco-lib';
-import { MyEvaluationComponent } from './my-evaluation/my-evaluation.component';
-import {MatTableModule} from '@angular/material/table';
-import { EvaluationViewComponent } from './evaluation-view/evaluation-view.component';
+import { MatTableModule } from '@angular/material/table';
 import { CategoryTableComponent } from './evaluation-view/category-table/category-table.component';
+import { EvaluationViewComponent } from './evaluation-view/evaluation-view.component';
+import { MyEvaluationComponent } from './my-evaluation/my-evaluation.component';
 export function storageFactory(): OAuthStorage {
 	return sessionStorage
 }
@@ -116,6 +115,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 		}),
 	],
 	providers: [
+    HTTP_INTERCEPTOR_PROVIDERS,
 		{ provide: Environment, useValue: environment },
 		{ provide: OAuthStorage, useFactory: storageFactory },
 	],

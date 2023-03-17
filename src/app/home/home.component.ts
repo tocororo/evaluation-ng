@@ -3,13 +3,10 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { EvaluationService } from "../evaluationService.service";
 
-import {
-  ActionText,
-  MetadataService,
-  MessageHandler,
-  StatusCode,
-} from "toco-lib";
 import { MatSnackBar } from "@angular/material";
+import {
+  ActionText, MessageHandler, MetadataService, StatusCode
+} from "toco-lib";
 
 @Component({
   selector: "app-home",
@@ -21,7 +18,7 @@ export class HomeComponent implements OnInit {
    * Represents the `ActionText` enum for internal use.
    */
   public readonly actionText: typeof ActionText;
-
+  hasTaskInProgress = false;
   public constructor(
     private _activatedRoute: ActivatedRoute,
     private EvaluationService: EvaluationService,
@@ -48,8 +45,10 @@ export class HomeComponent implements OnInit {
   }
 
   public createEvaluation() {
+    this.hasTaskInProgress = true;
     this.EvaluationService.createEvaluation().subscribe({
       next: (result: any) => {
+        this.hasTaskInProgress = false;
         const uuid = result.data.evaluation.uuid
         this.router.navigate(['survey', uuid, this.actionText.add])
       },

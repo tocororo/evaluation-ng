@@ -1,14 +1,14 @@
 
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ActionText, Hit, MessageHandler, StatusCode } from 'toco-lib';
 
 import { Evaluation } from '../evaluation.entity';
 
 /**
- * Represents a control that allows to see the details of a Survey. 
+ * Represents a control that allows to see the details of a Survey.
  */
 @Component({
 	selector: 'app-survey-view',
@@ -18,15 +18,15 @@ import { Evaluation } from '../evaluation.entity';
 export class SurveyViewComponent implements OnInit
 {
 	/**
-	 * Returns true if the component has a task in progress; otherwise, false. 
-	 * Example of task is: loading, updating, etc. 
-	 * By default, its value is `true` because it represents the loading task. 
+	 * Returns true if the component has a task in progress; otherwise, false.
+	 * Example of task is: loading, updating, etc.
+	 * By default, its value is `true` because it represents the loading task.
 	 */
 	public hasTaskInProgress: boolean;
 
 	public evaluation: Evaluation;  /* It is like a readonly field, and it is only used to initialize the view. */
 
-	public constructor(private _router: Router, 
+	public constructor(private _router: Router,
 		private _activatedRoute: ActivatedRoute,
 		private _snackBar: MatSnackBar)
 	{
@@ -40,7 +40,7 @@ export class SurveyViewComponent implements OnInit
 	{
 		this._activatedRoute.data.subscribe({
 			next: (data: { 'evaluation': Hit<Evaluation> }) => {
-				/* It is not necessary to realize deep copy because the `evaluation` field 
+				/* It is not necessary to realize deep copy because the `evaluation` field
 				 * is like a readonly field, and it is only used to initialize the view. */
 				this.evaluation = data.evaluation.metadata;
 
@@ -60,17 +60,17 @@ export class SurveyViewComponent implements OnInit
 	}
 
 	/**
-	 * Returns true if the user has permission to edit; otherwise false. 
+	 * Returns true if the user has permission to edit; otherwise false.
 	 */
 	 public get hasPermission(): boolean
 	 {
-		 // TODO: Implement this property. 
- 
+		 // TODO: Implement this property.
+
 		 return true;
 	 }
 
 	/**
-	 * Does the tasks to go to the adding view. 
+	 * Does the tasks to go to the adding view.
 	 */
 	public edit(): void
 	{
@@ -79,8 +79,8 @@ export class SurveyViewComponent implements OnInit
 	}
 
 	/**
-	 * Does the tasks to go back to the previous view. 
-	 */	
+	 * Does the tasks to go back to the previous view.
+	 */
 	public goBack(): void
 	{
 		/* Relatively navigates back to the previous view. */

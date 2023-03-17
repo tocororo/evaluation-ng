@@ -1,15 +1,22 @@
 <div fxLayout="column" fxLayoutAlign="center center">
 
-  <div class="w-100 bg-primary-color" fxLayoutAlign="center center">
+  <!-- <div class="w-100 bg-primary-color" fxLayoutAlign="center center">
     <div class="pt-2em pb-2em ph-10">
       <h3 class="mat-display-2 main-title" style="text-align: center; color: white;">{{ 'AUT_REV_CIENT_CUBANAS' |
         translate }}</h3>
     </div>
-  </div>
+  </div> -->
+
+    <h1>{{ 'AUT_REV_CIENT_CUBANAS' |
+      translate }}</h1>
+    <h2>{{ 'AUT_REV_CIENT_CUBANAS_SUB' |
+      translate }}</h2>
+
   <!-- <img src="assets/icons/sceiba.top.bottom.2.svg" alt="" style="margin-top: -4px; width: 100%;"> -->
+  <toco-progress [position]=1 [loading]="hasTaskInProgress"></toco-progress>
 
   <div class="w-100 p1" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="45px" fxFlexFill>
-    <mat-accordion   fxFlex="22" fxFlex.md="33" fxFlex.sm="100" fxFlex.xs="100" [multi]="'true'">
+    <mat-accordion   fxFlex="22" fxFlex.md="33" fxFlex.sm="33" fxFlex.xs="100" [multi]="'true'">
 
       <mat-expansion-panel >
         <mat-expansion-panel-header>
@@ -31,7 +38,7 @@
             {{ 'PERSONAS' | translate }}
           </a>
           <a mat-button class="button-get-started color-primary" [routerLink]="['survey', actionText.add]" disabled="true">
-            {{ 'INSTITUCIONES' | translate }}
+            {{ 'ORGANIZACIONES' | translate }}
           </a>
         </div>
       </mat-expansion-panel>
@@ -63,7 +70,7 @@
       </mat-expansion-panel>
     </mat-accordion>
 
-    <div fxFlex="50" fxFlex.md="60" fxFlex.sm="100" fxFlex.xs="100" fxLayout="column wrap" fx.Layout.xs="column wrap" fxLayoutAlign="start" style="text-align:center; ">
+    <div fxFlex="50" fxFlex.md="60" fxFlex.sm="50" fxFlex.xs="100" fxLayout="column wrap" fx.Layout.xs="column wrap" fxLayoutAlign="start" style="text-align:center; ">
       <div fxLayout="row wrap" fxLayoutAlign="space-between">
         <span class="mat-h1 slogan">
           {{ 'MONITOREA' | translate }}
@@ -83,23 +90,38 @@
         <mat-radio-group aria-label="Select an option"  fxLayout="row wrap" fxLayout.xs="column wrap" fxLayoutAlign="space-around">
           <mat-card>
             <div fxLayout="column" fxLayoutAlign="center center" style="width: min-content">
-              <img src="/assets/images/svg/group_system.svg" [alt]="'EVALUACION' | translate"
-                style="width: 70px; height: 70px;"/>
-              <mat-radio-button value="3">{{ 'ORGANIZATION' | translate }}</mat-radio-button>
+              <img src="/assets/icons/apps/journals.svg" [alt]="'REVISTAS' | translate"
+              style="width: 70px; height: 70px;"/>
+              <mat-radio-button value="1" checked>{{ 'REVISTAS' | translate }}</mat-radio-button>
             </div>
           </mat-card>
           <mat-card>
             <div fxLayout="column" fxLayoutAlign="center center" style="width: min-content">
-              <img src="/assets/images/svg/journals.svg" [alt]="'EVALUACION' | translate"
+              <img src="/assets/icons/apps/publishing.svg" [alt]="'EDITORIALES' | translate"
               style="width: 70px; height: 70px;"/>
-              <mat-radio-button value="1" checked>{{ 'PUBLICACION' | translate }}</mat-radio-button>
+              <mat-radio-button value="3" disabled>{{ 'EDITORIALES' | translate }}</mat-radio-button>
             </div>
           </mat-card>
           <mat-card>
-            <div fxLayout="column" fxLayoutAlign="center center" style="width: min-content; ">
-              <img  src="/assets/images/svg/person.svg" [alt]="'EVALUACION' | translate"
+            <div fxLayout="column" fxLayoutAlign="center center" style="width: min-content">
+              <img src="/assets/icons/apps/publication.svg" [alt]="'PUBLICACIONES' | translate"
+              style="width: 70px; height: 70px;"/>
+              <mat-radio-button value="3"  disabled>{{ 'PUBLICACIONES' | translate }}</mat-radio-button>
+            </div>
+          </mat-card>
+          <mat-card>
+            <div fxLayout="column" fxLayoutAlign="center center" style="width: min-content">
+              <img src="/assets/icons/apps/organizaciones.svg" [alt]="'ORGANIZACIONES' | translate"
                 style="width: 70px; height: 70px;"/>
-              <mat-radio-button value="2">{{ 'PERSON' | translate }}</mat-radio-button>
+              <mat-radio-button value="3" disabled>{{ 'ORGANIZACIONES' | translate }}</mat-radio-button>
+            </div>
+          </mat-card>
+
+          <mat-card>
+            <div fxLayout="column" fxLayoutAlign="center center" style="width: min-content; ">
+              <img  src="/assets/icons/apps/persons.svg" [alt]="'EVALUACION' | translate"
+                style="width: 70px; height: 70px;"/>
+              <mat-radio-button value="2" disabled >{{ 'PERSONAS' | translate }}</mat-radio-button>
             </div>
           </mat-card>
         </mat-radio-group>
@@ -109,7 +131,7 @@
         </mat-radio-group>
       </div>
       <div fxLayout="row" fxLayoutAlign="flex-end" style="width: 100%;">
-        <a mat-raised-button class="button-get-started" color="primary" [routerLink]="['survey', actionText.add]">
+        <a mat-raised-button class="button-get-started" color="primary"  (click)="createEvaluation()">
           {{ 'EMPEZAR' | translate }}
         </a>
       </div>
