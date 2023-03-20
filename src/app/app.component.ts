@@ -8,6 +8,8 @@ import { Observable, Subscription } from 'rxjs';
 import {
 	OauthAuthenticationService, OauthInfo, Response, User
 } from 'toco-lib';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material';
 
 
 
@@ -36,7 +38,9 @@ export class AppComponent {
 		private oauthService: OAuthService,
 		protected http: HttpClient,
 		private oauthStorage: OAuthStorage,
-		private authenticateService: OauthAuthenticationService,
+    private authenticateService: OauthAuthenticationService,
+    public iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer,
 		//private _recaptchaDynamicLanguageLoaderServ: RecaptchaLoaderService,
     /*@Inject(RecaptchaLoaderService) private _recaptchaDynamicLanguageLoaderServ: RecaptchaDynamicLanguageLoaderService*/) {
 		let env: any = this._env;
@@ -85,6 +89,19 @@ export class AppComponent {
 		this.footerInformation.push({ name: "PRIVACIDAD", url: "/help/policy", useRouterLink: true });
 		// this.footerInformation.push({ name: "PRIVACIDAD", url: "https://sceiba-lab.upr.edu.cu/page/politicas", useRouterLink: false});
 		this.footerInformation.push({ name: "CONTACTOS", url: "/help/contact", useRouterLink: true });
+
+
+
+    this.iconRegistry.addSvgIcon('facebook', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/svg/facebook.svg'));
+    this.iconRegistry.addSvgIcon('twitter', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/svg/twitter.svg'));
+    this.iconRegistry.addSvgIcon('github', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/images/svg/github.svg'));
+
+
+    this.iconRegistry.addSvgIcon('journals', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/apps/journals.svg'));
+    this.iconRegistry.addSvgIcon('publishing', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/apps/publishing.svg'));
+    this.iconRegistry.addSvgIcon('publication', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/apps/publication.svg'));
+    this.iconRegistry.addSvgIcon('organizaciones', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/apps/organizaciones.svg'));
+    this.iconRegistry.addSvgIcon('persons', this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/apps/persons.svg'));
 	}
 
 	ngOnDestroy(): void {
