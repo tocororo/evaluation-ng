@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, Input, OnInit } from "@angular/core";
+import { MatSnackBar } from "@angular/material";
 import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { OAuthService, OAuthStorage } from "angular-oauth2-oidc";
@@ -13,11 +14,10 @@ import {
   OauthInfo,
   Response,
   StatusCode,
-  User,
+  User
 } from "toco-lib";
-import { menuHelp } from "./constants";
-import { MatSnackBar } from "@angular/material";
 import { EvaluationService } from "../evaluationService.service";
+import { menuHelp } from "./constants";
 
 @Component({
   selector: "toco-header",
@@ -115,6 +115,7 @@ export class HeaderComponent implements OnInit {
   ) {
     let env: any = this._env;
     this.oauthInfo = env.oauthInfo;
+    this.actionText = ActionText;
   }
 
   ngOnInit() {
@@ -278,7 +279,7 @@ export class HeaderComponent implements OnInit {
         },
       },
       {
-        nameTranslate: "EVALUACION_APP",
+        nameTranslate: "EVALUACION",
         // @ts-ignore
         href: this._env.sceiba,
         target: "_blank",
@@ -323,6 +324,11 @@ export class HeaderComponent implements OnInit {
     ];
 
     this._subMenus = [
+      {
+        nameTranslate: "HOME",
+        useRouterLink: true,
+        href: "/"
+      },
       {
         nameTranslate: "EVALUA",
         childrenMenu: evauluaMenu,
