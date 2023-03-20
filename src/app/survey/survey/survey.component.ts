@@ -64,7 +64,7 @@ export class SurveyComponent implements OnInit {
    * its name begins with an underscore to remember you that you can NOT change its value after
    * it is initialized.
    */
-  public _evaluation: Evaluation;
+  public _evaluationData: Evaluation;
   public _evaluationUUID: string;
 
   public constructor(
@@ -85,7 +85,7 @@ export class SurveyComponent implements OnInit {
     this.evaluationFormGroup = undefined;
     this.evalJournalDataFormGroup = undefined;
     this.evalSurveyFormGroup = undefined;
-    this._evaluation = undefined;
+    this._evaluationData = undefined;
   }
 
   public ngOnInit(): void {
@@ -123,8 +123,9 @@ export class SurveyComponent implements OnInit {
          * its name begins with an underscore to remember you that you can change its value ONLY
          * when the application language will be changed. */
 
-        this._evaluation = data.evaluation.data;
+        this._evaluationData = data.evaluation.data;
         this._evaluationUUID = data.evaluation.uuid;
+        this.fullEvaluation = data.evaluation;
 
         this._initFormData();
 
@@ -147,7 +148,7 @@ export class SurveyComponent implements OnInit {
 
     console.log(
       "Data got for SurveyComponent: ",
-      this._evaluation,
+      this._evaluationData,
       this.evaluationFormGroup
     );
   }
@@ -171,7 +172,7 @@ export class SurveyComponent implements OnInit {
   private _setNewLanguage(evaluation?): void {
     this._surveyService.getOneEvaluationById(this._evaluationUUID).subscribe({
       next: ({ data }: Evaluations) => {
-        this._evaluation = data.evaluation.data;
+        this._evaluationData = data.evaluation.data;
         this._evaluationUUID = data.evaluation.uuid;
       },
       error: (err: any) => {
@@ -185,7 +186,7 @@ export class SurveyComponent implements OnInit {
   public onChildLoaded(component: SurveyQuestionsComponent): void {
     if (this._actionText != undefined) {
       component._actionText = this._actionText;
-      component._survey = this._evaluation.sections;
+      component._survey = this._evaluationData.sections;
       component.surveyFormGroup = this.evalSurveyFormGroup;
     }
   }
@@ -200,7 +201,8 @@ export class SurveyComponent implements OnInit {
         })
         .subscribe({
           next: ({ data }: Evaluations) => {
-            this._evaluation = data.evaluation.data;
+            this._evaluationData = data.evaluation.data;
+            this.fullEvaluation = data.evaluation;
             this.hasTaskInProgress = false;
           },
           error: (err: any) => {
@@ -232,7 +234,8 @@ export class SurveyComponent implements OnInit {
               // console.log('Do Evaluation result: ', result);
 
               /* Copies the result to show in the third part "Result and Recommendations". */
-              this._evaluation.resultAndRecoms = result.data.resultAndRecoms;
+              this._evaluationData.resultAndRecoms = result.data.resultAndRecoms;
+              // this.fullEvaluation = result.data.evaluation;
 
               /* The component ends its loading task. It is set here and not in the `complete` property because the `complete` notification is not sent. */
               this.hasTaskInProgress = false;
@@ -260,7 +263,7 @@ export class SurveyComponent implements OnInit {
   }
 
   public goToJournalData(): void {
-    this._evaluation.sections = undefined;
+    this._evaluationData.sections = undefined;
     /* Selects and focuses the previous step in list. */
     this._matHorizontalStepper.previous();
   }

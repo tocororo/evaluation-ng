@@ -136,8 +136,8 @@
     "TOCO_NG_E_ISSN": "Electronic ISSN",
     "TOCO_NG_ISSN_L": "Linking ISSN",
 
-    "TOCO_NG_ERROR_MSG_ISSN_LONG_INVAL": "The length must be 11.",
-    "TOCO_NG_ERROR_MSG_ISSN_LONG_Y_DIG_INVAL": "The length must be 11, and all positions have digits (the last one can also have x or X).",
+    "TOCO_NG_ERROR_MSG_ISSN_LONG_INVAL": "Invalid ISSN.",
+    "TOCO_NG_ERROR_MSG_ISSN_LONG_Y_DIG_INVAL": "The length is invalid, and all positions have digits (the last one can also have x or X).",
     "TOCO_NG_ERROR_MSG_ISSN_DIG_INVAL": "All positions must have digits (the last one can also have x or X).",
     "TOCO_NG_ERROR_MSG_ISSN_DIG_CHEQUEO_INVAL": "There is some wrong digit.",
 
