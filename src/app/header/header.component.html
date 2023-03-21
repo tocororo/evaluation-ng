@@ -39,6 +39,14 @@
       fxLayoutAlign="center"
       fxLayoutGap="15px"
     >
+    <button
+        mat-icon-button
+        [class]="showHideMenuHeader()"
+        (click)="toogleSideNav.emit()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+
       <button
         *ngIf="showMenuLang"
         mat-icon-button
@@ -58,14 +66,7 @@
         [isButtonLoginText]="'AUTENTICARSE' | translate"
       >
       </toco-authentication
-      ><button
-        mat-icon-button
-        *ngIf="_subMenus.length > 0"
-        [matMenuTriggerFor]="menuHeader"
-        [class]="showHideMenuHeader()"
       >
-        <mat-icon>more_vert</mat-icon>
-      </button>
     </div>
     <div *ngIf="_subMenus.length > 0" [class]="showHideMenuHeaderElements()">
       <span style="width: 5%"></span>
@@ -89,23 +90,4 @@
   <ng-template #elseTemplate_radio_button_unchecked>
     <mat-icon>radio_button_unchecked</mat-icon>
   </ng-template>
-</mat-menu>
-
-<mat-menu #menuHeader="matMenu">
-  <ng-container *ngFor="let item of menuElements">
-    <a
-      mat-menu-item
-      [routerLink]="item.href"
-      *ngIf="item.useRouterLink; else useHrefMenu"
-    >
-      <!-- <mat-icon>dialpad</mat-icon> -->
-      <span>{{ item.nameTranslate | translate }}</span>
-    </a>
-    <ng-template #useHrefMenu>
-      <a mat-menu-item [href]="item.href" [target]="item.target">
-        <!-- <mat-icon>dialpad</mat-icon> -->
-        <span>{{ item.nameTranslate | translate }}</span>
-      </a>
-    </ng-template>
-  </ng-container>
 </mat-menu>

@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { MatSnackBar } from "@angular/material";
 import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
@@ -81,6 +81,9 @@ export class HeaderComponent implements OnInit {
    * Gets a value of input `autehnticated_name` to know the name of the authenticated user
    */
   @Input() public autehnticated_name: string = "";
+
+  @Output() public toogleSideNav: EventEmitter<any> = new EventEmitter();
+
 
   public _menuLoginOptions: MenuElement[];
   public _menuUser: MenuElement[];
@@ -350,7 +353,7 @@ export class HeaderComponent implements OnInit {
     ];
 
     this.staticMenuOptions = this.menuOptions || [
-      {
+     {
         nameTranslate: "APLICACIONES",
         icon: "apps",
         childrenMenu: menuApps,

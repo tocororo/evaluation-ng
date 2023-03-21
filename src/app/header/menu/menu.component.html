@@ -33,13 +33,13 @@
       </ng-container>
       <ng-template #useLink>
         <ng-container *ngIf="item.useRouterLink; else useHrefMenu">
-          <button mat-button [routerLink]="item.href" [disabled]="item.disabled">
+          <button mat-button [routerLink]="item.href" [disabled]="item.disabled" (click)="item.click()">
             <mat-icon [svgIcon]="item.svgIcon" *ngIf="item.icon || item.svgIcon">{{item.icon}}</mat-icon>
             <span>{{ item.nameTranslate | translate }}</span>
           </button>
         </ng-container>
         <ng-template #useHrefMenu>
-            <a mat-button [target]="item.target" [href]="item.href" [disabled]="item.disabled">
+            <a mat-button [target]="item.target" [href]="item.href" [disabled]="item.disabled" (click)="item.click()">
               <mat-icon [svgIcon]="item.svgIcon" *ngIf="item.icon || item.svgIcon">{{item.icon}}</mat-icon>
               <span>{{item.nameTranslate | translate}}</span>
             </a>
