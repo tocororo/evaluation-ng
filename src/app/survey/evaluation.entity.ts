@@ -1,6 +1,6 @@
 
 
-import { EntityBase, Entity, SelectOption, InputContent, Params } from 'toco-lib';
+import { Entity, EntityBase, InputContent, Params, SelectOption } from 'toco-lib';
 
 /**
  * More general implementation for the future:
@@ -310,5 +310,7 @@ export class Evaluations
     notes: string;
     user_id: number;
     data: any;
+    entity_type: string;
+    methodology_name: string;
 
 }

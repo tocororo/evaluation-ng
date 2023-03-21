@@ -34,7 +34,7 @@ export class EnvironmentImpl implements Environment {
 
   oauthInfo = {
     serverHost: this.sceibaHost,
-    loginUrl: this.sceibaHost + 'oauth/authorize',
+    loginUrl: this.sceibaHost + 'oauth/internal/authorize',
     tokenEndpoint: this.sceibaHost + 'oauth/token',
     userInfoEndpoint: this.sceibaApi + 'me',
     appHost: this.appHost,
