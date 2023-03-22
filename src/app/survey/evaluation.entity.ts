@@ -309,8 +309,6 @@ export class Evaluations
     datetime: Date;
     notes: string;
     user_id: number;
-    entity_type: string;
-    methodology_name: string;
     data: any;
     entity_type: string;
     methodology_name: string;
