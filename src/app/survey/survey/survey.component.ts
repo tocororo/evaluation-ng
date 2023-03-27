@@ -1,11 +1,9 @@
 import { StepperSelectionEvent } from "@angular/cdk/stepper";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import {
-  MatDialog,
-  MatHorizontalStepper,
-  MatSnackBar
-} from "@angular/material";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatHorizontalStepper } from "@angular/material/stepper";
 import { ActivatedRoute, Router } from "@angular/router";
 import { LangChangeEvent, TranslateService } from "@ngx-translate/core";
 

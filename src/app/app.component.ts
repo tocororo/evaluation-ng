@@ -12,7 +12,9 @@ import {
   User,
 } from "toco-lib";
 import { DomSanitizer } from "@angular/platform-browser";
-import { MatIconRegistry, MatSidenav, MatSnackBar } from "@angular/material";
+import { MatIconRegistry } from "@angular/material/icon";
+import { MatSidenav } from "@angular/material/sidenav";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { EvaluationService } from "./evaluationService.service";
 
 @Component({
