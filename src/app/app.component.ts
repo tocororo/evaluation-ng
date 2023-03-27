@@ -14,7 +14,7 @@ import {
 import { DomSanitizer } from "@angular/platform-browser";
 import { MatIconRegistry } from "@angular/material/icon";
 import { MatSidenav } from "@angular/material/sidenav";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatLegacySnackBar as MatSnackBar } from "@angular/material/legacy-snack-bar";
 import { EvaluationService } from "./evaluationService.service";
 
 @Component({

@@ -217,7 +217,7 @@ $toco-warn: mat.define-palette(mat.$deep-orange-palette);
 
 $toco-theme: mat.define-light-theme($toco-primary, $toco-accent, $toco-warn);
 
-@include mat.all-component-themes($toco-theme);
+@include mat.all-legacy-component-themes($toco-theme);
 @include toco-app-theme($toco-theme);
 
 // .alternate-theme {
@@ -239,7 +239,7 @@ $toco-theme: mat.define-light-theme($toco-primary, $toco-accent, $toco-warn);
 
     $alternate-theme: mat.define-light-theme($alternate-primary, $alternate-accent, $toco-warn);
 
-    @include mat.all-component-themes($alternate-theme);
+    @include mat.all-legacy-component-themes($alternate-theme);
     // @include toco-app-theme($toco-theme);
 }
 
@@ -250,7 +250,7 @@ $toco-theme: mat.define-light-theme($toco-primary, $toco-accent, $toco-warn);
 
     $alternate-theme: mat.define-light-theme($alternate-primary, $alternate-accent, $toco-warn);
 
-    @include mat.all-component-themes($alternate-theme);
+    @include mat.all-legacy-component-themes($alternate-theme);
     @include toco-app-theme($toco-theme);
 }
 
