@@ -3,9 +3,9 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { EvaluationService } from "../evaluationService.service";
 import { Evaluations } from "../survey/evaluation.entity";
 
-import { MatLegacyPaginator as MatPaginator } from "@angular/material/legacy-paginator";
+import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
-import { MatLegacyTableDataSource as MatTableDataSource } from "@angular/material/legacy-table";
+import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
 
 @Component({
