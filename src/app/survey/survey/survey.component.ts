@@ -1,6 +1,6 @@
 import { StepperSelectionEvent } from "@angular/cdk/stepper";
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatHorizontalStepper } from "@angular/material/stepper";
@@ -48,9 +48,9 @@ export class SurveyComponent implements OnInit {
    */
   public hasTaskInProgress: boolean;
 
-  public evaluationFormGroup: FormGroup;
-  public evalJournalDataFormGroup: FormGroup;
-  public evalSurveyFormGroup: FormGroup;
+  public evaluationFormGroup: UntypedFormGroup;
+  public evalJournalDataFormGroup: UntypedFormGroup;
+  public evalSurveyFormGroup: UntypedFormGroup;
 
   public fullEvaluation: Evaluations = undefined;
 
@@ -67,7 +67,7 @@ export class SurveyComponent implements OnInit {
 
   public constructor(
     private _activatedRoute: ActivatedRoute,
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private _transServ: TranslateService,
     private _surveyService: SurveyService,
     private _dialog: MatDialog,
