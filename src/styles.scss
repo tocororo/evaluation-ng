@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@use '~@angular/material' as mat;
 
 /* You can add global styles to this file, and also import other style files */
 
-@import '~@angular/material/theming';
 
 @import './styles/typography';
 @import './styles/app-theme';
@@ -209,15 +209,15 @@ $md-greylight: (
 
 
 /* - colors - */
-$toco-primary: mat-palette(/*$md-azullight*/$md-green);
-$toco-accent: mat-palette($md-grey);
-$toco-error: mat-palette($md-grey, A700);
+$toco-primary: mat.define-palette(/*$md-azullight*/$md-green);
+$toco-accent: mat.define-palette($md-grey);
+$toco-error: mat.define-palette($md-grey, A700);
 //$toco-warn: mat-palette($mat-grey, 200, 100, 900);
-$toco-warn: mat-palette($mat-deep-orange);
+$toco-warn: mat.define-palette(mat.$deep-orange-palette);
 
-$toco-theme: mat-light-theme($toco-primary, $toco-accent, $toco-warn);
+$toco-theme: mat.define-light-theme($toco-primary, $toco-accent, $toco-warn);
 
-@include angular-material-theme($toco-theme);
+@include mat.all-component-themes($toco-theme);
 @include toco-app-theme($toco-theme);
 
 // .alternate-theme {
@@ -232,53 +232,53 @@ $toco-theme: mat-light-theme($toco-primary, $toco-accent, $toco-warn);
 // }
 
 .alternate-theme-footer {
-    $alternate-primary: mat-palette($mat-grey, 800);
-    $alternate-accent:  mat-palette($md-blue);
-    $toco-warn: mat-palette($mat-deep-orange);
-    $toco-warn: mat-palette($mat-deep-orange);
+    $alternate-primary: mat.define-palette(mat.$grey-palette, 800);
+    $alternate-accent:  mat.define-palette($md-blue);
+    $toco-warn: mat.define-palette(mat.$deep-orange-palette);
+    $toco-warn: mat.define-palette(mat.$deep-orange-palette);
 
-    $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent, $toco-warn);
+    $alternate-theme: mat.define-light-theme($alternate-primary, $alternate-accent, $toco-warn);
 
-    @include angular-material-theme($alternate-theme);
+    @include mat.all-component-themes($alternate-theme);
     // @include toco-app-theme($toco-theme);
 }
 
 .alternate-theme-userProfile {
-    $alternate-primary: mat-palette(/*$md-azullight*/$md-green);
-    $alternate-accent:  mat-palette($md-grey);
-    $toco-warn: mat-palette($mat-deep-orange);
+    $alternate-primary: mat.define-palette(/*$md-azullight*/$md-green);
+    $alternate-accent:  mat.define-palette($md-grey);
+    $toco-warn: mat.define-palette(mat.$deep-orange-palette);
 
-    $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent, $toco-warn);
+    $alternate-theme: mat.define-light-theme($alternate-primary, $alternate-accent, $toco-warn);
 
-    @include angular-material-theme($alternate-theme);
+    @include mat.all-component-themes($alternate-theme);
     @include toco-app-theme($toco-theme);
 }
 
 .color-primary
 {
-    color: mat-color($toco-primary);
+    color: mat.get-color-from-palette($toco-primary);
 }
 
 .bg-primary
 {
-    background-color: mat-color($toco-primary);
+    background-color: mat.get-color-from-palette($toco-primary);
 }
 
 .bg-warn
 {
-    background-color: mat-color($toco-warn);
+    background-color: mat.get-color-from-palette($toco-warn);
 }
 
 .bg-accent
 {
-    background-color: mat-color($toco-error);
+    background-color: mat.get-color-from-palette($toco-error);
 }
 
 .custom
 {
     a
     {
-        color: mat-color($toco-primary);
+        color: mat.get-color-from-palette($toco-primary);
     }
 }
 /* autoprefixer grid: autoplace */
@@ -309,29 +309,29 @@ body { margin: 0; }
     padding-bottom: 0 !important;
 }
 .my-outline{
-    border: 2px solid mat-color($toco-primary, 50);
+    border: 2px solid mat.get-color-from-palette($toco-primary, 50);
     border-radius: 4px;
     padding: 8px;
     padding-bottom: 0px;
     margin-bottom: 24px;
  }
  .my-outline:hover{
-    border: 2px solid mat-color($toco-primary);
+    border: 2px solid mat.get-color-from-palette($toco-primary);
  }
  .tooltip-red{
     // background: #b71c1c !important;
-     background: mat-color($toco-warn, A700);
+     background: mat.get-color-from-palette($toco-warn, A700);
  }
 
  .tooltip-beta-red{
-    background: mat-color($toco-warn, A700);
+    background: mat.get-color-from-palette($toco-warn, A700);
     font-size: larger;
  }
  .triangle{
-    border-left: 80px solid mat-color($toco-warn, A700) !important;
+    border-left: 80px solid mat.get-color-from-palette($toco-warn, A700) !important;
  }
  .primary-color{
-     background-color: mat-color($toco-primary);
+     background-color: mat.get-color-from-palette($toco-primary);
      color: #fff;
      padding: 16px;
      margin: 16px;
@@ -339,7 +339,7 @@ body { margin: 0; }
  }
  .mch-bg-primary-color
  {
-    background-color: mat-color($toco-primary);
+    background-color: mat.get-color-from-palette($toco-primary);
     color: #fff;
     padding: 0.5em;
     margin: 0.5em;
@@ -347,7 +347,7 @@ body { margin: 0; }
     text-align: center;
 }
  .bg-primary-color {
-    background-color: mat-color($toco-primary);
+    background-color: mat.get-color-from-palette($toco-primary);
 }
 
  .ligth-green {
@@ -356,7 +356,7 @@ body { margin: 0; }
     color: white;
     max-width: 400px;
     border: 1px solid;
-    border-color: mat-color($toco-primary);
+    border-color: mat.get-color-from-palette($toco-primary);
  }
 
  .ligth-green-card {
@@ -364,7 +364,7 @@ body { margin: 0; }
     background-color: rgba(0,127,63,0.1);
     color: black;
     border: 1px solid;
-    border-color: mat-color($toco-primary);
+    border-color: mat.get-color-from-palette($toco-primary);
  }
  .markdown-card-green-light{
     background: #f3fff9;
