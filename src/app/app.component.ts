@@ -41,7 +41,7 @@ export class AppComponent {
 
   private authenticateSuscription: Subscription = null;
 
-  @ViewChild("sidenav", { static: false }) sidenav: MatSidenav;
+  @ViewChild("sidenav") sidenav: MatSidenav;
   sideNavOpen: boolean = false;
   public readonly actionText: typeof ActionText;
   hasTaskInProgress = false;
