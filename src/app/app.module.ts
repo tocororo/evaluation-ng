@@ -2,19 +2,6 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { ReactiveFormsModule } from "@angular/forms";
-import { MatListModule } from "@angular/material/list";
-
-import { MatButtonModule } from "@angular/material/button";
-import { MatCardModule } from "@angular/material/card";
-import { MatDividerModule } from "@angular/material/divider";
-import { MatExpansionModule } from "@angular/material/expansion";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatIconModule } from "@angular/material/icon";
-import { MatInputModule } from "@angular/material/input";
-import { MatMenuModule } from "@angular/material/menu";
-import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatTooltipModule } from "@angular/material/tooltip";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
@@ -46,8 +33,6 @@ import { PageNotFoundEvaluationComponent } from "./page-not-found-evaluation/pag
 // 	AngularMaterialModule,OrganizationServiceNoAuth, SearchModule,
 // 	SearchService, SourceServiceNoAuth, StaticsModule, TocoFormsModule
 //   } from 'toco-lib';
-import { MatRadioModule } from "@angular/material/radio";
-import { MatTableModule } from "@angular/material/table";
 import { CategoryTableComponent } from "./evaluation-view/category-table/category-table.component";
 import { EvaluationViewComponent } from "./evaluation-view/evaluation-view.component";
 import { MyEvaluationComponent } from "./my-evaluation/my-evaluation.component";
@@ -92,21 +77,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     MarkdownModule.forRoot({
       loader: HttpClient,
     }),
-
-    MatButtonModule,
-    MatTooltipModule,
-    MatMenuModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatDividerModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSnackBarModule,
-    MatListModule,
-    MatExpansionModule,
-    MatRadioModule,
-    MatTableModule,
 
     SharedModule,
     CoreModule,
