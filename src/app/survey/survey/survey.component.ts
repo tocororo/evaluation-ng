@@ -1,7 +1,6 @@
 import { StepperSelectionEvent } from "@angular/cdk/stepper";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { UntypedFormBuilder, UntypedFormGroup } from "@angular/forms";
-import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatStepper } from "@angular/material/stepper";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -69,7 +68,6 @@ export class SurveyComponent implements OnInit {
     private _formBuilder: UntypedFormBuilder,
     private _transServ: TranslateService,
     private _surveyService: SurveyService,
-    private _dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private router: Router
   ) {
