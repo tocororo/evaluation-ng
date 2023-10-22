@@ -3,6 +3,10 @@ import { Component, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { ActionText, Environment, MessageHandler, StatusCode } from "toco-lib";
 
+import { MatIconRegistry } from "@angular/material/icon";
+import { MatSidenav } from "@angular/material/sidenav";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { DomSanitizer } from "@angular/platform-browser";
 import { OAuthService, OAuthStorage } from "angular-oauth2-oidc";
 import { Observable, Subscription } from "rxjs";
 import {
@@ -11,11 +15,7 @@ import {
   Response,
   User,
 } from "toco-lib";
-import { DomSanitizer } from "@angular/platform-browser";
-import { MatIconRegistry } from "@angular/material/icon";
-import { MatSidenav } from "@angular/material/sidenav";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { EvaluationService } from "./evaluationService.service";
+import { EvaluationService } from "./_services/evaluationService.service";
 
 @Component({
   selector: "app-root",
