@@ -43,7 +43,7 @@ export class EnvironmentImpl implements Environment {
   persons = 'https://cuba-personas.sceiba.org/';
   vocabularies = 'https://vocabularios.sceiba.cu/';
   moodle = 'https://courses.sceiba.org/';
-  evaluations = 'https://evaluaciones.sceiba.org/';
+  evaluations = '';
 
   oauthInfo = {
     serverHost: this.sceibaHost,
